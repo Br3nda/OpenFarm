@@ -178,7 +178,7 @@ openFarmApp.factory('stageService', ['$http', '$log', '$q', 'alertsService',
           .success(function (response) {
             resolve(buildStage(response.data));
           }).error(function (response, code) {
-            $log.error("error when updating a stage", response, code);
+            $log.error('error when updating a stage', response, code);
             reject();
             alertsService.pushToAlerts(response.errors, code);
           });
