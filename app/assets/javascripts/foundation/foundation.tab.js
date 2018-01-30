@@ -18,7 +18,7 @@
 
     init : function (scope, method, options) {
       var self = this,
-          S = this.S;
+        S = this.S;
 
       this.bindings(method, options);
       this.handle_location_hash_change();
@@ -33,7 +33,7 @@
 
     events : function () {
       var self = this,
-          S = this.S;
+        S = this.S;
 
       S(this.scope)
         .off('.tab')
@@ -61,7 +61,7 @@
 
     handle_location_hash_change : function () {
       var self = this,
-          S = this.S;
+        S = this.S;
 
       S('[' + this.attr_name() + ']', this.scope).each(function () {
         var settings = S(this).data(self.attr_name(true) + '-init');
@@ -90,17 +90,17 @@
             }
           }
         }
-       });
-     },
+      });
+    },
 
     toggle_active_tab: function (tab, location_hash) {
       var S = this.S,
-          tabs = tab.closest('[' + this.attr_name() + ']'),
-          anchor = tab.children('a').first(),
-          target_hash = '#' + anchor.attr('href').split('#')[1],
-          target = S(target_hash),
-          siblings = tab.siblings(),
-          settings = tabs.data(this.attr_name(true) + '-init');
+        tabs = tab.closest('[' + this.attr_name() + ']'),
+        anchor = tab.children('a').first(),
+        target_hash = '#' + anchor.attr('href').split('#')[1],
+        target = S(target_hash),
+        siblings = tab.siblings(),
+        settings = tabs.data(this.attr_name(true) + '-init');
 
       // allow usage of data-tab-content attribute instead of href
       if (S(this).data(this.data_attr('tab-content'))) {

@@ -53,7 +53,7 @@
 
     events : function (instance) {
       var self = this,
-          S = self.S;
+        S = self.S;
 
       self.create(this.S(instance));
 
@@ -61,40 +61,40 @@
         .off('.tooltip')
         .on('mouseenter.fndtn.tooltip mouseleave.fndtn.tooltip touchstart.fndtn.tooltip MSPointerDown.fndtn.tooltip',
           '[' + this.attr_name() + ']', function (e) {
-          var $this = S(this),
+            var $this = S(this),
               settings = $.extend({}, self.settings, self.data_options($this)),
               is_touch = false;
 
-          if (Modernizr.touch && /touchstart|MSPointerDown/i.test(e.type) && S(e.target).is('a')) {
-            return false;
-          }
-
-          if (/mouse/i.test(e.type) && self.ie_touch(e)) return false;
-
-          if ($this.hasClass('open')) {
-            if (Modernizr.touch && /touchstart|MSPointerDown/i.test(e.type)) e.preventDefault();
-            self.hide($this);
-          } else {
-            if (settings.disable_for_touch && Modernizr.touch && /touchstart|MSPointerDown/i.test(e.type)) {
-              return;
-            } else if(!settings.disable_for_touch && Modernizr.touch && /touchstart|MSPointerDown/i.test(e.type)) {
-              e.preventDefault();
-              S(settings.tooltip_class + '.open').hide();
-              is_touch = true;
+            if (Modernizr.touch && /touchstart|MSPointerDown/i.test(e.type) && S(e.target).is('a')) {
+              return false;
             }
 
-            if (/enter|over/i.test(e.type)) {
-              this.timer = setTimeout(function () {
-                var tip = self.showTip($this);
-              }.bind(this), self.settings.hover_delay);
-            } else if (e.type === 'mouseout' || e.type === 'mouseleave') {
-              clearTimeout(this.timer);
+            if (/mouse/i.test(e.type) && self.ie_touch(e)) return false;
+
+            if ($this.hasClass('open')) {
+              if (Modernizr.touch && /touchstart|MSPointerDown/i.test(e.type)) e.preventDefault();
               self.hide($this);
             } else {
-              self.showTip($this);
+              if (settings.disable_for_touch && Modernizr.touch && /touchstart|MSPointerDown/i.test(e.type)) {
+                return;
+              } else if(!settings.disable_for_touch && Modernizr.touch && /touchstart|MSPointerDown/i.test(e.type)) {
+                e.preventDefault();
+                S(settings.tooltip_class + '.open').hide();
+                is_touch = true;
+              }
+
+              if (/enter|over/i.test(e.type)) {
+                this.timer = setTimeout(function () {
+                  var tip = self.showTip($this);
+                }.bind(this), self.settings.hover_delay);
+              } else if (e.type === 'mouseout' || e.type === 'mouseleave') {
+                clearTimeout(this.timer);
+                self.hide($this);
+              } else {
+                self.showTip($this);
+              }
             }
-          }
-        })
+          })
         .on('mouseleave.fndtn.tooltip touchstart.fndtn.tooltip MSPointerDown.fndtn.tooltip', '[' + this.attr_name() + '].open', function (e) {
           if (/mouse/i.test(e.type) && self.ie_touch(e)) return false;
 
@@ -127,8 +127,8 @@
 
     getTip : function ($target) {
       var selector = this.selector($target),
-          settings = $.extend({}, this.settings, this.data_options($target)),
-          tip = null;
+        settings = $.extend({}, this.settings, this.data_options($target)),
+        tip = null;
 
       if (selector) {
         tip = this.S('span[data-selector="' + selector + '"]' + settings.tooltip_class);
@@ -139,7 +139,7 @@
 
     selector : function ($target) {
       var id = $target.attr('id'),
-          dataSelector = $target.attr(this.attr_name()) || $target.attr('data-selector');
+        dataSelector = $target.attr(this.attr_name()) || $target.attr('data-selector');
 
       if ((id && id.length < 1 || !id) && typeof dataSelector != 'string') {
         dataSelector = this.random_str(6);
@@ -151,15 +151,15 @@
 
     create : function ($target) {
       var self = this,
-          settings = $.extend({}, this.settings, this.data_options($target)),
-          tip_template = this.settings.tip_template;
+        settings = $.extend({}, this.settings, this.data_options($target)),
+        tip_template = this.settings.tip_template;
 
       if (typeof settings.tip_template === 'string' && window.hasOwnProperty(settings.tip_template)) {
         tip_template = window[settings.tip_template];
       }
 
       var $tip = $(tip_template(this.selector($target), $('<div></div>').html($target.attr('title')).html())),
-          classes = this.inheritable_classes($target);
+        classes = this.inheritable_classes($target);
 
       $tip.addClass(classes).appendTo(settings.append_to);
 
@@ -237,21 +237,21 @@
 
     inheritable_classes : function ($target) {
       var settings = $.extend({}, this.settings, this.data_options($target)),
-          inheritables = ['tip-top', 'tip-left', 'tip-bottom', 'tip-right', 'radius', 'round'].concat(settings.additional_inheritable_classes),
-          classes = $target.attr('class'),
-          filtered = classes ? $.map(classes.split(' '), function (el, i) {
-            if ($.inArray(el, inheritables) !== -1) {
-              return el;
-            }
-          }).join(' ') : '';
+        inheritables = ['tip-top', 'tip-left', 'tip-bottom', 'tip-right', 'radius', 'round'].concat(settings.additional_inheritable_classes),
+        classes = $target.attr('class'),
+        filtered = classes ? $.map(classes.split(' '), function (el, i) {
+          if ($.inArray(el, inheritables) !== -1) {
+            return el;
+          }
+        }).join(' ') : '';
 
       return $.trim(filtered);
     },
 
     convert_to_touch : function($target) {
       var self = this,
-          $tip = self.getTip($target),
-          settings = $.extend({}, self.settings, self.data_options($target));
+        $tip = self.getTip($target),
+        settings = $.extend({}, self.settings, self.data_options($target));
 
       if ($tip.find('.tap-to-close').length === 0) {
         $tip.append('<span class="tap-to-close">'+settings.touch_close_text+'</span>');

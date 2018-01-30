@@ -5,5 +5,5 @@ openFarmApp.factory('focus', ['$rootScope', '$timeout',
         $rootScope.$broadcast('focusOn', name);
       });
     };
-}]);
+  }]);
 

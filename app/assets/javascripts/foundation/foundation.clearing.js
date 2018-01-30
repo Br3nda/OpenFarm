@@ -45,8 +45,8 @@
 
     events : function (scope) {
       var self = this,
-          S = self.S,
-          $scroll_container = $('.scroll-container');
+        S = self.S,
+        $scroll_container = $('.scroll-container');
 
       if ($scroll_container.length > 0) {
         this.scope = $scroll_container;
@@ -57,10 +57,10 @@
         .on('click.fndtn.clearing', 'ul[' + this.attr_name() + '] li ' + this.settings.open_selectors,
           function (e, current, target) {
             var current = current || S(this),
-                target = target || current,
-                next = current.next('li'),
-                settings = current.closest('[' + self.attr_name() + ']').data(self.attr_name(true) + '-init'),
-                image = S(e.target);
+              target = target || current,
+              next = current.next('li'),
+              settings = current.closest('[' + self.attr_name() + ']').data(self.attr_name(true) + '-init'),
+              image = S(e.target);
 
             e.preventDefault();
 
@@ -91,7 +91,7 @@
           function (e) { Foundation.libs.clearing.close(e, this) });
 
       $(document).on('keydown.fndtn.clearing',
-          function (e) { self.keydown(e) });
+        function (e) { self.keydown(e) });
 
       S(window).off('.clearing').on('resize.fndtn.clearing',
         function () { self.resize() });
@@ -101,18 +101,18 @@
 
     swipe_events : function (scope) {
       var self = this,
-      S = self.S;
+        S = self.S;
 
       S(this.scope)
         .on('touchstart.fndtn.clearing', '.visible-img', function(e) {
           if (!e.touches) { e = e.originalEvent; }
           var data = {
-                start_page_x: e.touches[0].pageX,
-                start_page_y: e.touches[0].pageY,
-                start_time: (new Date()).getTime(),
-                delta_x: 0,
-                is_scrolling: undefined
-              };
+            start_page_x: e.touches[0].pageX,
+            start_page_y: e.touches[0].pageY,
+            start_time: (new Date()).getTime(),
+            delta_x: 0,
+            is_scrolling: undefined
+          };
 
           S(this).data('swipe-transition', data);
           e.stopPropagation();
@@ -161,7 +161,7 @@
       $el.after('<div id="foundationClearingHolder"></div>');
 
       var grid = $el.detach(),
-          grid_outerHTML = '';
+        grid_outerHTML = '';
 
       if (grid[0] == null) {
         return;
@@ -170,14 +170,14 @@
       }
       
       var holder = this.S('#foundationClearingHolder'),
-          settings = $el.data(this.attr_name(true) + '-init'),
-          data = {
-            grid: '<div class="carousel">' + grid_outerHTML + '</div>',
-            viewing: settings.templates.viewing
-          },
-          wrapper = '<div class="clearing-assembled"><div>' + data.viewing +
+        settings = $el.data(this.attr_name(true) + '-init'),
+        data = {
+          grid: '<div class="carousel">' + grid_outerHTML + '</div>',
+          viewing: settings.templates.viewing
+        },
+        wrapper = '<div class="clearing-assembled"><div>' + data.viewing +
             data.grid + '</div></div>',
-          touch_label = this.settings.touch_label;
+        touch_label = this.settings.touch_label;
 
       if (Modernizr.touch) {
         wrapper = $(wrapper).find('.clearing-touch-label').html(touch_label).end();
@@ -188,13 +188,13 @@
 
     open : function ($image, current, target) {
       var self = this,
-          body = $(document.body),
-          root = target.closest('.clearing-assembled'),
-          container = self.S('div', root).first(),
-          visible_image = self.S('.visible-img', container),
-          image = self.S('img', visible_image).not($image),
-          label = self.S('.clearing-touch-label', container),
-          error = false;
+        body = $(document.body),
+        root = target.closest('.clearing-assembled'),
+        container = self.S('div', root).first(),
+        visible_image = self.S('.visible-img', container),
+        image = self.S('img', visible_image).not($image),
+        label = self.S('.clearing-touch-label', container),
+        error = false;
 
       image.error(function () {
         error = true;
@@ -245,13 +245,13 @@
       e.preventDefault();
 
       var root = (function (target) {
-            if (/blackout/.test(target.selector)) {
-              return target;
-            } else {
-              return target.closest('.clearing-blackout');
-            }
-          }($(el))),
-          body = $(document.body), container, visible_image;
+          if (/blackout/.test(target.selector)) {
+            return target;
+          } else {
+            return target.closest('.clearing-blackout');
+          }
+        }($(el))),
+        body = $(document.body), container, visible_image;
 
       if (el === e.target && root) {
         body.css('overflow', '');
@@ -276,9 +276,9 @@
 
     keydown : function (e) {
       var clearing = $('.clearing-blackout ul[' + this.attr_name() + ']'),
-          NEXT_KEY = this.rtl ? 37 : 39,
-          PREV_KEY = this.rtl ? 39 : 37,
-          ESC_KEY = 27;
+        NEXT_KEY = this.rtl ? 37 : 39,
+        PREV_KEY = this.rtl ? 39 : 37,
+        ESC_KEY = 27;
 
       if (e.which === NEXT_KEY) this.go(clearing, 'next');
       if (e.which === PREV_KEY) this.go(clearing, 'prev');
@@ -294,7 +294,7 @@
 
     resize : function () {
       var image = $('img', '.clearing-blackout .visible-img'),
-          label = $('.clearing-touch-label', '.clearing-blackout');
+        label = $('.clearing-touch-label', '.clearing-blackout');
 
       if (image.length) {
         this.center_and_label(image, label);
@@ -305,18 +305,18 @@
     // visual adjustments
     fix_height : function (target) {
       var lis = target.parent().children(),
-          self = this;
+        self = this;
 
       lis.each(function () {
         var li = self.S(this),
-            image = li.find('img');
+          image = li.find('img');
 
         if (li.height() > image.outerHeight()) {
           li.addClass('fix-height');
         }
       })
-      .closest('ul')
-      .width(lis.length * 100 + '%');
+        .closest('ul')
+        .width(lis.length * 100 + '%');
 
       return this;
     },
@@ -399,7 +399,7 @@
     img : function (img) {
       if (img.length) {
         var new_img = new Image(),
-            new_a = this.S('a', img);
+          new_a = this.S('a', img);
 
         if (new_a.length) {
           new_img.src = new_a.attr('href');
@@ -431,7 +431,7 @@
 
     go : function ($ul, direction) {
       var current = this.S('.visible', $ul),
-          target = current[direction]();
+        target = current[direction]();
 
       if (target.length) {
         this.S('img', target)
@@ -442,12 +442,12 @@
 
     shift : function (current, target, callback) {
       var clearing = target.parent(),
-          old_index = this.settings.prev_index || target.index(),
-          direction = this.direction(clearing, current, target),
-          dir = this.rtl ? 'right' : 'left',
-          left = parseInt(clearing.css('left'), 10),
-          width = target.outerWidth(),
-          skip_shift;
+        old_index = this.settings.prev_index || target.index(),
+        direction = this.direction(clearing, current, target),
+        dir = this.rtl ? 'right' : 'left',
+        left = parseInt(clearing.css('left'), 10),
+        width = target.outerWidth(),
+        skip_shift;
 
       var dir_obj = {};
 
@@ -484,10 +484,10 @@
 
     direction : function ($el, current, target) {
       var lis = this.S('li', $el),
-          li_width = lis.outerWidth() + (lis.outerWidth() / 4),
-          up_count = Math.floor(this.S('.clearing-container').outerWidth() / li_width) - 1,
-          target_index = lis.index(target),
-          response;
+        li_width = lis.outerWidth() + (lis.outerWidth() / 4),
+        up_count = Math.floor(this.S('.clearing-container').outerWidth() / li_width) - 1,
+        target_index = lis.index(target),
+        response;
 
       this.settings.up_count = up_count;
 

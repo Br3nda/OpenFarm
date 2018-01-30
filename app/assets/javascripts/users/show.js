@@ -13,8 +13,8 @@ openFarmApp.controller('profileCtrl', ['$scope', '$rootScope', '$http',
         if((!object.user_setting ||
             !object.user_setting.favorite_crop) &&
             $scope.profileUser.id === $scope.currentUser.id) {
-            $scope.cropNotSet = true;
-            $scope.favoriteCrop = undefined;
+          $scope.cropNotSet = true;
+          $scope.favoriteCrop = undefined;
           if ($scope.profileId === $scope.userId) {
             $scope.editProfile();
           }
@@ -40,8 +40,8 @@ openFarmApp.controller('profileCtrl', ['$scope', '$rootScope', '$http',
           }
         };
         userService.setFavoriteCrop($scope.currentUser.id,
-                                    favCrop.id,
-                                    callback);
+          favCrop.id,
+          callback);
       }
     };
 
@@ -54,7 +54,7 @@ openFarmApp.controller('profileCtrl', ['$scope', '$rootScope', '$http',
         $scope.setProfileUser(true, user);
       } else {
         userService.getUser($scope.profileId,
-                        $scope.setProfileUser);
+          $scope.setProfileUser);
       }
     });
-}]);
+  }]);
