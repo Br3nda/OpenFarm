@@ -18,7 +18,7 @@ module OpenFarm
     # Replace %w( *.css *.js *.css.scss) with complex regexp avoiding SCSS partials compilation
     config.assets.precompile += [/^[^_]\w+\.(css|css.scss)$/]
     # Adding active_admin JS and CSS to the precompilation list
-    config.assets.precompile += %w( active_admin.css active_admin.js active_admin/print.css )
+    config.assets.precompile += %w(active_admin.css active_admin.js active_admin/print.css)
     config.secret_key_base = ENV['SECRET_KEY_BASE']
     config.middleware.insert_before 'ActionDispatch::Static', 'Rack::Cors' do
       allow do
