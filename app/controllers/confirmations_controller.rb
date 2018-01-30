@@ -33,7 +33,7 @@ class ConfirmationsController < Devise::ConfirmationsController
     else
       respond_with_navigational(
         resource.errors,
-        status: :unprocessable_entity ){
+        status: :unprocessable_entity) {
           render '/devise/confirmations/new'
         }
     end

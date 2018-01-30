@@ -104,5 +104,5 @@ if Rails.env != 'production' # <= Prevent catastrophe
   dormant = FactoryGirl.create(:stage_option, name: 'Dormant', order: 8)
   dormant.stage_action_options = [prune, cover, tap]
 
-  Guide.all.each{ |gde| gde.update_attributes(user: admin) }
+  Guide.all.each { |gde| gde.update_attributes(user: admin) }
 end
