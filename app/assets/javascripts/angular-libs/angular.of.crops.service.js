@@ -113,4 +113,4 @@ openFarmApp.factory('cropService', ['$http', '$q', '$log', 'alertsService',
       'updateCrop': updateCrop,
       'createCropWithPromise': createCropWithPromise
     };
-}]);
+  }]);

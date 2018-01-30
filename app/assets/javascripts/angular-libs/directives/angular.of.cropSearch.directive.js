@@ -62,4 +62,4 @@ openFarmApp.directive('cropSearch', ['$http', 'cropService',
       ],
       templateUrl: '/assets/templates/_crop_search.html',
     };
-}]);
+  }]);

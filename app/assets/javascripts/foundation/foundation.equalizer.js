@@ -27,8 +27,8 @@
 
     equalize: function(equalizer) {
       var isStacked = false,
-          vals = equalizer.find('[' + this.attr_name() + '-watch]:visible'),
-          settings = equalizer.data(this.attr_name(true)+'-init');
+        vals = equalizer.find('[' + this.attr_name() + '-watch]:visible'),
+        settings = equalizer.data(this.attr_name(true)+'-init');
 
       if (vals.length === 0) return;
       var firstTopOffset = vals.first().offset().top;

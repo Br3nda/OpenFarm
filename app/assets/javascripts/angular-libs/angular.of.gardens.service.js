@@ -138,8 +138,8 @@ openFarmApp.factory('gardenService', ['$http','alertsService',
           alertsService.pushToAlerts(['Created Your Garden!'], status)
           if (callback){
             return callback(true,
-                            buildGarden(response.data, response.included),
-                            status);
+              buildGarden(response.data, response.included),
+              status);
           }
         })
         .error(function (response, code){
@@ -171,9 +171,9 @@ openFarmApp.factory('gardenService', ['$http','alertsService',
     // Because garden crops can be added as a guide or as a crop
     // the `object` is the ambigious choice of either.
     var addGardenCropToGarden = function(garden,
-                                          adding,
-                                          object,
-                                          callback){
+      adding,
+      object,
+      callback){
       var data = { 'data': {'attributes': {}}};
       data.data.attributes[adding] = object.id;
       var url = garden.relationships.garden_crops.links.related;
@@ -244,5 +244,5 @@ openFarmApp.factory('gardenService', ['$http','alertsService',
       'addGardenCropToGarden': addGardenCropToGarden,
       'deleteGardenCrop': deleteGardenCrop
     };
-}]);
+  }]);
 

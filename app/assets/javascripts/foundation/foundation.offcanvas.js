@@ -17,10 +17,10 @@
 
     events : function () {
       var self = this,
-          S = self.S,
-          move_class = '',
-          right_postfix = '',
-          left_postfix = '';
+        S = self.S,
+        move_class = '',
+        right_postfix = '',
+        left_postfix = '';
 
       if (this.settings.open_method === 'move') {
         move_class = 'move-';

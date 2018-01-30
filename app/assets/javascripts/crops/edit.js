@@ -93,8 +93,8 @@ openFarmApp.controller('cropCtrl', ['$scope', '$http', 'cropService',
         tags_array: tags_array,
         svg_icon: $scope.crop.svg_icon,
         companions: $scope.crop.companions
-                      .map(function (crop) { return crop.id; })
-                      .filter(function (crop) { return crop; }),
+          .map(function (crop) { return crop.id; })
+          .filter(function (crop) { return crop; }),
       };
 
       if ($scope.crop.pictures !== undefined) {

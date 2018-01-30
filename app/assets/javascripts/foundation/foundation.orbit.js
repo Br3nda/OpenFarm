@@ -10,16 +10,16 @@
     }
 
     var self = this,
-        container,
-        slides_container = el,
-        number_container,
-        bullets_container,
-        timer_container,
-        idx = 0,
-        animate,
-        timer,
-        locked = false,
-        adjust_height_after = false;
+      container,
+      slides_container = el,
+      number_container,
+      bullets_container,
+      timer_container,
+      idx = 0,
+      animate,
+      timer,
+      locked = false,
+      adjust_height_after = false;
 
 
     self.slides = function() {
@@ -250,42 +250,42 @@
           container.data('swipe-transition', data);
           e.stopPropagation();
         })
-        .on('touchmove.fndtn.orbit', function(e) {
-          if (!e.touches) { e = e.originalEvent; }
-          // Ignore pinch/zoom events
-          if(e.touches.length > 1 || e.scale && e.scale !== 1) return;
+          .on('touchmove.fndtn.orbit', function(e) {
+            if (!e.touches) { e = e.originalEvent; }
+            // Ignore pinch/zoom events
+            if(e.touches.length > 1 || e.scale && e.scale !== 1) return;
 
-          var data = container.data('swipe-transition');
-          if (typeof data === 'undefined') {data = {};}
+            var data = container.data('swipe-transition');
+            if (typeof data === 'undefined') {data = {};}
 
-          data.delta_x = e.touches[0].pageX - data.start_page_x;
+            data.delta_x = e.touches[0].pageX - data.start_page_x;
 
-          if ( typeof data.is_scrolling === 'undefined') {
-            data.is_scrolling = !!( data.is_scrolling || Math.abs(data.delta_x) < Math.abs(e.touches[0].pageY - data.start_page_y) );
-          }
+            if ( typeof data.is_scrolling === 'undefined') {
+              data.is_scrolling = !!( data.is_scrolling || Math.abs(data.delta_x) < Math.abs(e.touches[0].pageY - data.start_page_y) );
+            }
 
-          if (!data.is_scrolling && !data.active) {
-            e.preventDefault();
-            var direction = (data.delta_x < 0) ? (idx+1) : (idx-1);
-            data.active = true;
-            self._goto(direction);
-          }
-        })
-        .on('touchend.fndtn.orbit', function(e) {
-          container.data('swipe-transition', {});
-          e.stopPropagation();
-        })
+            if (!data.is_scrolling && !data.active) {
+              e.preventDefault();
+              var direction = (data.delta_x < 0) ? (idx+1) : (idx-1);
+              data.active = true;
+              self._goto(direction);
+            }
+          })
+          .on('touchend.fndtn.orbit', function(e) {
+            container.data('swipe-transition', {});
+            e.stopPropagation();
+          })
       }
       container.on('mouseenter.fndtn.orbit', function(e) {
         if (settings.timer && settings.pause_on_hover) {
           self.stop_timer();
         }
       })
-      .on('mouseleave.fndtn.orbit', function(e) {
-        if (settings.timer && settings.resume_on_mouseout) {
-          timer.start();
-        }
-      });
+        .on('mouseleave.fndtn.orbit', function(e) {
+          if (settings.timer && settings.resume_on_mouseout) {
+            timer.start();
+          }
+        });
       
       $(document).on('click', '[data-orbit-link]', self.link_custom);
       $(window).on('load resize', self.compute_dimensions);
@@ -303,11 +303,11 @@
 
   var Timer = function(el, settings, callback) {
     var self = this,
-        duration = settings.timer_speed,
-        progress = el.find('.'+settings.timer_progress_class),
-        start, 
-        timeout,
-        left = -1;
+      duration = settings.timer_speed,
+      progress = el.find('.'+settings.timer_progress_class),
+      start, 
+      timeout,
+      left = -1;
 
     this.update_progress = function(w) {
       var new_progress = progress.clone();
