@@ -18,15 +18,15 @@ class XmlHttpImport
   def run
     Net::HTTP.start(uri.host, uri.port) do |http|
       http.request request do |response|
-        response.read_body{|r| parse(r)}
+        response.read_body { |r| parse(r) }
       end
     end
     puts 'Done'
   end
 
   def parse(response)
-    rows = response.split("\n").map(&:parse_csv).select{|r| r.length == 5}
-    rows.map{|r| handle_row(r) }
+    rows = response.split("\n").map(&:parse_csv).select { |r| r.length == 5 }
+    rows.map { |r| handle_row(r) }
   end
 
   def handle_row(row)

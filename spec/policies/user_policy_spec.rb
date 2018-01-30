@@ -5,7 +5,7 @@ describe UserPolicy do
 
   let (:current_user) { FactoryGirl.create :user }
   let (:other_user) { FactoryGirl.create :user }
-  let (:private_user) { FactoryGirl.create :user, is_private: true}
+  let (:private_user) { FactoryGirl.create :user, is_private: true }
   let (:admin) { FactoryGirl.create :user, admin: true }
 
   permissions :show? do

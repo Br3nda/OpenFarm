@@ -25,7 +25,7 @@ class CsvHttpImport
   end
 
   def parse(response)
-    seriously_dude?(response).map{|r| handle_row(r) }
+    seriously_dude?(response).map { |r| handle_row(r) }
   end
 
   # "CSV is one hell of a drug."
@@ -37,7 +37,7 @@ class CsvHttpImport
       rescue
         nil
       end
-    end.select{|r| r.present? && (r.length > 1)}.uniq
+    end.select { |r| r.present? && (r.length > 1) }.uniq
   end
 
   def handle_row(row)

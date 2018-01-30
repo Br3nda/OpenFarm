@@ -22,7 +22,7 @@ describe Gardens::UpdateGarden do
   end
 
   it 'tests this' do
-    attributes = {"name"=>"The Hanoi Balcony", "location"=>"Inside", "description"=>"We created this garden automatically to get\nyou started. You can edit it to better suit\nyour needs!", "type"=>"Inside", "average_sun"=>"Full Sun", "soil_type"=>"Loam", "ph"=>7.5}
+    attributes = { "name" => "The Hanoi Balcony", "location" => "Inside", "description" => "We created this garden automatically to get\nyou started. You can edit it to better suit\nyour needs!", "type" => "Inside", "average_sun" => "Full Sun", "soil_type" => "Loam", "ph" => 7.5 }
     params = {
       user: garden.user,
       id: "#{garden._id}",
