@@ -71,7 +71,7 @@ class Crop
                    :guides_count]
   end
 
-  def main_image_path(args={})
+  def main_image_path(args = {})
     if pictures.present?
       pictures.first.attachment.url(args[:size] || :large)
     else

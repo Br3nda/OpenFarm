@@ -32,7 +32,7 @@ OpenFarm::Application.routes.draw do
 
   get 'announcements/hide', to: 'announcements#hide'
 
-  namespace :api, defaults: {format: 'json'} do
+  namespace :api, defaults: { format: 'json' } do
     get '/aws/s3_access_token' => 'aws#s3_access_token'
     post '/local/upload_file' => 'file_upload#upload_file'
 
