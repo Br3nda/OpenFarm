@@ -45,7 +45,7 @@
             target = $this;
           } else {
             dropdown = $this;
-            target = S("[" + self.attr_name() + "='" + dropdown.attr('id') + "']");
+            target = S('[' + self.attr_name() + '=\'' + dropdown.attr('id') + '\']');
           }
 
           var settings = target.data(self.attr_name(true) + '-init') || self.settings;
@@ -159,7 +159,7 @@
 
     resize : function () {
       var dropdown = this.S('[' + this.attr_name() + '-content].open'),
-          target = this.S("[" + this.attr_name() + "='" + dropdown.attr('id') + "']");
+          target = this.S('[' + this.attr_name() + '=\'' + dropdown.attr('id') + '\']');
 
       if (dropdown.length && target.length) {
         this.css(dropdown, target);

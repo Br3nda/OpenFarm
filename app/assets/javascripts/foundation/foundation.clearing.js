@@ -378,7 +378,7 @@
     load : function ($image) {
       var href;
 
-      if ($image[0].nodeName === "A") {
+      if ($image[0].nodeName === 'A') {
         href = $image.attr('href');
       } else {
         href = $image.parent().attr('href');

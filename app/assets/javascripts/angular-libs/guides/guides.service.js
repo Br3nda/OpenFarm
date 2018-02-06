@@ -118,7 +118,7 @@ openFarmApp.factory('guideService', ['$http', '$q', 'alertsService',
     // part of refactoring.
     var getGuideWithPromise = function(guideId) {
       return $q(function (resolve, reject) {
-        if (guideId !== "" && guideId !== "new") {
+        if (guideId !== '' && guideId !== 'new') {
           $http.get('/api/v1/guides/' + guideId)
           .success(function (response) {
             resolve(buildGuide(response.data, response.included));
