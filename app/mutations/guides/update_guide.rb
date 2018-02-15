@@ -47,7 +47,7 @@ module Guides
     end
 
     def execute
-      @guide.update(attributes.select {|k| k != 'featured_image'})
+      @guide.update(attributes.select { |k| k != 'featured_image' })
       set_time_span
       set_images images, @guide
       set_empty_practices

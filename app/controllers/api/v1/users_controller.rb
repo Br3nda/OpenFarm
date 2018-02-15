@@ -6,7 +6,7 @@ class Api::V1::UsersController < Api::V1::BaseController
                                   include: ['garden_crops', 'pictures'])
   end
 
-  def compatibility_score (user_id, id)
+  def compatibility_score(user_id, id)
     user = User.find(user_id)
     render json: Guide.find(id).compatibility_score(user)
   end

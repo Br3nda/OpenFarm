@@ -2,7 +2,7 @@ module PicturesMixin
 
   # Complexity of this method is way too high. Let's refactor some time.
   #   - @RickCarlino
-  def validate_images (images, obj=nil)
+  def validate_images(images, obj = nil)
     images && images.each do |pic|
       pic_id = "#{pic[:id]}" if pic[:id].present?
       pictures = obj.pictures if obj
@@ -18,7 +18,7 @@ module PicturesMixin
     end
   end
 
-  def set_images (images, obj)
+  def set_images(images, obj)
     # Delete all pictures
     # This is much simpler, less ping pong than what it was
     # and probably okay for now. However, this only works when S3
@@ -32,7 +32,7 @@ module PicturesMixin
     end
   end
 
-  def choose_images_to_delete (images, obj)
+  def choose_images_to_delete(images, obj)
     unless images
       images = []
     end
