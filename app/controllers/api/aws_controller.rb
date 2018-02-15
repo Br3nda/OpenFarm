@@ -20,7 +20,7 @@ module Api
       policy_document = {
         'expiration' => 1.hour.from_now.utc.xmlschema,
         'conditions' => [
-           { 'bucket' =>  ENV['S3_BUCKET_NAME'] },
+           { 'bucket' => ENV['S3_BUCKET_NAME'] },
            ['starts-with', '$key', ''],
            { 'acl' => 'public-read' },
            # { success_action_status: '201' },
@@ -37,7 +37,7 @@ module Api
       # to strip out the carriage return. AWS gives cryptic errors.
       Base64.encode64(OpenSSL::HMAC.digest(OpenSSL::Digest::Digest.new('sha1'),
                       ENV['S3_SECRET_KEY'],
-                      s3_upload_policy)).gsub("\n",'')
+                      s3_upload_policy)).gsub("\n", '')
     end
   end
 end

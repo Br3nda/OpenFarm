@@ -7,6 +7,6 @@ class Api::V1::ProgressJobController < Api::V1::BaseController
       when 'guide' then Guide
       when 'stage' then Stage
     end
-    render json: {processing: object_class.find(id).processing_pictures}
+    render json: { processing: object_class.find(id).processing_pictures }
   end
 end
