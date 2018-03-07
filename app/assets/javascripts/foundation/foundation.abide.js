@@ -43,8 +43,8 @@
       validators : {
         equalTo: function(el, required, parent) {
           var from  = document.getElementById(el.getAttribute(this.add_namespace('data-equalto'))).value,
-              to    = el.value,
-              valid = (from === to);
+            to    = el.value,
+            valid = (from === to);
 
           return valid;
         }
@@ -59,8 +59,8 @@
 
     events : function (scope) {
       var self = this,
-          form = self.S(scope).attr('novalidate', 'novalidate'),
-          settings = form.data(this.attr_name(true) + '-init') || {};
+        form = self.S(scope).attr('novalidate', 'novalidate'),
+        settings = form.data(this.attr_name(true) + '-init') || {};
 
       this.invalid_attr = this.add_namespace('data-invalid');
 
@@ -74,18 +74,18 @@
           return self.reset($(this));
         })
         .find('input, textarea, select')
-          .off('.abide')
-          .on('blur.fndtn.abide change.fndtn.abide', function (e) {
-            self.validate([this], e);
-          })
-          .on('keydown.fndtn.abide', function (e) {
-            if (settings.live_validate === true) {
-              clearTimeout(self.timer);
-              self.timer = setTimeout(function () {
-                self.validate([this], e);
-              }.bind(this), settings.timeout);
-            }
-          });
+        .off('.abide')
+        .on('blur.fndtn.abide change.fndtn.abide', function (e) {
+          self.validate([this], e);
+        })
+        .on('keydown.fndtn.abide', function (e) {
+          if (settings.live_validate === true) {
+            clearTimeout(self.timer);
+            self.timer = setTimeout(function () {
+              self.validate([this], e);
+            }.bind(this), settings.timeout);
+          }
+        });
     },
 
     reset : function (form) {
@@ -96,10 +96,10 @@
 
     validate : function (els, e, is_ajax) {
       var validations = this.parse_patterns(els),
-          validation_count = validations.length,
-          form = this.S(els[0]).closest('[data-' + this.attr_name(true) + ']'),
-          settings = form.data(this.attr_name(true) + '-init') || {},
-          submit_event = /submit/.test(e.type);
+        validation_count = validations.length,
+        form = this.S(els[0]).closest('[data-' + this.attr_name(true) + ']'),
+        settings = form.data(this.attr_name(true) + '-init') || {},
+        submit_event = /submit/.test(e.type);
 
       form.trigger('validated').trigger('validated.fndtn.abide');
       // Has to count up to make sure the focus gets applied to the top error
@@ -125,7 +125,7 @@
 
     parse_patterns : function (els) {
       var i = els.length,
-          el_patterns = [];
+        el_patterns = [];
 
       while (i--) {
         el_patterns.push(this.pattern(els[i]));
@@ -136,7 +136,7 @@
 
     pattern : function (el) {
       var type = el.getAttribute('type'),
-          required = typeof el.getAttribute('required') === 'string';
+        required = typeof el.getAttribute('required') === 'string';
 
       var pattern = el.getAttribute('pattern') || '';
 
@@ -157,20 +157,20 @@
 
     check_validation_and_apply_styles : function (el_patterns) {
       var i = el_patterns.length,
-          validations = [],
-          form = this.S(el_patterns[0][0]).closest('[data-' + this.attr_name(true) + ']'),
-          settings = form.data(this.attr_name(true) + '-init') || {};
+        validations = [],
+        form = this.S(el_patterns[0][0]).closest('[data-' + this.attr_name(true) + ']'),
+        settings = form.data(this.attr_name(true) + '-init') || {};
 
       while (i--) {
         var el = el_patterns[i][0],
-            required = el_patterns[i][2],
-            value = el.value.trim(),
-            direct_parent = this.S(el).parent(),
-            validator = el.getAttribute(this.add_namespace('data-abide-validator')),
-            is_radio = el.type === "radio",
-            is_checkbox = el.type === "checkbox",
-            label = this.S('label[for="' + el.getAttribute('id') + '"]'),
-            valid_length = (required) ? (el.value.length > 0) : true;
+          required = el_patterns[i][2],
+          value = el.value.trim(),
+          direct_parent = this.S(el).parent(),
+          validator = el.getAttribute(this.add_namespace('data-abide-validator')),
+          is_radio = el.type === "radio",
+          is_checkbox = el.type === "checkbox",
+          label = this.S('label[for="' + el.getAttribute('id') + '"]'),
+          valid_length = (required) ? (el.value.length > 0) : true;
 
         var parent, valid;
 
@@ -225,7 +225,7 @@
 
     valid_checkbox : function(el, required) {
       var el = this.S(el),
-          valid = (el.is(':checked') || !required);
+        valid = (el.is(':checked') || !required);
 
       if (valid) {
         el.removeAttr(this.invalid_attr).parent().removeClass('error');
@@ -238,9 +238,9 @@
 
     valid_radio : function (el, required) {
       var name = el.getAttribute('name'),
-          group = this.S(el).closest('[data-' + this.attr_name(true) + ']').find("[name='"+name+"']"),
-          count = group.length,
-          valid = false;
+        group = this.S(el).closest('[data-' + this.attr_name(true) + ']').find("[name='"+name+"']"),
+        count = group.length,
+        valid = false;
 
       // Has to count up to make sure the focus gets applied to the top error
       for (var i=0; i < count; i++) {
@@ -261,8 +261,8 @@
 
     valid_equal: function(el, required, parent) {
       var from  = document.getElementById(el.getAttribute(this.add_namespace('data-equalto'))).value,
-          to    = el.value,
-          valid = (from === to);
+        to    = el.value,
+        valid = (from === to);
 
       if (valid) {
         this.S(el).removeAttr(this.invalid_attr);

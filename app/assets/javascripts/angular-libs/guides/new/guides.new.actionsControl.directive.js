@@ -45,9 +45,9 @@ openFarmApp.directive('actionsControl', ['$http', '$modal', 'defaultService',
 
                       $scope.ok = function () {
                         var selectedActions = $scope.actionOptions
-                                                .filter(function(action){
-                                                  return action.selected;
-                                                });
+                          .filter(function(action){
+                            return action.selected;
+                          });
                         $modalInstance.close(selectedActions);
                       };
 

@@ -1,11 +1,11 @@
 openFarmApp.controller('showCropCtrl', ['$scope', '$http', 'cropService',
   'gardenService', 'userService', '$interval',
   function showCropCtrl($scope,
-                        $http,
-                        cropService,
-                        gardenService,
-                        userService,
-                        $interval) {
+    $http,
+    cropService,
+    gardenService,
+    userService,
+    $interval) {
     $scope.alerts = [];
     $scope.s3upload = '';
     $scope.crop = {};

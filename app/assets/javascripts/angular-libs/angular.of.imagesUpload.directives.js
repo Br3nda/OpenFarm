@@ -2,9 +2,9 @@
   'use strict';
 
   angular
-      .module('openFarmApp')
-      .directive('ofImagesUpload', ofImagesUpload)
-      .controller('ImagesUploadController', ImagesUploadController);
+    .module('openFarmApp')
+    .directive('ofImagesUpload', ofImagesUpload)
+    .controller('ImagesUploadController', ImagesUploadController);
 
   function ofImagesUpload() {
     return {

@@ -1,11 +1,11 @@
 openFarmApp.controller('gardenCtrl', ['$scope', '$http', '$rootScope',
   'userService', 'gardenService', 'cropService',
   function gardenCtrl($scope,
-                      $http,
-                      $rootScope,
-                      userService,
-                      gardenService,
-                      cropService) {
+    $http,
+    $rootScope,
+    userService,
+    gardenService,
+    cropService) {
     $scope.addingGarden = false;
     $scope.addingCrop = false;
     $scope.newGarden = {};
@@ -41,7 +41,7 @@ openFarmApp.controller('gardenCtrl', ['$scope', '$http', '$rootScope',
                   // already have a crop associated with it.
                   if (garden_crop.guide){
                     cropService.getCrop(garden_crop.guide.crop_id,
-                                        callback);
+                      callback);
                   }
                 });
               });
@@ -109,7 +109,7 @@ openFarmApp.controller('gardenCtrl', ['$scope', '$http', '$rootScope',
     $scope.saveGardenCropChanges = function(garden){
       angular.forEach(garden.garden_crops, function(crop){
         gardenService.saveGardenCrop(garden,
-                                     crop);
+          crop);
       });
     };
 
@@ -124,8 +124,8 @@ openFarmApp.controller('gardenCtrl', ['$scope', '$http', '$rootScope',
             }
           };
           gardenService.deleteGardenCrop(garden,
-                                         crop,
-                                         removeFromList);
+            crop,
+            removeFromList);
         }
       });
     };
@@ -136,4 +136,4 @@ openFarmApp.controller('gardenCtrl', ['$scope', '$http', '$rootScope',
         new: true
       });
     };
-}]);
+  }]);

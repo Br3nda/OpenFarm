@@ -13,23 +13,23 @@ openFarmApp.directive('ofLightboxModal', ['$http', '$modal', 'stageService',
             var modalInstance = $modal.open({
               template: '<img ng-src="{{displayUrl}}"/><span ng-bind="description"></span>',
               controller: ['$scope', '$modalInstance', 'displayUrl', 'description',
-              function ($scope, $modalInstance, displayUrl, description) {
-                $scope.displayUrl = displayUrl;
-                $scope.description = description;
+                function ($scope, $modalInstance, displayUrl, description) {
+                  $scope.displayUrl = displayUrl;
+                  $scope.description = description;
 
-                $scope.reposition = function () {
-                  $modalInstance.reposition();
-                };
+                  $scope.reposition = function () {
+                    $modalInstance.reposition();
+                  };
 
-                $scope.ok = function () {
-                  $modalInstance.close($scope.selected.item);
-                };
+                  $scope.ok = function () {
+                    $modalInstance.close($scope.selected.item);
+                  };
 
-                $scope.cancel = function () {
-                  $modalInstance.dismiss('cancel');
-                };
+                  $scope.cancel = function () {
+                    $modalInstance.dismiss('cancel');
+                  };
 
-              }],
+                }],
               resolve: {
                 displayUrl: function () {
                   return $scope.displayUrl;

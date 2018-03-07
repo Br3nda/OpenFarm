@@ -14,7 +14,7 @@ openFarmApp.config(['localStorageServiceProvider',
   function (localStorageServiceProvider){
     localStorageServiceProvider
       .setPrefix('openFarm');
-}]);
+  }]);
 
 openFarmApp.factory('alertsService', ['$rootScope',
   function alertsService($rootScope) {
@@ -40,7 +40,7 @@ openFarmApp.factory('alertsService', ['$rootScope',
           }).join(', ');
         } else {
           msg = ['An unknown error occurred. Please contact an administrator ',
-                 'with details. hi@openfarm.cc'].join('');
+            'with details. hi@openfarm.cc'].join('');
         }
 
         $rootScope.alerts.push({

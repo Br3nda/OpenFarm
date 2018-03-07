@@ -26,8 +26,8 @@
 
       self.S('[' + this.attr_name() + ']', this.scope).each(function () {
         var topbar = $(this),
-            settings = topbar.data(self.attr_name(true) + '-init'),
-            section = self.S('section', this);
+          settings = topbar.data(self.attr_name(true) + '-init'),
+          section = self.S('section', this);
         topbar.data('index', 0);
         var topbarContainer = topbar.parent();
         if (topbarContainer.hasClass('fixed') || self.is_sticky(topbar, topbarContainer, settings) ) {
@@ -82,7 +82,7 @@
 
     toggle: function (toggleEl) {
       var self = this,
-          topbar;
+        topbar;
 
       if (toggleEl) {
         topbar = self.S(toggleEl).closest('[' + this.attr_name() + ']');
@@ -152,7 +152,7 @@
 
     events : function (bar) {
       var self = this,
-          S = this.S;
+        S = this.S;
 
       S(this.scope)
         .off('.topbar')
@@ -161,17 +161,17 @@
           self.toggle(this);
         })
         .on('click.fndtn.topbar','.top-bar .top-bar-section li a[href^="#"],[' + this.attr_name() + '] .top-bar-section li a[href^="#"]',function (e) {
-            var li = $(this).closest('li');
-            if(self.breakpoint() && !li.hasClass('back') && !li.hasClass('has-dropdown'))
-            {
+          var li = $(this).closest('li');
+          if(self.breakpoint() && !li.hasClass('back') && !li.hasClass('has-dropdown'))
+          {
             self.toggle();
-            }
+          }
         })
         .on('click.fndtn.topbar', '[' + this.attr_name() + '] li.has-dropdown', function (e) {
           var li = S(this),
-              target = S(e.target),
-              topbar = li.closest('[' + self.attr_name() + ']'),
-              settings = topbar.data(self.attr_name(true) + '-init');
+            target = S(e.target),
+            topbar = li.closest('[' + self.attr_name() + ']'),
+            settings = topbar.data(self.attr_name(true) + '-init');
 
           if(target.data('revealId')) {
             self.toggle();
@@ -207,10 +207,10 @@
             e.preventDefault();
 
             var $this = S(this),
-                topbar = $this.closest('[' + self.attr_name() + ']'),
-                section = topbar.find('section, .section'),
-                dropdownHeight = $this.next('.dropdown').outerHeight(),
-                $selectedLi = $this.closest('li');
+              topbar = $this.closest('[' + self.attr_name() + ']'),
+              section = topbar.find('section, .section'),
+              dropdownHeight = $this.next('.dropdown').outerHeight(),
+              $selectedLi = $this.closest('li');
 
             topbar.data('index', topbar.data('index') + 1);
             $selectedLi.addClass('moved');
@@ -246,11 +246,11 @@
         e.preventDefault();
 
         var $this = S(this),
-            topbar = $this.closest('[' + self.attr_name() + ']'),
-            section = topbar.find('section, .section'),
-            settings = topbar.data(self.attr_name(true) + '-init'),
-            $movedLi = $this.closest('li.moved'),
-            $previousLevelUl = $movedLi.parent();
+          topbar = $this.closest('[' + self.attr_name() + ']'),
+          section = topbar.find('section, .section'),
+          settings = topbar.data(self.attr_name(true) + '-init'),
+          $movedLi = $this.closest('li.moved'),
+          $previousLevelUl = $movedLi.parent();
 
         topbar.data('index', topbar.data('index') - 1);
 
@@ -278,7 +278,7 @@
       var self = this;
       self.S('[' + this.attr_name() + ']').each(function () {
         var topbar = self.S(this),
-            settings = topbar.data(self.attr_name(true) + '-init');
+          settings = topbar.data(self.attr_name(true) + '-init');
 
         var stickyContainer = topbar.parent('.' + self.settings.sticky_class);
         var stickyOffset;
@@ -291,9 +291,9 @@
             .find('li')
             .removeClass('hover');
 
-            if(doToggle) {
-              self.toggle(topbar);
-            }
+          if(doToggle) {
+            self.toggle(topbar);
+          }
         }
 
         if(self.is_sticky(topbar, stickyContainer, settings)) {
@@ -335,17 +335,17 @@
 
     assemble : function (topbar) {
       var self = this,
-          settings = topbar.data(this.attr_name(true) + '-init'),
-          section = self.S('section', topbar);
+        settings = topbar.data(this.attr_name(true) + '-init'),
+        section = self.S('section', topbar);
 
       // Pull element out of the DOM for manipulation
       section.detach();
 
       self.S('.has-dropdown>a', section).each(function () {
         var $link = self.S(this),
-            $dropdown = $link.siblings('.dropdown'),
-            url = $link.attr('href'),
-            $titleLi;
+          $dropdown = $link.siblings('.dropdown'),
+          url = $link.attr('href'),
+          $titleLi;
 
         if (!$dropdown.find('.title.back').length) {
           $titleLi = $('<li class="title back js-generated"><h5><a href="javascript:void(0)"></a></h5></li>');
@@ -375,7 +375,7 @@
 
     height : function (ul) {
       var total = 0,
-          self = this;
+        self = this;
 
       $('> li', ul).each(function () {
         total += self.S(this).outerHeight(true);
@@ -394,8 +394,8 @@
 
     update_sticky_positioning: function() {
       var klass = '.' + this.settings.sticky_class,
-          $window = this.S(window),
-          self = this;
+        $window = this.S(window),
+        self = this;
 
       if (self.settings.sticky_topbar && self.is_sticky(this.settings.sticky_topbar,this.settings.sticky_topbar.parent(), this.settings)) {
         var distance = this.settings.sticky_topbar.data('stickyoffset');

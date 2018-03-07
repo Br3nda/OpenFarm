@@ -23,11 +23,11 @@ openFarmApp.directive('createTimeline', ['guideService',
           $scope.creating = true;
 
           guideService.drawTimeline($scope.timespan,
-                                    function(days, dayWidth, scale){
-                                      $scope.days = days;
-                                      $scope.dayWidth = dayWidth;
-                                      $scope.calendarScale = scale;
-                                    });
+            function(days, dayWidth, scale){
+              $scope.days = days;
+              $scope.dayWidth = dayWidth;
+              $scope.calendarScale = scale;
+            });
 
         }],
       templateUrl: '/assets/templates/_timeline.html'

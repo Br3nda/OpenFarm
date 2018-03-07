@@ -30,12 +30,12 @@
       $(this.scope)
         .off('.slider')
         .on('mousedown.fndtn.slider touchstart.fndtn.slider pointerdown.fndtn.slider',
-        '[' + self.attr_name() + ']:not(.disabled, [disabled]) .range-slider-handle', function(e) {
-          if (!self.cache.active) {
-            e.preventDefault();
-            self.set_active_slider($(e.target));
-          }
-        })
+          '[' + self.attr_name() + ']:not(.disabled, [disabled]) .range-slider-handle', function(e) {
+            if (!self.cache.active) {
+              e.preventDefault();
+              self.set_active_slider($(e.target));
+            }
+          })
         .on('mousemove.fndtn.slider touchmove.fndtn.slider pointermove.fndtn.slider', function(e) {
           if (!!self.cache.active) {
             e.preventDefault();
@@ -75,11 +75,11 @@
 
     calculate_position : function($handle, cursor_x) {
       var self = this,
-          settings = $.data($handle[0], 'settings'),
-          handle_l = $.data($handle[0], 'handle_l'),
-          handle_o = $.data($handle[0], 'handle_o'),
-          bar_l = $.data($handle[0], 'bar_l'),
-          bar_o = $.data($handle[0], 'bar_o');
+        settings = $.data($handle[0], 'settings'),
+        handle_l = $.data($handle[0], 'handle_l'),
+        handle_o = $.data($handle[0], 'handle_o'),
+        bar_l = $.data($handle[0], 'bar_l'),
+        bar_o = $.data($handle[0], 'bar_o');
 
       requestAnimationFrame(function(){
         var pct;
@@ -100,11 +100,11 @@
 
     set_ui : function($handle, value) {
       var settings = $.data($handle[0], 'settings'),
-          handle_l = $.data($handle[0], 'handle_l'),
-          bar_l = $.data($handle[0], 'bar_l'),
-          norm_pct = this.normalized_percentage(value, settings.start, settings.end),
-          handle_offset = norm_pct*(bar_l-handle_l)-1,
-          progress_bar_length = norm_pct*100;
+        handle_l = $.data($handle[0], 'handle_l'),
+        bar_l = $.data($handle[0], 'bar_l'),
+        norm_pct = this.normalized_percentage(value, settings.start, settings.end),
+        handle_offset = norm_pct*(bar_l-handle_l)-1,
+        progress_bar_length = norm_pct*100;
 
       if (Foundation.rtl && !settings.vertical) {
         handle_offset = -handle_offset;
@@ -141,10 +141,10 @@
 
     normalized_value : function(val, start, end, step) {
       var range = end - start,
-          point = val*range,
-          mod = (point-(point%step)) / step,
-          rem = point % step,
-          round = ( rem >= step*0.5 ? step : 0);
+        point = val*range,
+        mod = (point-(point%step)) / step,
+        rem = point % step,
+        round = ( rem >= step*0.5 ? step : 0);
       return (mod*step + round) + start;
     },
 
@@ -191,8 +191,8 @@
 
     set_initial_position : function($ele) {
       var settings = $.data($ele.children('.range-slider-handle')[0], 'settings'),
-          initial = (!!settings.initial ? settings.initial : Math.floor((settings.end-settings.start)*0.5/settings.step)*settings.step+settings.start),
-          $handle = $ele.children('.range-slider-handle');
+        initial = (!!settings.initial ? settings.initial : Math.floor((settings.end-settings.start)*0.5/settings.step)*settings.step+settings.start),
+        $handle = $ele.children('.range-slider-handle');
       this.set_ui($handle, initial);
     },
 
@@ -211,7 +211,7 @@
       var self = this;
       self.S('[' + this.attr_name() + ']').each(function() {
         var handle = $(this).children('.range-slider-handle')[0],
-            val = $(this).attr(self.attr_name());
+          val = $(this).attr(self.attr_name());
         self.initialize_settings(handle);
 
         if (val) {

@@ -42,7 +42,7 @@
 
     events : function (scope) {
       var self = this,
-          S = self.S;
+        S = self.S;
 
       S(this.scope)
         .off('.reveal')
@@ -51,7 +51,7 @@
 
           if (!self.locked) {
             var element = S(this),
-                ajax = element.data(self.data_attr('reveal-ajax'));
+              ajax = element.data(self.data_attr('reveal-ajax'));
 
             self.locked = true;
 
@@ -72,7 +72,7 @@
 
           if (!self.locked) {
             var settings = S('[' + self.attr_name() + '].open').data(self.attr_name(true) + '-init'),
-                bg_clicked = S(e.target)[0] === S('.' + settings.bg_class)[0];
+              bg_clicked = S(e.target)[0] === S('.' + settings.bg_class)[0];
 
             if (bg_clicked) {
               if (settings.close_on_background_click) {
@@ -117,7 +117,7 @@
       // PATCH #1: fixing multiple keyup event trigger from single key press
       self.S('body').off('keyup.fndtn.reveal').on('keyup.fndtn.reveal', function ( event ) {
         var open_modal = self.S('[' + self.attr_name() + '].open'),
-            settings = open_modal.data(self.attr_name(true) + '-init');
+          settings = open_modal.data(self.attr_name(true) + '-init');
         // PATCH #2: making sure that the close event can be called only while unlocked,
         //           so that multiple keyup.fndtn.reveal events don't prevent clean closing of the reveal window.
         if ( settings && event.which === 27  && settings.close_on_esc && !self.locked) { // 27 is the keycode for the Escape key
@@ -136,7 +136,7 @@
 
     open : function (target, ajax_settings) {
       var self = this,
-          modal;
+        modal;
 
       if (target) {
         if (typeof target.selector !== 'undefined') {
@@ -208,8 +208,8 @@
 
     close : function (modal) {
       var modal = modal && modal.length ? modal : this.S(this.scope),
-          open_modals = this.S('[' + this.attr_name() + '].open'),
-          settings = modal.data(this.attr_name(true) + '-init') || this.settings;
+        open_modals = this.S('[' + this.attr_name() + '].open'),
+        settings = modal.data(this.attr_name(true) + '-init') || this.settings;
 
       if (open_modals.length > 0) {
         this.locked = true;
@@ -250,7 +250,7 @@
       // is modal
       if (css) {
         var settings = el.data(this.attr_name(true) + '-init') || this.settings,
-            root_element = settings.root_element;
+          root_element = settings.root_element;
 
         if (el.parent(root_element).length === 0) {
           var placeholder = el.wrap('<div style="display: none;" />').parent();
@@ -369,7 +369,7 @@
 
     close_video : function (e) {
       var video = $('.flex-video', e.target),
-          iframe = $('iframe', video);
+        iframe = $('iframe', video);
 
       if (iframe.length > 0) {
         iframe.attr('data-src', iframe[0].src);
@@ -380,7 +380,7 @@
 
     open_video : function (e) {
       var video = $('.flex-video', e.target),
-          iframe = video.find('iframe');
+        iframe = video.find('iframe');
 
       if (iframe.length > 0) {
         var data_src = iframe.attr('data-src');

@@ -81,35 +81,35 @@ openFarmApp.directive('ofShowGuideStages', ['$http', '$modal', 'stageService',
                 name: stage.name,
                 overview: stage.overview,
                 environment: $scope.environment.filter(function(env) {
-                                return env.selected;
-                              }).map(function(env) {
-                                return env.label;
-                              }),
+                  return env.selected;
+                }).map(function(env) {
+                  return env.label;
+                }),
                 light: $scope.light.filter(function(light) {
-                          return light.selected;
-                        }).map(function(light) {
-                          return light.label;
-                        }),
+                  return light.selected;
+                }).map(function(light) {
+                  return light.label;
+                }),
                 soil: $scope.soil.filter(function(soil) {
-                        return soil.selected;
-                      }).map(function(soil) {
-                        return soil.label;
-                      }),
+                  return soil.selected;
+                }).map(function(soil) {
+                  return soil.label;
+                }),
                 stage_length: stage.stage_length,
                 order: stage.order,
               },
               actions: actions.map(function(sa, index) {
-                        var actionData = {
-                          name: sa.name,
-                          images: sa.pictures,
-                          time: sa.time,
-                          time_unit: sa.time_unit,
-                          overview: sa.overview,
-                          order: index,
-                          id: sa.id || null
-                        };
-                        return actionData;
-                      }),
+                var actionData = {
+                  name: sa.name,
+                  images: sa.pictures,
+                  time: sa.time,
+                  time_unit: sa.time_unit,
+                  overview: sa.overview,
+                  order: index,
+                  id: sa.id || null
+                };
+                return actionData;
+              }),
               images: stage.pictures || null
             };
 
@@ -148,9 +148,9 @@ openFarmApp.directive('ofShowGuideStages', ['$http', '$modal', 'stageService',
 
                       $scope.ok = function () {
                         var selectedActions = $scope.actionOptions
-                                                .filter(function(action){
-                                                  return action.selected;
-                                                });
+                          .filter(function(action){
+                            return action.selected;
+                          });
                         $modalInstance.close(selectedActions);
                       };
 

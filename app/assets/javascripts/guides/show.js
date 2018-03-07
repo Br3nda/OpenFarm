@@ -1,16 +1,16 @@
 openFarmApp.controller('showGuideCtrl', ['$scope', '$http', 'guideService', '$q',
-    'userService', 'gardenService', 'cropService', 'stageService', 'defaultService',
-    'alertsService',
+  'userService', 'gardenService', 'cropService', 'stageService', 'defaultService',
+  'alertsService',
   function showGuideCtrl($scope,
-                         $http,
-                         guideService,
-                         $q,
-                         userService,
-                         gardenService,
-                         cropService,
-                         stageService,
-                         defaultService,
-                         alertsService) {
+    $http,
+    guideService,
+    $q,
+    userService,
+    gardenService,
+    cropService,
+    stageService,
+    defaultService,
+    alertsService) {
     $scope.guideId = getIDFromURL('guides') || GUIDE_ID;
     $scope.userId = USER_ID || undefined;
     $scope.gardenCrop = {};
@@ -47,13 +47,13 @@ openFarmApp.controller('showGuideCtrl', ['$scope', '$http', 'guideService', '$q'
           'draft': $scope.guide.draft,
           'featured_image': 0,
           'practices': $scope.practices.filter(function(practice) {
-                         return practice.selected === true;
-                       }).map(function(practice) {
-                         return practice.slug;
-                       })
-          },
-        'images': $scope.guide.pictures
+            return practice.selected === true;
+          }).map(function(practice) {
+            return practice.slug;
+          })
         },
+        'images': $scope.guide.pictures
+      },
       };
 
       guideService.updateGuideWithPromise($scope.guide.id, params)
@@ -90,65 +90,65 @@ openFarmApp.controller('showGuideCtrl', ['$scope', '$http', 'guideService', '$q'
           $scope.guide.basic_needs.forEach(function(b){
             if (b.percent < 0.5){
               switch (b.name){
-                case 'Sun / Shade':
-                  b.tooltip = 'Low compatibility with "' + b.garden +
+              case 'Sun / Shade':
+                b.tooltip = 'Low compatibility with "' + b.garden +
                   '" because it gets ' + b.user;
-                  break;
-                case 'Location':
-                  b.tooltip = 'Low compatibility with "' + b.garden +
+                break;
+              case 'Location':
+                b.tooltip = 'Low compatibility with "' + b.garden +
                   '" because it is ' + b.user;
-                  break;
-                case 'Soil Type':
-                  b.tooltip = 'Low compatibility with "' + b.garden +
+                break;
+              case 'Soil Type':
+                b.tooltip = 'Low compatibility with "' + b.garden +
                   '" because it has ' + b.user + ' soil';
-                  break;
-                case 'Practices':
-                  b.tooltip = 'Low compatibility with "' + b.garden +
+                break;
+              case 'Practices':
+                b.tooltip = 'Low compatibility with "' + b.garden +
                   '" because you don\'t follow ' + b.user + ' practices there';
-                  break;
+                break;
               }
             }
 
             if (b.percent >= 0.5 && b.percent < 0.75){
               switch (b.name){
-                case 'Sun / Shade':
-                  b.tooltip = 'Medium compatibility with "' + b.garden +
+              case 'Sun / Shade':
+                b.tooltip = 'Medium compatibility with "' + b.garden +
                   '" because it gets ' + b.user;
-                  break;
-                case 'Location':
-                  b.tooltip = 'Medium compatibility with "' + b.garden +
+                break;
+              case 'Location':
+                b.tooltip = 'Medium compatibility with "' + b.garden +
                   '" because it is ' + b.user;
-                  break;
-                case 'Soil Type':
-                  b.tooltip = 'Medium compatibility with "' + b.garden +
+                break;
+              case 'Soil Type':
+                b.tooltip = 'Medium compatibility with "' + b.garden +
                   '" because it has ' + b.user + ' soil';
-                  break;
-                case 'Practices':
-                  b.tooltip = 'Medium compatibility with "' + b.garden +
+                break;
+              case 'Practices':
+                b.tooltip = 'Medium compatibility with "' + b.garden +
                   '" because you follow ' + b.user +
                   ' and other practices there';
-                  break;
+                break;
               }
             }
 
             if (b.percent >= 0.75){
               switch (b.name){
-                case 'Sun / Shade':
-                  b.tooltip = 'High compatibility with "' + b.garden +
+              case 'Sun / Shade':
+                b.tooltip = 'High compatibility with "' + b.garden +
                   '" because it gets ' + b.user;
-                  break;
-                case 'Location':
-                  b.tooltip = 'High compatibility with "' + b.garden +
+                break;
+              case 'Location':
+                b.tooltip = 'High compatibility with "' + b.garden +
                   '" because it is ' + b.user;
-                  break;
-                case 'Soil Type':
-                  b.tooltip = 'High compatibility with "' + b.garden +
+                break;
+              case 'Soil Type':
+                b.tooltip = 'High compatibility with "' + b.garden +
                   '" because it has ' + b.user + ' soil';
-                  break;
-                case 'Practices':
-                  b.tooltip = 'High compatibility with "' + b.garden +
+                break;
+              case 'Practices':
+                b.tooltip = 'High compatibility with "' + b.garden +
                   '" because you follow only ' + b.user + ' practices there';
-                  break;
+                break;
               }
             }
           });
@@ -168,12 +168,12 @@ openFarmApp.controller('showGuideCtrl', ['$scope', '$http', 'guideService', '$q'
 
       if ($scope.userId){
         userService.getUser($scope.userId,
-                            $scope.setCurrentUser);
+          $scope.setCurrentUser);
       }
 
       if($scope.guide.user !== undefined) {
         userService.getUser($scope.guide.user.id,
-                            $scope.setGuideUser);
+          $scope.setGuideUser);
       }
 
       setPractices($scope.guide.practices);
@@ -204,8 +204,8 @@ openFarmApp.controller('showGuideCtrl', ['$scope', '$http', 'guideService', '$q'
     $scope.practicesList = function () {
       if ($scope.practices) {
         return $scope.practices.filter(function (p) { return p.selected; })
-                               .map(function (p) { return p.slug; })
-                               .join(', ');
+          .map(function (p) { return p.slug; })
+          .join(', ');
       }
     };
 

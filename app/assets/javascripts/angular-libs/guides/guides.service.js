@@ -51,8 +51,8 @@ openFarmApp.factory('guideService', ['$http', '$q', 'alertsService',
 
     var buildGuide = function(data, included) {
       var stages,
-          user,
-          crop;
+        user,
+        crop;
       var guide = data.attributes;
       guide.id = data.id;
       guide.relationships = data.relationships;
@@ -108,11 +108,11 @@ openFarmApp.factory('guideService', ['$http', '$q', 'alertsService',
     // below
     var getGuide = function(guideId, callback){
       $http.get('/api/v1/guides/' + guideId)
-      .success(function (response) {
-        return callback (true, buildGuide(response.data, response.included));
-      }).error(function (response, code) {
-        alertsService.pushToAlerts(response.errors, code);
-      });
+        .success(function (response) {
+          return callback (true, buildGuide(response.data, response.included));
+        }).error(function (response, code) {
+          alertsService.pushToAlerts(response.errors, code);
+        });
     };
     // This function should replace the above function,
     // part of refactoring.
@@ -120,12 +120,12 @@ openFarmApp.factory('guideService', ['$http', '$q', 'alertsService',
       return $q(function (resolve, reject) {
         if (guideId !== "" && guideId !== "new") {
           $http.get('/api/v1/guides/' + guideId)
-          .success(function (response) {
-            resolve(buildGuide(response.data, response.included));
-          }).error(function (response, code) {
-            alertsService.pushToAlerts(response.errors, code);
-            reject(response);
-          });
+            .success(function (response) {
+              resolve(buildGuide(response.data, response.included));
+            }).error(function (response, code) {
+              alertsService.pushToAlerts(response.errors, code);
+              reject(response);
+            });
         } else {
           resolve();
         }
@@ -134,11 +134,11 @@ openFarmApp.factory('guideService', ['$http', '$q', 'alertsService',
 
     var createGuide = function(params, callback){
       $http.post('/api/v1/guides/', params)
-      .success(function (response) {
-        return callback (true, buildGuide(response.data, response.included));
-      }).error(function (response, code) {
-        alertsService.pushToAlerts(response.errors, code);
-      });
+        .success(function (response) {
+          return callback (true, buildGuide(response.data, response.included));
+        }).error(function (response, code) {
+          alertsService.pushToAlerts(response.errors, code);
+        });
     };
 
     var createGuideWithPromise = function(params) {
@@ -212,12 +212,12 @@ openFarmApp.factory('guideService', ['$http', '$q', 'alertsService',
 
     var drawTimeline = function(timespan, callback){
       var firstDay,
-          currentDay,
-          day,
-          today,
-          todayIndex,
-          days,
-          scale;
+        currentDay,
+        day,
+        today,
+        todayIndex,
+        days,
+        scale;
 
       days = [];
       today = moment();
@@ -256,16 +256,16 @@ openFarmApp.factory('guideService', ['$http', '$q', 'alertsService',
       //   $('.plantLifetime.overflow').width(remainderDays);
       // } else {
 
-        // This has a * 7 multiplier because we're assuming weeks.
-        $('.plantLifetime')
-          .width(scale.convertWeekToPosition(timespan.length));
+      // This has a * 7 multiplier because we're assuming weeks.
+      $('.plantLifetime')
+        .width(scale.convertWeekToPosition(timespan.length));
 
-        $('.plantLifetime').on('mouseup', function(){
-          var left = $(this).css('left');
-          var scaled = scale.convertPositionToWeek(left);
-          timespan
-            .set_start_event(scaled);
-        });
+      $('.plantLifetime').on('mouseup', function(){
+        var left = $(this).css('left');
+        var scaled = scale.convertPositionToWeek(left);
+        timespan
+          .set_start_event(scaled);
+      });
       // }
       return callback(days, scale.step, scale);
     };
@@ -283,4 +283,4 @@ openFarmApp.factory('guideService', ['$http', '$q', 'alertsService',
       'updateGuide': updateGuide,
       'drawTimeline': drawTimeline
     };
-}]);
+  }]);
