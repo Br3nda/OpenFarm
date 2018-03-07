@@ -1,7 +1,7 @@
 openFarmApp.directive('addCrop', ['$http',
-                                  '$rootScope',
-                                  'cropService',
-                                  'gardenService',
+  '$rootScope',
+  'cropService',
+  'gardenService',
   function addCrop($http, $rootScope, cropService, gardenService) {
     return {
       restrict: 'A',
@@ -67,19 +67,19 @@ openFarmApp.directive('addCrop', ['$http',
             $scope.crops1 = $scope.getCrops($scope.cropQuery);
             var cropi;
             if($scope.crops1) {
-            for (cropi in $scope.crops) {
-              if($scope.crops[cropi].name == $scope.cropQuery.name) {
-                gardenService.addGardenCropToGarden($scope.gardenQuery,
-                                                    $scope.objectType,
-                                                    $scope.cropQuery, acallback);
+              for (cropi in $scope.crops) {
+                if($scope.crops[cropi].name == $scope.cropQuery.name) {
+                  gardenService.addGardenCropToGarden($scope.gardenQuery,
+                    $scope.objectType,
+                    $scope.cropQuery, acallback);
                 }
                 if($scope.crops[cropi].name == $scope.cropQuery) {
                   $scope.finalCrop = cropService.utilities.buildParams($scope.crops[cropi]);
                   gardenService.addGardenCropToGarden($scope.gardenQuery,
-                                                    $scope.objectType,
-                                                    $scope.cropQuery, acallback);
-                  }
+                    $scope.objectType,
+                    $scope.cropQuery, acallback);
                 }
+              }
             }
           };
 
@@ -87,4 +87,4 @@ openFarmApp.directive('addCrop', ['$http',
       ],
       templateUrl: '/assets/templates/_add_crop_to_garden.html',
     };
-}]);
+  }]);

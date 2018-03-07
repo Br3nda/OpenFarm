@@ -9,7 +9,7 @@ openFarmApp.controller('finishCtrl', ['$scope', '$http', 'userService',
     };
 
     userService.getUser($scope.userId,
-                        $scope.setUser);
+      $scope.setUser);
 
     $scope.placeUserUpload = function(image){
       $scope.user.user_setting.picture = {
@@ -44,7 +44,7 @@ openFarmApp.controller('finishCtrl', ['$scope', '$http', 'userService',
       };
 
       userService.updateUser($scope.user.id,
-                             params,
-                             userCallback);
+        params,
+        userCallback);
     };
-}]);
+  }]);

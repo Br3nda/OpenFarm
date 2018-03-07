@@ -47,8 +47,8 @@ openFarmApp.factory('userService', ['$http', '$q', 'gardenService',
 
     function buildUser (data, included) {
       var user_setting,
-          picture,
-          gardens;
+        picture,
+        gardens;
       var user = data.attributes;
       user.id = data.id;
       user.relationships = data.relationships;
@@ -158,6 +158,6 @@ openFarmApp.factory('userService', ['$http', '$q', 'gardenService',
             alertsService.pushToAlerts(response.errors, code);
             reject(response, code);
           });
-        });
+      });
     }
-}]);
+  }]);

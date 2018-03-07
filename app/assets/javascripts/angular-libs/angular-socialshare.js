@@ -300,9 +300,9 @@
             , aConfigurationKey
             , configElement
             , internIndex = 0
-          //this is necessary becuase provider run before any service
-          //so i have to take the log from another injector
-          , $log = angular.injector(['ng']).get('$log');
+            //this is necessary becuase provider run before any service
+            //so i have to take the log from another injector
+            , $log = angular.injector(['ng']).get('$log');
 
           if (configuration && configuration.length > 0) {
             for (; configIndex < configuration.length; configIndex += 1) {
@@ -315,34 +315,34 @@
                     configElement.provider &&
                     configuration[configIndex].provider === configElement.provider) {
 
-                      configurationKeys = Object.keys(configElement.conf);
-                      configurationIndex = 0;
+                    configurationKeys = Object.keys(configElement.conf);
+                    configurationIndex = 0;
 
-                      for (; configurationIndex < configurationKeys.length; configurationIndex += 1) {
+                    for (; configurationIndex < configurationKeys.length; configurationIndex += 1) {
 
-                        aConfigurationKey = configurationKeys[configurationIndex];
-                        if (aConfigurationKey && configuration[configIndex].conf[aConfigurationKey]) {
+                      aConfigurationKey = configurationKeys[configurationIndex];
+                      if (aConfigurationKey && configuration[configIndex].conf[aConfigurationKey]) {
 
-                          configElement.conf[aConfigurationKey] = configuration[configIndex].conf[aConfigurationKey];
-                        }
+                        configElement.conf[aConfigurationKey] = configuration[configIndex].conf[aConfigurationKey];
                       }
-
-                      // once the provider has been found and configuration applied
-                      // we should reset the internIndex for the next provider match to work correctly
-                      // and break, to skip loops on unwanted next providers
-                      internIndex = 0;
-                      break;
                     }
+
+                    // once the provider has been found and configuration applied
+                    // we should reset the internIndex for the next provider match to work correctly
+                    // and break, to skip loops on unwanted next providers
+                    internIndex = 0;
+                    break;
                   }
-                } else {
-                  $log.warn('Invalid provider at element ' + configIndex + ' with name:' + configuration[configIndex].provider);
                 }
+              } else {
+                $log.warn('Invalid provider at element ' + configIndex + ' with name:' + configuration[configIndex].provider);
               }
             }
+          }
         }
         , '$get': /*@ngInject*/ function instantiateProvider() {
 
-            return socialshareConfigurationDefault;
+          return socialshareConfigurationDefault;
         }
       };
     }
@@ -415,47 +415,47 @@
           + ',top=' + ($window.innerHeight - attrs.socialsharePopupHeight) / 2 + ',left=' + ($window.innerWidth - attrs.socialsharePopupWidth) / 2);
 
       } else if (attrs.socialshareType && attrs.socialshareType === 'share') {
-       // if user specifies that they want to use the Facebook feed dialog (https://developers.facebook.com/docs/sharing/reference/feed-dialog/v2.4)
-       urlString = 'https://www.facebook.com/dialog/share?';
+        // if user specifies that they want to use the Facebook feed dialog (https://developers.facebook.com/docs/sharing/reference/feed-dialog/v2.4)
+        urlString = 'https://www.facebook.com/dialog/share?';
 
-       if (attrs.socialshareVia) {
-         urlString += '&app_id=' + encodeURIComponent(attrs.socialshareVia);
-       }
-       if (attrs.socialshareTitle) {
-         urlString += '&title=' + encodeURIComponent(attrs.socialshareTitle);
-       }
+        if (attrs.socialshareVia) {
+          urlString += '&app_id=' + encodeURIComponent(attrs.socialshareVia);
+        }
+        if (attrs.socialshareTitle) {
+          urlString += '&title=' + encodeURIComponent(attrs.socialshareTitle);
+        }
 
-       if (attrs.socialshareUrl) {
-         urlString += '&href=' + encodeURIComponent(attrs.socialshareUrl);
-       }
+        if (attrs.socialshareUrl) {
+          urlString += '&href=' + encodeURIComponent(attrs.socialshareUrl);
+        }
 
-       if (attrs.socialshareQuote) {
-         urlString += '&quote=' + encodeURIComponent(attrs.socialshareQuote);
-       }
+        if (attrs.socialshareQuote) {
+          urlString += '&quote=' + encodeURIComponent(attrs.socialshareQuote);
+        }
 
-       if (attrs.socialshareDisplay) {
-         urlString += '&display=' + encodeURIComponent(attrs.socialshareDisplay);
-       }
+        if (attrs.socialshareDisplay) {
+          urlString += '&display=' + encodeURIComponent(attrs.socialshareDisplay);
+        }
 
-      if (attrs.socialshareDescription) {
-         urlString += '&description=' + encodeURIComponent(attrs.socialshareDescription);
-       }
+        if (attrs.socialshareDescription) {
+          urlString += '&description=' + encodeURIComponent(attrs.socialshareDescription);
+        }
 
-       if (attrs.socialshareHashtags) {
-         urlString += '&hashtag=' + encodeURIComponent(attrs.socialshareHashtags);
-       }
+        if (attrs.socialshareHashtags) {
+          urlString += '&hashtag=' + encodeURIComponent(attrs.socialshareHashtags);
+        }
 
-       if (attrs.socialshareCaption) {
-         urlString += '&caption=' + encodeURIComponent(attrs.socialshareCaption);
-       }
+        if (attrs.socialshareCaption) {
+          urlString += '&caption=' + encodeURIComponent(attrs.socialshareCaption);
+        }
 
-       if (attrs.socialshareMedia) {
-         urlString += '&picture=' + encodeURIComponent(attrs.socialshareMedia);
-       }
+        if (attrs.socialshareMedia) {
+          urlString += '&picture=' + encodeURIComponent(attrs.socialshareMedia);
+        }
 
-       $window.open(
-         urlString,
-         'Facebook', 'toolbar=0,status=0,resizable=yes,width=' + attrs.socialsharePopupWidth + ',height=' + attrs.socialsharePopupHeight
+        $window.open(
+          urlString,
+          'Facebook', 'toolbar=0,status=0,resizable=yes,width=' + attrs.socialsharePopupWidth + ',height=' + attrs.socialsharePopupHeight
          + ',top=' + ($window.innerHeight - attrs.socialsharePopupHeight) / 2 + ',left=' + ($window.innerWidth - attrs.socialsharePopupWidth) / 2);
 
       } else if (attrs.socialshareType && attrs.socialshareType === 'send') {
@@ -539,7 +539,7 @@
 
       element.attr('href', href);
       element.attr('target', '_top');
-  }
+    }
     , manageTwitterShare = function manageTwitterShare($window, attrs) {
       var urlString = 'https://www.twitter.com/intent/tweet?';
 
@@ -569,7 +569,7 @@
         'https://plus.google.com/share?url=' + encodeURIComponent(attrs.socialshareUrl || $window.location.href)
         , 'Google+', 'toolbar=0,status=0,resizable=yes,width=' + attrs.socialsharePopupWidth + ',height=' + attrs.socialsharePopupHeight
         + ',top=' + ($window.innerHeight - attrs.socialsharePopupHeight) / 2 + ',left=' + ($window.innerWidth - attrs.socialsharePopupWidth) / 2);
-      }
+    }
     , manageRedditShare = function manageRedditShare($window, attrs) {
       var urlString = 'https://www.reddit.com/';
 
@@ -595,7 +595,7 @@
         urlString + encodeURIComponent(attrs.socialshareUrl || $window.location.href) + '&title=' + encodeURIComponent(attrs.socialshareText)
         , 'Reddit', 'toolbar=0,status=0,resizable=yes,width=' + attrs.socialsharePopupWidth + ',height=' + attrs.socialsharePopupHeight
         + ',top=' + ($window.innerHeight - attrs.socialsharePopupHeight) / 2 + ',left=' + ($window.innerWidth - attrs.socialsharePopupWidth) / 2);
-      }
+    }
     , manageStumbleuponShare = function manageStumbleuponShare($window, attrs) {
 
       $window.open(
@@ -680,8 +680,8 @@
       }
 
       $window.open(
-       urlString
-       , 'Vk', 'toolbar=0,status=0,resizable=yes,width=' + attrs.socialsharePopupWidth + ',height=' + attrs.socialsharePopupHeight
+        urlString
+        , 'Vk', 'toolbar=0,status=0,resizable=yes,width=' + attrs.socialsharePopupWidth + ',height=' + attrs.socialsharePopupHeight
        + ',top=' + ($window.innerHeight - attrs.socialsharePopupHeight) / 2 + ',left=' + ($window.innerWidth - attrs.socialsharePopupWidth) / 2);
     }
     , manageOkShare = function manageOkShare($window, attrs) {
@@ -692,9 +692,9 @@
     }
     , manageDeliciousShare = function manageDeliciousShare($window, attrs) {
 
-     $window.open(
-       'https://www.delicious.com/save?v=5&noui&jump=close&url=' + encodeURIComponent(attrs.socialshareUrl || $window.location.href) + '&title=' + encodeURIComponent(attrs.socialshareText)
-       , 'Delicious', 'toolbar=0,status=0,resizable=yes,width=' + attrs.socialsharePopupWidth + ',height=' + attrs.socialsharePopupHeight
+      $window.open(
+        'https://www.delicious.com/save?v=5&noui&jump=close&url=' + encodeURIComponent(attrs.socialshareUrl || $window.location.href) + '&title=' + encodeURIComponent(attrs.socialshareText)
+        , 'Delicious', 'toolbar=0,status=0,resizable=yes,width=' + attrs.socialsharePopupWidth + ',height=' + attrs.socialsharePopupHeight
        + ',top=' + ($window.innerHeight - attrs.socialsharePopupHeight) / 2 + ',left=' + ($window.innerWidth - attrs.socialsharePopupWidth) / 2);
     }
     , manageBufferShare = function manageBufferShare($window, attrs) {
@@ -730,8 +730,8 @@
       urlString += 'u=' + encodeURIComponent(attrs.socialshareUrl || $window.location.href);
 
       $window.open(
-       urlString,
-       'Hackernews', 'toolbar=0,status=0,resizable=yes,width=' + attrs.socialsharePopupWidth + ',height=' + attrs.socialsharePopupHeight
+        urlString,
+        'Hackernews', 'toolbar=0,status=0,resizable=yes,width=' + attrs.socialsharePopupWidth + ',height=' + attrs.socialsharePopupHeight
       + ',top=' + ($window.innerHeight - attrs.socialsharePopupHeight) / 2 + ',left=' + ($window.innerWidth - attrs.socialsharePopupWidth) / 2);
     }
     , manageFlipboardShare = function manageFlipboardShare($window, attrs) {
@@ -894,101 +894,101 @@
       this.share = function shareTrigger(serviceShareConf) {
 
         switch (serviceShareConf.provider) {
-          case 'email': {
-            this.emailShare($window, serviceShareConf.attrs);
-            break;
-          }
-          case 'sms': {
-            this.smsShare($window, $log, serviceShareConf.attrs);
-            break;
-          }
-          case 'facebook': {
-            this.facebookShare($window, serviceShareConf.attrs);
-            break;
-          }
-          case 'twitter': {
-            this.twitterShare($window, serviceShareConf.attrs);
-            break;
-          }
-          case 'pinterest': {
-            this.pinterestShare($window, serviceShareConf.attrs);
-            break;
-          }
-          case 'ok': {
-            this.okShare($window, serviceShareConf.attrs);
-            break;
-          }
-          case 'vk': {
-            this.vkShare($window, serviceShareConf.attrs);
-            break;
-          }
-          case 'delicious': {
-            this.deliciousShare($window, serviceShareConf.attrs);
-            break;
-          }
-          case 'digg': {
-            this.diggShare($window, serviceShareConf.attrs);
-            break;
-          }
-          case 'google': {
-            this.googleShare($window, serviceShareConf.attrs);
-            break;
-          }
-          case 'reddit': {
-            this.redditShare($window, serviceShareConf.attrs);
-            break;
-          }
-          case 'hackernews': {
-            this.hackernewsShare($window, serviceShareConf.attrs);
-            break;
-          }
-          case 'skype': {
-            this.skypeShare($window, serviceShareConf.attrs);
-            break;
-          }
-          case 'evernote': {
-            this.evernoteShare($window, serviceShareConf.attrs);
-            break;
-          }
-          case 'pocket': {
-            this.pocketShare($window, serviceShareConf.attrs);
-            break;
-          }
-          case 'tumblr': {
-            this.tumblrShare($window, serviceShareConf.attrs);
-            break;
-          }
-          case 'telegram': {
-            this.telegramShare($window, serviceShareConf.attrs);
-            break;
-          }
-          case 'xing': {
-            this.xingShare($window, serviceShareConf.attrs);
-            break;
-          }
-          case 'buffer': {
-            this.bufferShare($window, serviceShareConf.attrs);
-            break;
-          }
-          case 'stumbleupon': {
-            this.stumbleuponShare($window, serviceShareConf.attrs);
-            break;
-          }
-          case 'linkedin': {
-            this.linkedinShare($window, serviceShareConf.attrs);
-            break;
-          }
-          case 'wordpress': {
-            this.wordpressShare($window, serviceShareConf.attrs);
-            break;
-          }
-          case 'flipboard': {
-            this.flipboardShare($window, serviceShareConf.attrs);
-            break;
-          }
-          default: {
-            return;
-          }
+        case 'email': {
+          this.emailShare($window, serviceShareConf.attrs);
+          break;
+        }
+        case 'sms': {
+          this.smsShare($window, $log, serviceShareConf.attrs);
+          break;
+        }
+        case 'facebook': {
+          this.facebookShare($window, serviceShareConf.attrs);
+          break;
+        }
+        case 'twitter': {
+          this.twitterShare($window, serviceShareConf.attrs);
+          break;
+        }
+        case 'pinterest': {
+          this.pinterestShare($window, serviceShareConf.attrs);
+          break;
+        }
+        case 'ok': {
+          this.okShare($window, serviceShareConf.attrs);
+          break;
+        }
+        case 'vk': {
+          this.vkShare($window, serviceShareConf.attrs);
+          break;
+        }
+        case 'delicious': {
+          this.deliciousShare($window, serviceShareConf.attrs);
+          break;
+        }
+        case 'digg': {
+          this.diggShare($window, serviceShareConf.attrs);
+          break;
+        }
+        case 'google': {
+          this.googleShare($window, serviceShareConf.attrs);
+          break;
+        }
+        case 'reddit': {
+          this.redditShare($window, serviceShareConf.attrs);
+          break;
+        }
+        case 'hackernews': {
+          this.hackernewsShare($window, serviceShareConf.attrs);
+          break;
+        }
+        case 'skype': {
+          this.skypeShare($window, serviceShareConf.attrs);
+          break;
+        }
+        case 'evernote': {
+          this.evernoteShare($window, serviceShareConf.attrs);
+          break;
+        }
+        case 'pocket': {
+          this.pocketShare($window, serviceShareConf.attrs);
+          break;
+        }
+        case 'tumblr': {
+          this.tumblrShare($window, serviceShareConf.attrs);
+          break;
+        }
+        case 'telegram': {
+          this.telegramShare($window, serviceShareConf.attrs);
+          break;
+        }
+        case 'xing': {
+          this.xingShare($window, serviceShareConf.attrs);
+          break;
+        }
+        case 'buffer': {
+          this.bufferShare($window, serviceShareConf.attrs);
+          break;
+        }
+        case 'stumbleupon': {
+          this.stumbleuponShare($window, serviceShareConf.attrs);
+          break;
+        }
+        case 'linkedin': {
+          this.linkedinShare($window, serviceShareConf.attrs);
+          break;
+        }
+        case 'wordpress': {
+          this.wordpressShare($window, serviceShareConf.attrs);
+          break;
+        }
+        case 'flipboard': {
+          this.flipboardShare($window, serviceShareConf.attrs);
+          break;
+        }
+        default: {
+          return;
+        }
         }
       };
     }]
@@ -999,15 +999,15 @@
         // observe the values in each of the properties so that if they're updated elsewhere,
         // they are updated in this directive.
         var configurationElement
-        , index = 0
-        , onEventTriggered = function onEventTriggered() {
+          , index = 0
+          , onEventTriggered = function onEventTriggered() {
           /*eslint-disable no-use-before-define*/
-          if (attrs.socialshareProvider in sharingFunctions) {
-            sharingFunctions[attrs.socialshareProvider]($window, attrs, element);
-          } else {
-            return true;
-          }
-        };
+            if (attrs.socialshareProvider in sharingFunctions) {
+              sharingFunctions[attrs.socialshareProvider]($window, attrs, element);
+            } else {
+              return true;
+            }
+          };
         /*eslint-enable no-use-before-define*/
         //looking into configuration if there is a config for the current provider
         for (; index < socialshareConf.length; index += 1) {
@@ -1063,7 +1063,7 @@
       };
     }]
     , sharingFunctions = {
-        'email': manageEmailShare
+      'email': manageEmailShare
       , 'facebook': manageFacebookShare
       , 'facebook-messenger': facebookMessengerShare
       , 'twitter': manageTwitterShare
@@ -1093,7 +1093,7 @@
 
 
   angular.module('720kb.socialshare', [])
-  .provider(directiveName + 'Conf', socialshareConfigurationProvider)
-  .service(serviceName, socialshareService)
-  .directive(directiveName, socialshareDirective);
+    .provider(directiveName + 'Conf', socialshareConfigurationProvider)
+    .service(serviceName, socialshareService)
+    .directive(directiveName, socialshareDirective);
 }(angular));

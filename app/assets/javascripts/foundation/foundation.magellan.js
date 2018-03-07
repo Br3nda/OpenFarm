@@ -21,8 +21,8 @@
 
     events : function () {
       var self = this,
-          S = self.S,
-          settings = self.settings;
+        S = self.S,
+        settings = self.settings;
 
       // initialize expedition offset
       self.set_expedition_position();
@@ -32,9 +32,9 @@
         .on('click.fndtn.magellan', '[' + self.add_namespace('data-magellan-arrival') + '] a[href^="#"]', function (e) {
           e.preventDefault();
           var expedition = $(this).closest('[' + self.attr_name() + ']'),
-              settings = expedition.data('magellan-expedition-init'),
-              hash = this.hash.split('#').join(''),
-              target = $("a[name='"+hash+"']");
+            settings = expedition.data('magellan-expedition-init'),
+            hash = this.hash.split('#').join(''),
+            target = $("a[name='"+hash+"']");
           
           if (target.length === 0) {
             target = $('#'+hash);
@@ -71,9 +71,9 @@
       var self = this;
       $('[' + this.attr_name() + '=fixed]', self.scope).each(function(idx, el) {
         var expedition = $(this),
-            settings = expedition.data('magellan-expedition-init'),
-            styles = expedition.attr('styles'), // save styles
-            top_offset;
+          settings = expedition.data('magellan-expedition-init'),
+          styles = expedition.attr('styles'), // save styles
+          top_offset;
 
         expedition.attr('style', '');
         top_offset = expedition.offset().top + settings.threshold;
@@ -85,12 +85,12 @@
 
     update_expedition_positions : function() {
       var self = this,
-          window_top_offset = $(window).scrollTop();
+        window_top_offset = $(window).scrollTop();
 
       $('[' + this.attr_name() + '=fixed]', self.scope).each(function() {
         var expedition = $(this),
-            settings = expedition.data('magellan-expedition-init'),
-            top_offset = expedition.data('magellan-top-offset');
+          settings = expedition.data('magellan-expedition-init'),
+          top_offset = expedition.data('magellan-top-offset');
 
         if (window_top_offset >= top_offset) {
           // Placeholder allows height calculations to be consistent even when
@@ -112,14 +112,14 @@
 
     update_arrivals : function() {
       var self = this,
-          window_top_offset = $(window).scrollTop();
+        window_top_offset = $(window).scrollTop();
 
       $('[' + this.attr_name() + ']', self.scope).each(function() {
         var expedition = $(this),
-            settings = expedition.data(self.attr_name(true) + '-init'),
-            offsets = self.offsets(expedition, window_top_offset),
-            arrivals = expedition.find('[' + self.add_namespace('data-magellan-arrival') + ']'),
-            active_item = false;
+          settings = expedition.data(self.attr_name(true) + '-init'),
+          offsets = self.offsets(expedition, window_top_offset),
+          arrivals = expedition.find('[' + self.add_namespace('data-magellan-arrival') + ']'),
+          active_item = false;
         offsets.each(function(idx, item) {
           if (item.viewport_offset >= item.top_offset) {
             var arrivals = expedition.find('[' + self.add_namespace('data-magellan-arrival') + ']');
@@ -136,12 +136,12 @@
 
     offsets : function(expedition, window_offset) {
       var self = this,
-          settings = expedition.data(self.attr_name(true) + '-init'),
-          viewport_offset = window_offset;
+        settings = expedition.data(self.attr_name(true) + '-init'),
+        viewport_offset = window_offset;
 
       return expedition.find('[' + self.add_namespace('data-magellan-arrival') + ']').map(function(idx, el) {
         var name = $(this).data(self.data_attr('magellan-arrival')),
-            dest = $('[' + self.add_namespace('data-magellan-destination') + '=' + name + ']');
+          dest = $('[' + self.add_namespace('data-magellan-destination') + '=' + name + ']');
         if (dest.length > 0) {
           var top_offset = dest.offset().top - settings.destination_threshold - expedition.outerHeight();
           return {

@@ -52,12 +52,12 @@ openFarmApp.factory('defaultService', ['$http', '$q', 'alertsService',
     };
 
     var nameToMultiSelect = function(name) {
-        return {
-            // TODO: make the slug creation more robust.
-            'slug': name.toLowerCase(),
-            'label': name,
-            'selected': false
-        };
+      return {
+        // TODO: make the slug creation more robust.
+        'slug': name.toLowerCase(),
+        'label': name,
+        'selected': false
+      };
     };
 
     var getDetailOptions = function() {
@@ -113,4 +113,4 @@ openFarmApp.factory('defaultService', ['$http', '$q', 'alertsService',
       'getStageOptions': getStageOptions,
       'getStageActionOptions': getStageActionOptions
     };
-}]);
+  }]);

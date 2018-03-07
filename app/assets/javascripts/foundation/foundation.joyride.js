@@ -113,9 +113,9 @@
 
     start : function () {
       var self = this,
-          $this = $('[' + this.attr_name() + ']', this.scope),
-          integer_settings = ['timer', 'scrollSpeed', 'startOffset', 'tipAnimationFadeSpeed', 'cookieExpires'],
-          int_settings_count = integer_settings.length;
+        $this = $('[' + this.attr_name() + ']', this.scope),
+        integer_settings = ['timer', 'scrollSpeed', 'startOffset', 'tipAnimationFadeSpeed', 'cookieExpires'],
+        int_settings_count = integer_settings.length;
 
       if (!$this.length > 0) return;
 
@@ -373,16 +373,16 @@
 
     set_target : function () {
       var cl = this.settings.$li.attr(this.add_namespace('data-class')),
-          id = this.settings.$li.attr(this.add_namespace('data-id')),
-          $sel = function () {
-            if (id) {
-              return $(document.getElementById(id));
-            } else if (cl) {
-              return $('.' + cl).first();
-            } else {
-              return $('body');
-            }
-          };
+        id = this.settings.$li.attr(this.add_namespace('data-id')),
+        $sel = function () {
+          if (id) {
+            return $(document.getElementById(id));
+          } else if (cl) {
+            return $('.' + cl).first();
+          } else {
+            return $('body');
+          }
+        };
 
       this.settings.$target = $sel();
     },
@@ -412,9 +412,9 @@
 
     pos_default : function (init) {
       var $nub = this.settings.$next_tip.find('.joyride-nub'),
-          nub_width = Math.ceil($nub.outerWidth() / 2),
-          nub_height = Math.ceil($nub.outerHeight() / 2),
-          toggle = init || false;
+        nub_width = Math.ceil($nub.outerWidth() / 2),
+        nub_height = Math.ceil($nub.outerHeight() / 2),
+        toggle = init || false;
 
       // tip must not be "display: none" to calculate position
       if (toggle) {
@@ -426,64 +426,64 @@
       	  var topAdjustment = this.settings.tip_settings.tipAdjustmentY ? parseInt(this.settings.tip_settings.tipAdjustmentY) : 0,
 			        leftAdjustment = this.settings.tip_settings.tipAdjustmentX ? parseInt(this.settings.tip_settings.tipAdjustmentX) : 0;
           
-          if (this.bottom()) {
-            if (this.rtl) {
-              this.settings.$next_tip.css({
-                top: (this.settings.$target.offset().top + nub_height + this.settings.$target.outerHeight() + topAdjustment),
-                left: this.settings.$target.offset().left + this.settings.$target.outerWidth() - this.settings.$next_tip.outerWidth() + leftAdjustment});
-            } else {
-              this.settings.$next_tip.css({
-                top: (this.settings.$target.offset().top + nub_height + this.settings.$target.outerHeight() + topAdjustment),
-                left: this.settings.$target.offset().left + leftAdjustment});
-            }
-
-            this.nub_position($nub, this.settings.tip_settings.nub_position, 'top');
-
-          } else if (this.top()) {
-            if (this.rtl) {
-              this.settings.$next_tip.css({
-                top: (this.settings.$target.offset().top - this.settings.$next_tip.outerHeight() - nub_height + topAdjustment),
-                left: this.settings.$target.offset().left + this.settings.$target.outerWidth() - this.settings.$next_tip.outerWidth()});
-            } else {
-              this.settings.$next_tip.css({
-                top: (this.settings.$target.offset().top - this.settings.$next_tip.outerHeight() - nub_height + topAdjustment),
-                left: this.settings.$target.offset().left + leftAdjustment});
-            }
-
-            this.nub_position($nub, this.settings.tip_settings.nub_position, 'bottom');
-
-          } else if (this.right()) {
-
+        if (this.bottom()) {
+          if (this.rtl) {
             this.settings.$next_tip.css({
-              top: this.settings.$target.offset().top + topAdjustment,
-              left: (this.settings.$target.outerWidth() + this.settings.$target.offset().left + nub_width + leftAdjustment)});
-
-            this.nub_position($nub, this.settings.tip_settings.nub_position, 'left');
-
-          } else if (this.left()) {
-
+              top: (this.settings.$target.offset().top + nub_height + this.settings.$target.outerHeight() + topAdjustment),
+              left: this.settings.$target.offset().left + this.settings.$target.outerWidth() - this.settings.$next_tip.outerWidth() + leftAdjustment});
+          } else {
             this.settings.$next_tip.css({
-              top: this.settings.$target.offset().top + topAdjustment,
-              left: (this.settings.$target.offset().left - this.settings.$next_tip.outerWidth() - nub_width + leftAdjustment)});
-
-            this.nub_position($nub, this.settings.tip_settings.nub_position, 'right');
-
+              top: (this.settings.$target.offset().top + nub_height + this.settings.$target.outerHeight() + topAdjustment),
+              left: this.settings.$target.offset().left + leftAdjustment});
           }
 
-          if (!this.visible(this.corners(this.settings.$next_tip)) && this.settings.attempts < this.settings.tip_settings.tip_location_pattern.length) {
+          this.nub_position($nub, this.settings.tip_settings.nub_position, 'top');
 
-            $nub.removeClass('bottom')
-              .removeClass('top')
-              .removeClass('right')
-              .removeClass('left');
-
-            this.settings.tip_settings.tip_location = this.settings.tip_settings.tip_location_pattern[this.settings.attempts];
-
-            this.settings.attempts++;
-
-            this.pos_default();
-
+        } else if (this.top()) {
+          if (this.rtl) {
+            this.settings.$next_tip.css({
+              top: (this.settings.$target.offset().top - this.settings.$next_tip.outerHeight() - nub_height + topAdjustment),
+              left: this.settings.$target.offset().left + this.settings.$target.outerWidth() - this.settings.$next_tip.outerWidth()});
+          } else {
+            this.settings.$next_tip.css({
+              top: (this.settings.$target.offset().top - this.settings.$next_tip.outerHeight() - nub_height + topAdjustment),
+              left: this.settings.$target.offset().left + leftAdjustment});
           }
+
+          this.nub_position($nub, this.settings.tip_settings.nub_position, 'bottom');
+
+        } else if (this.right()) {
+
+          this.settings.$next_tip.css({
+            top: this.settings.$target.offset().top + topAdjustment,
+            left: (this.settings.$target.outerWidth() + this.settings.$target.offset().left + nub_width + leftAdjustment)});
+
+          this.nub_position($nub, this.settings.tip_settings.nub_position, 'left');
+
+        } else if (this.left()) {
+
+          this.settings.$next_tip.css({
+            top: this.settings.$target.offset().top + topAdjustment,
+            left: (this.settings.$target.offset().left - this.settings.$next_tip.outerWidth() - nub_width + leftAdjustment)});
+
+          this.nub_position($nub, this.settings.tip_settings.nub_position, 'right');
+
+        }
+
+        if (!this.visible(this.corners(this.settings.$next_tip)) && this.settings.attempts < this.settings.tip_settings.tip_location_pattern.length) {
+
+          $nub.removeClass('bottom')
+            .removeClass('top')
+            .removeClass('right')
+            .removeClass('left');
+
+          this.settings.tip_settings.tip_location = this.settings.tip_settings.tip_location_pattern[this.settings.attempts];
+
+          this.settings.attempts++;
+
+          this.pos_default();
+
+        }
 
       } else if (this.settings.$li.length) {
 
@@ -500,11 +500,11 @@
 
     pos_phone : function (init) {
       var tip_height = this.settings.$next_tip.outerHeight(),
-          tip_offset = this.settings.$next_tip.offset(),
-          target_height = this.settings.$target.outerHeight(),
-          $nub = $('.joyride-nub', this.settings.$next_tip),
-          nub_height = Math.ceil($nub.outerHeight() / 2),
-          toggle = init || false;
+        tip_offset = this.settings.$next_tip.offset(),
+        target_height = this.settings.$target.outerHeight(),
+        $nub = $('.joyride-nub', this.settings.$next_tip),
+        nub_height = Math.ceil($nub.outerHeight() / 2),
+        toggle = init || false;
 
       $nub.removeClass('bottom')
         .removeClass('top')
@@ -520,8 +520,8 @@
 
         if (this.top()) {
 
-            this.settings.$next_tip.offset({top: this.settings.$target.offset().top - tip_height - nub_height});
-            $nub.addClass('bottom');
+          this.settings.$next_tip.offset({top: this.settings.$target.offset().top - tip_height - nub_height});
+          $nub.addClass('bottom');
 
         } else {
 
@@ -555,20 +555,20 @@
         }
 
         if (/pop/i.test(this.settings.tip_animation)) {
-            joyridemodalbg.show();
+          joyridemodalbg.show();
         } else {
-            joyridemodalbg.fadeIn(this.settings.tip_animation_fade_speed);
+          joyridemodalbg.fadeIn(this.settings.tip_animation_fade_speed);
         }
       }
     },
 
     expose : function () {
       var expose,
-          exposeCover,
-          el,
-          origCSS,
-          origClasses,
-          randId = 'expose-' + this.random_str(6);
+        exposeCover,
+        el,
+        origCSS,
+        origClasses,
+        randId = 'expose-' + this.random_str(6);
 
       if (arguments.length > 0 && arguments[0] instanceof $) {
         el = arguments[0];
@@ -632,11 +632,11 @@
 
     un_expose : function () {
       var exposeId,
-          el,
-          expose ,
-          origCSS,
-          origClasses,
-          clearAll = false;
+        el,
+        expose ,
+        origCSS,
+        origClasses,
+        clearAll = false;
 
       if (arguments.length > 0 && arguments[0] instanceof $) {
         el = arguments[0];
@@ -748,13 +748,13 @@
 
     corners : function (el) {
       var w = $(window),
-          window_half = w.height() / 2,
-          //using this to calculate since scroll may not have finished yet.
-          tipOffset = Math.ceil(this.settings.$target.offset().top - window_half + this.settings.$next_tip.outerHeight()),
-          right = w.width() + w.scrollLeft(),
-          offsetBottom =  w.height() + tipOffset,
-          bottom = w.height() + w.scrollTop(),
-          top = w.scrollTop();
+        window_half = w.height() / 2,
+        //using this to calculate since scroll may not have finished yet.
+        tipOffset = Math.ceil(this.settings.$target.offset().top - window_half + this.settings.$next_tip.outerHeight()),
+        right = w.width() + w.scrollLeft(),
+        offsetBottom =  w.height() + tipOffset,
+        bottom = w.height() + w.scrollTop(),
+        top = w.scrollTop();
 
       if (tipOffset < top) {
         if (tipOffset < 0) {

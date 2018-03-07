@@ -74,8 +74,8 @@
 
   var add_namespace = function (str) {
     var parts = str.split('-'),
-        i = parts.length,
-        arr = [];
+      i = parts.length,
+      arr = [];
 
     while (i--) {
       if (i !== 0) {
@@ -96,7 +96,7 @@
 
   var bindings = function (method, options) {
     var self = this,
-        should_bind_events = !S(this).data(this.attr_name(true));
+      should_bind_events = !S(this).data(this.attr_name(true));
 
 
     if (S(this.scope).is('[' + this.attr_name() +']')) {
@@ -133,7 +133,7 @@
 
       if (/MSIE (\d+\.\d+);/.test(navigator.userAgent)) {
         var src = this.attr( 'src' ),
-            param = src.match( /\?/ ) ? '&' : '?';
+          param = src.match( /\?/ ) ? '&' : '?';
 
         param += 'random=' + (new Date()).getTime();
         this.attr('src', src + param);
@@ -161,11 +161,11 @@
     "use strict";
 
     var bool,
-        docElem = doc.documentElement,
-        refNode = docElem.firstElementChild || docElem.firstChild,
-        // fakeBody required for <FF4 when executed in <head>
-        fakeBody = doc.createElement( "body" ),
-        div = doc.createElement( "div" );
+      docElem = doc.documentElement,
+      refNode = docElem.firstElementChild || docElem.firstChild,
+      // fakeBody required for <FF4 when executed in <head>
+      fakeBody = doc.createElement( "body" ),
+      div = doc.createElement( "div" );
 
     div.id = "mq-test-1";
     div.style.cssText = "position:absolute;top:-100em";
@@ -205,64 +205,64 @@
   // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
   // http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating
 
-  var animating,
+    var animating,
       lastTime = 0,
       vendors = ['webkit', 'moz'],
       requestAnimationFrame = window.requestAnimationFrame,
       cancelAnimationFrame = window.cancelAnimationFrame,
       jqueryFxAvailable = 'undefined' !== typeof jQuery.fx;
 
-  for (; lastTime < vendors.length && !requestAnimationFrame; lastTime++) {
-    requestAnimationFrame = window[ vendors[lastTime] + "RequestAnimationFrame" ];
-    cancelAnimationFrame = cancelAnimationFrame ||
+    for (; lastTime < vendors.length && !requestAnimationFrame; lastTime++) {
+      requestAnimationFrame = window[ vendors[lastTime] + "RequestAnimationFrame" ];
+      cancelAnimationFrame = cancelAnimationFrame ||
       window[ vendors[lastTime] + "CancelAnimationFrame" ] ||
       window[ vendors[lastTime] + "CancelRequestAnimationFrame" ];
-  }
+    }
 
-  function raf() {
-    if (animating) {
-      requestAnimationFrame(raf);
+    function raf() {
+      if (animating) {
+        requestAnimationFrame(raf);
 
-      if (jqueryFxAvailable) {
-        jQuery.fx.tick();
+        if (jqueryFxAvailable) {
+          jQuery.fx.tick();
+        }
       }
     }
-  }
 
-  if (requestAnimationFrame) {
+    if (requestAnimationFrame) {
     // use rAF
-    window.requestAnimationFrame = requestAnimationFrame;
-    window.cancelAnimationFrame = cancelAnimationFrame;
+      window.requestAnimationFrame = requestAnimationFrame;
+      window.cancelAnimationFrame = cancelAnimationFrame;
 
-    if (jqueryFxAvailable) {
-      jQuery.fx.timer = function (timer) {
-        if (timer() && jQuery.timers.push(timer) && !animating) {
-          animating = true;
-          raf();
-        }
-      };
+      if (jqueryFxAvailable) {
+        jQuery.fx.timer = function (timer) {
+          if (timer() && jQuery.timers.push(timer) && !animating) {
+            animating = true;
+            raf();
+          }
+        };
 
-      jQuery.fx.stop = function () {
-        animating = false;
-      };
-    }
-  } else {
+        jQuery.fx.stop = function () {
+          animating = false;
+        };
+      }
+    } else {
     // polyfill
-    window.requestAnimationFrame = function (callback) {
-      var currTime = new Date().getTime(),
-        timeToCall = Math.max(0, 16 - (currTime - lastTime)),
-        id = window.setTimeout(function () {
-          callback(currTime + timeToCall);
-        }, timeToCall);
-      lastTime = currTime + timeToCall;
-      return id;
-    };
+      window.requestAnimationFrame = function (callback) {
+        var currTime = new Date().getTime(),
+          timeToCall = Math.max(0, 16 - (currTime - lastTime)),
+          id = window.setTimeout(function () {
+            callback(currTime + timeToCall);
+          }, timeToCall);
+        lastTime = currTime + timeToCall;
+        return id;
+      };
 
-    window.cancelAnimationFrame = function (id) {
-      clearTimeout(id);
-    };
+      window.cancelAnimationFrame = function (id) {
+        clearTimeout(id);
+      };
 
-  }
+    }
 
   }( jQuery ));
 
@@ -296,7 +296,7 @@
 
     init : function (scope, libraries, method, options, response) {
       var args = [scope, method, options, response],
-          responses = [];
+        responses = [];
 
       // check RTL
       this.rtl = /rtl/i.test(S('html').attr('dir'));
@@ -324,12 +324,12 @@
         this.patch(this.libs[lib]);
 
         if (args && args.hasOwnProperty(lib)) {
-            if (typeof this.libs[lib].settings !== 'undefined') {
-                $.extend(true, this.libs[lib].settings, args[lib]);
-            }
-            else if (typeof this.libs[lib].defaults !== 'undefined') {
-                $.extend(true, this.libs[lib].defaults, args[lib]);
-            }
+          if (typeof this.libs[lib].settings !== 'undefined') {
+            $.extend(true, this.libs[lib].settings, args[lib]);
+          }
+          else if (typeof this.libs[lib].defaults !== 'undefined') {
+            $.extend(true, this.libs[lib].defaults, args[lib]);
+          }
           return this.libs[lib].init.apply(this.libs[lib], [this.scope, args[lib]]);
         }
 
@@ -353,7 +353,7 @@
 
     inherit : function (scope, methods) {
       var methods_arr = methods.split(' '),
-          i = methods_arr.length;
+        i = methods_arr.length;
 
       while (i--) {
         if (this.utils.hasOwnProperty(methods_arr[i])) {
@@ -472,15 +472,15 @@
       data_options : function (el, data_attr_name) {
         data_attr_name = data_attr_name || 'options';
         var opts = {}, ii, p, opts_arr,
-            data_options = function (el) {
-              var namespace = Foundation.global.namespace;
+          data_options = function (el) {
+            var namespace = Foundation.global.namespace;
 
-              if (namespace.length > 0) {
-                return el.data(namespace + '-' + data_attr_name);
-              }
+            if (namespace.length > 0) {
+              return el.data(namespace + '-' + data_attr_name);
+            }
 
-              return el.data(data_attr_name);
-            };
+            return el.data(data_attr_name);
+          };
 
         var cached_options = data_options(el);
 
@@ -567,7 +567,7 @@
       //    Callback (Function): Function to execute when image is fully loaded.
       image_loaded : function (images, callback) {
         var self = this,
-            unloaded = images.length;
+          unloaded = images.length;
 
         if (unloaded === 0) {
           callback(images);
