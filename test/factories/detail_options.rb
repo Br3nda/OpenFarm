@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :detail_option do
     name        { "#{Faker::Name.last_name}" }
