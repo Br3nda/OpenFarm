@@ -153,7 +153,8 @@ describe Api::V1::GardensController, type: :controller do
       sign_in user
       delete :destroy, id: 1, format: :json
       expect(json['errors'][0]['title']).to include(
-        'Could not find a garden with id')
+        'Could not find a garden with id'
+      )
       expect(response.status).to eq(422)
     end
 
@@ -161,7 +162,8 @@ describe Api::V1::GardensController, type: :controller do
       sign_in user
       delete :destroy, id: FactoryGirl.create(:garden)
       expect(json['errors'][0]['title']).to include(
-        'can only destroy gardens that belong to you.')
+        'can only destroy gardens that belong to you.'
+      )
       expect(response.status).to eq(401)
     end
   end

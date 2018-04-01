@@ -28,7 +28,8 @@ class Api::V1::UsersController < Api::V1::BaseController
       current_user: current_user,
       pictures: params[:data][:pictures],
       user_setting: params[:data][:user_setting],
-      id: "#{current_user._id}")
+      id: "#{current_user._id}"
+    )
 
     respond_with_mutation(:ok, include: ['user_setting',
                                          'guides',

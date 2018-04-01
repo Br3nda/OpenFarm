@@ -18,8 +18,7 @@ describe Api::V1::GuidesController, type: :controller do
       crop = FactoryGirl.create(:crop)
       data = { attributes: { name: 'brocolini in the desert',
                              overview: 'something exotic' },
-               crop_id: crop.id.to_s
-             }
+               crop_id: crop.id.to_s}
       post 'create', data: data, format: :json
       expect(response.status).to eq(201)
       expect(json['data']['attributes']['name']).to eq(data[:attributes][:name])
@@ -149,7 +148,8 @@ describe Api::V1::GuidesController, type: :controller do
       sign_in user
       delete :destroy, id: 1, format: :json
       expect(json['errors'][0]['title']).to include(
-        'Could not find a guide with id')
+        'Could not find a guide with id'
+      )
       expect(response.status).to eq(422)
     end
 
@@ -157,7 +157,8 @@ describe Api::V1::GuidesController, type: :controller do
       sign_in user
       delete :destroy, id: FactoryGirl.create(:guide)
       expect(json['errors'][0]['title']).to include(
-        'can only destroy guides that belong to you.')
+        'can only destroy guides that belong to you.'
+      )
       expect(response.status).to eq(401)
     end
   end

@@ -21,8 +21,8 @@ describe 'Announcements' do
   it 'shows announcements that have been updated since the hide time' do
     skip 'fails on CI - RickCarlino'
     announcement = Announcement.create(message: 'Test Announcement',
-                        starts_at: Time.zone.now.to_date.prev_day,
-                        ends_at: Time.zone.now.to_date.next_day)
+                                       starts_at: Time.zone.now.to_date.prev_day,
+                                       ends_at: Time.zone.now.to_date.next_day)
     visit root_path
     click_link '×'
     visit root_path

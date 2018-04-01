@@ -89,8 +89,7 @@ describe Stages::CreateStage do
                    overview: "#{Faker::Lorem.paragraph}",
                    order: 1,
                    images: [{ image_url: 'http://i.imgur.com/2haLt4J.jpg' },
-                            { image_url: 'http://i.imgur.com/kpHLl.jpg' }]
-                    },
+                            { image_url: 'http://i.imgur.com/kpHLl.jpg' }]},
                  { name: "#{Faker::Lorem.word}",
                    overview: "#{Faker::Lorem.paragraph}",
                    order: 2 }]

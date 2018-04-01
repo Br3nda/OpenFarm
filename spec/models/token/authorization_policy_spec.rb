@@ -16,7 +16,8 @@ describe Token::AuthorizationPolicy do
     email = token.user.email
     key   = "#{email}:#{pt}"
     expect { policy.new(key).build }.to(
-      raise_error(OpenfarmErrors::NotAuthorized))
+      raise_error(OpenfarmErrors::NotAuthorized)
+    )
   end
 
   it 'gives error messages if accessing a GCed token' do
@@ -35,7 +36,8 @@ describe Token::AuthorizationPolicy do
     email = 'wrong@nope.com'
     key   = "#{email}:#{pt}"
     expect { policy.new(key).build }.to(
-      raise_error OpenfarmErrors::NotAuthorized, 'Invalid token or user email.')
+      raise_error OpenfarmErrors::NotAuthorized, 'Invalid token or user email.'
+    )
   end
 
   it 'raises Openfarm::NotAuthorized for expired tokens' do
@@ -44,6 +46,7 @@ describe Token::AuthorizationPolicy do
     key   = "#{email}:#{pt}"
     token.update_attributes(expiration: 20.days.ago)
     expect { policy.new(key).build }.to(
-      raise_error OpenfarmErrors::NotAuthorized, 'Expired token.')
+      raise_error OpenfarmErrors::NotAuthorized, 'Expired token.'
+    )
   end
 end

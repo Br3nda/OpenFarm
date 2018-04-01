@@ -12,8 +12,7 @@ describe GardenCrops::CreateGardenCrop do
       attributes: { stage: "#{Faker::Lorem.word}",
                     sowed: "#{Faker::Date.between(2.days.ago, Date.today)}",
                     quantity: rand(100),
-                    guide: FactoryGirl.create(:guide).id.to_s }
-    }
+                    guide: FactoryGirl.create(:guide).id.to_s }}
   end
 
   it 'requires fields' do

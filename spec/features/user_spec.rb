@@ -19,7 +19,7 @@ describe 'User features', type: :feature do
     visit user_path(:en, user.id)
     title = user.display_name + ' Profile'
     expect(page).to have_css "meta[property='og:title'][content=\"#{title}\"]",
-                              visible: false
+                             visible: false
   end
 
   context 'should handle returning appropriate image when sharing user profile' do
@@ -32,7 +32,7 @@ describe 'User features', type: :feature do
         login_as user
         visit user_path(:en, user.id)
         expect(page).to have_css "meta[property='og:image'][content='#{host_with_port}#{favorite_crop_path}']",
-                                  visible: false
+                                 visible: false
       end
     end
 
@@ -43,7 +43,7 @@ describe 'User features', type: :feature do
         login_as user
         visit user_path(:en, user.id)
         expect(page).to have_css "meta[property='og:image'][content='#{asset_url(image)}']",
-                                  visible: false
+                                 visible: false
       end
     end
   end

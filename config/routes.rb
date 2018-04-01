@@ -3,9 +3,9 @@ OpenFarm::Application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   devise_for :users, controllers: {
-      registrations: "registrations",
-      confirmations: "confirmations"
-    }
+    registrations: "registrations",
+    confirmations: "confirmations"
+  }
 
   scope '(:locale)', locale: /en|nl/ do
     root to: 'homes#show'

@@ -14,12 +14,13 @@ class UsersController < ApplicationController
       current_user: current_user,
       user_setting: user_settings,
       pictures: params[:pictures],
-      id: "#{current_user._id}")
+      id: "#{current_user._id}"
+    )
 
     if @outcome.errors
       flash[:alert] = @outcome.errors.message_list
       redirect_to(controller: 'users',
-        action: 'finish')
+                  action: 'finish')
     else
       redirect_to user_path(current_user)
     end

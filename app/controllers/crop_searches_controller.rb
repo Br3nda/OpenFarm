@@ -12,8 +12,7 @@ class CropSearchesController < ApplicationController
                                   'common_names^10',
                                   'binomial_name^10',
                                   'description'],
-                         boost_by: [:guides_count]
-                        )
+                         boost_by: [:guides_count])
     if query.empty?
       @crops = Crop.search('*', limit: 25, boost_by: [:guides_count])
     end

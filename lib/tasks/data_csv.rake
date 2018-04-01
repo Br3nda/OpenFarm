@@ -3,7 +3,7 @@ require 'csv'
 namespace :data do
   desc "Import CSV file from ITIS"
   task csv: :environment do
-  CsvHttpImport.new(ENV['CSV_URL']).run
+    CsvHttpImport.new(ENV['CSV_URL']).run
   end
 end
 

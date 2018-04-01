@@ -13,8 +13,7 @@ describe Users::UpdateUser do
       attributes: {
         mailing_list: false
       },
-      current_user: current_user
-    }
+      current_user: current_user}
   end
   let(:params_with_usersetting) do
     { id: "#{current_user.id}",
@@ -22,8 +21,7 @@ describe Users::UpdateUser do
       user_setting: {
         location: "Manila"
       },
-      current_user: current_user
-    }
+      current_user: current_user}
   end
 
   it 'requires fields' do
