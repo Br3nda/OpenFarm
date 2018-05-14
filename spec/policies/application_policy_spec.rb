@@ -31,7 +31,7 @@ describe ApplicationPolicy do
   # called for.
   context "for a user" do
     it "should only return records action" do
-     @p = ApplicationPolicy::Scope.new(current_user, User).resolve
-   end
+      @p = ApplicationPolicy::Scope.new(current_user, User).resolve
+    end
   end
 end

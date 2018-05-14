@@ -64,7 +64,8 @@ describe 'User registrations' do
     click_button 'Permanently delete account'
     see('Your account was successfully cancelled.')
     expect { User.find(user.id) }.to raise_error(
-      Mongoid::Errors::DocumentNotFound)
+      Mongoid::Errors::DocumentNotFound
+    )
   end
 
   it 'should leave guides that belong to the user when deleting an account' do

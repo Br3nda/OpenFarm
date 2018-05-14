@@ -27,7 +27,7 @@ describe Gardens::UpdateGarden do
       user: garden.user,
       id: "#{garden._id}",
       attributes: attributes
-      }
+    }
     expect(mutation.run(params).success?).to be_truthy
   end
 

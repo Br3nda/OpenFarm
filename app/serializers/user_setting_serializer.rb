@@ -25,8 +25,7 @@ class UserSettingSerializer < BaseSerializer
         image_url: picture.attachment.url,
         thumbnail_url: picture.attachment.url(:small),
         medium_url: picture.attachment.url(:medium),
-        canopy_url: picture.attachment.url(:canopy)
-      }
+        canopy_url: picture.attachment.url(:canopy)}
     end
   end
 end

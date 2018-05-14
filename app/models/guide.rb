@@ -127,32 +127,31 @@ class Guide
                      total: [],
                      percent: 0,
                      user: first_garden.average_sun,
-                     garden: first_garden.name
-                   }, {
-                     name: 'Location',
-                     slug: 'location',
-                     overlap: [],
-                     total: [],
-                     percent: 0,
-                     user: first_garden.type,
-                     garden: first_garden.name
-                   }, {
-                     name: 'Soil Type',
-                     slug: 'soil',
-                     overlap: [],
-                     total: [],
-                     percent: 0,
-                     user: first_garden.soil_type,
-                     garden: first_garden.name
-                   }, {
-                     name: 'Practices',
-                     slug: 'practices',
-                     overlap: [],
-                     total: [],
-                     percent: 0,
-                     user: first_garden.growing_practices,
-                     garden: first_garden.name
-                   }]
+                     garden: first_garden.name}, {
+                       name: 'Location',
+                       slug: 'location',
+                       overlap: [],
+                       total: [],
+                       percent: 0,
+                       user: first_garden.type,
+                       garden: first_garden.name
+                     }, {
+                       name: 'Soil Type',
+                       slug: 'soil',
+                       overlap: [],
+                       total: [],
+                       percent: 0,
+                       user: first_garden.soil_type,
+                       garden: first_garden.name
+                     }, {
+                       name: 'Practices',
+                       slug: 'practices',
+                       overlap: [],
+                       total: [],
+                       percent: 0,
+                       user: first_garden.growing_practices,
+                       garden: first_garden.name
+                     }]
 
     # Still have to implement:
     # pH Range, Temperature, Water Use, Practices,

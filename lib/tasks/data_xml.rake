@@ -3,7 +3,7 @@ require 'csv'
 namespace :data do
   desc "Import XML file"
   task xml: :environment do
-  XmlHttpImport.new(ENV['XML_URL']).run
+    XmlHttpImport.new(ENV['XML_URL']).run
   end
 end
 

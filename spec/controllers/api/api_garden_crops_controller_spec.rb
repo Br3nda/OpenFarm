@@ -46,8 +46,7 @@ describe Api::V1::GardenCropsController, type: :controller do
       data = { attributes: { quantity: rand(100),
                              stage: "#{Faker::Lorem.word}",
                              sowed: sowed,
-                             guide: guide.id.to_s,
-                            } }
+                             guide: guide.id.to_s,} }
       post :create, data: data, garden_id: garden.id.to_s, format: :json
       expect(response.status).to eq(422)
     end

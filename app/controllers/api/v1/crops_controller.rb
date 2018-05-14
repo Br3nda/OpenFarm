@@ -12,8 +12,7 @@ class Api::V1::CropsController < Api::V1::BaseController
                                    'common_names^10',
                                    'binomial_name^10',
                                    'description'],
-                          boost_by: [:guides_count]
-                         )
+                          boost_by: [:guides_count])
       render json: serialize_models(crops, include: ['pictures'])
     else
       render json: serialize_models(Crop.none)

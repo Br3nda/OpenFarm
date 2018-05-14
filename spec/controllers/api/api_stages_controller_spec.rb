@@ -72,7 +72,8 @@ describe Api::V1::StagesController, type: :controller do
              guide_id: FactoryGirl.create(:guide).id.to_s }
     post 'create', data: data, format: :json
     expect(json['errors'][0]['title']).to include(
-      "You can only create stages for guides that belong to you.")
+      "You can only create stages for guides that belong to you."
+    )
     expect(response.status).to eq(401)
   end
 
@@ -97,7 +98,8 @@ describe Api::V1::StagesController, type: :controller do
   it 'only destroys stages owned by the user' do
     delete :destroy, id: FactoryGirl.create(:stage)
     expect(json['errors'][0]['title']).to include(
-      'can only destroy stages that belong to your guides.')
+      'can only destroy stages that belong to your guides.'
+    )
     expect(response.status).to eq(401)
   end
 
