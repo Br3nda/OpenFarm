@@ -6,7 +6,7 @@ describe 'User sessions' do
   let(:user) { FactoryGirl.create(:user) }
 
   it 'registers for an account should not be confirmed' do
-    skip 'this test does not pass on CI - RickCarlino'
+    User.destroy_all
     visit root_path
     click_link 'register'
     fill_in :user_display_name, with: 'Rick'
@@ -28,13 +28,8 @@ describe 'User sessions' do
     see('Signed out successfully.')
   end
 
-  it 'does not let the user access the admin panel' do
-    visit rails_admin.dashboard_path
-    expect(page).to have_content('I told you kids to get out of here!')
-  end
-
   it 'should redirect the user to their finish page after sign up' do
-    skip 'this test does not pass on CI - RickCarlino'
+    User.destroy_all
     visit new_user_registration_path
     fill_in :user_display_name, with: 'Rick'
     fill_in :user_password, with: 'password123'
@@ -43,8 +38,9 @@ describe 'User sessions' do
     expect(page).to have_content('Thanks for joining!')
   end
 
-  it 'should redirect the user to the page they were viewing after sign up' do
-    skip 'this test does not pass on CI - RickCarlino'
+  it 'should redirect the user to the page they' \
+     'were viewing after sign up', js: true do
+    User.destroy_all
     visit new_guide_path
     see ('You need to sign in or sign up before continuing.')
     page.first(:link, 'Become a Member').click
@@ -52,8 +48,7 @@ describe 'User sessions' do
     fill_in :user_password, with: 'password123'
     fill_in :user_email, with: 'm@il.com'
     click_button 'Join OpenFarm'
-    string_ref = 'guides.new.new_guide_steps.create_a_growing_guide'
-    expect(page).to have_content(I18n::t(string_ref))
+    expect(page).to have_content('Create a Growing Guide')
   end
 
   it 'should create a new garden for a newly registered user' do
@@ -151,6 +146,7 @@ describe 'User sessions' do
   end
 
   def sign_up_procedure
+    User.destroy_all
     visit root_path
     click_link 'register'
     fill_in :user_display_name, with: 'Rick'
