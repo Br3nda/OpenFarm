@@ -42,7 +42,7 @@ describe 'User sessions' do
      'were viewing after sign up', js: true do
     User.destroy_all
     visit new_guide_path
-    see ('You need to sign in or sign up before continuing.')
+    see 'You need to sign in or sign up before continuing.'
     page.first(:link, 'Become a Member').click
     fill_in :user_display_name, with: 'Rick'
     fill_in :user_password, with: 'password123'
@@ -55,7 +55,7 @@ describe 'User sessions' do
     skip 'this test does not pass on CI - RickCarlino'
     usr = sign_up_procedure
 
-    expect(Garden.all.last.user).to eq (usr)
+    expect(Garden.all.last.user).to eq usr
   end
 
   it 'user gets redirected to finish page after confirmation' # , js: true do
