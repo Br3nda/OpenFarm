@@ -45,5 +45,4 @@ OpenFarm::Application.configure do
                                                      ':extension')
   Rails.application.config.assets.precompile += %w(application-print.css)
   config.action_mailer.default_url_options = { :host => "test.test.com" }
-
 end
