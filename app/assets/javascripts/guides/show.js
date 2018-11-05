@@ -64,7 +64,7 @@ openFarmApp.controller('showGuideCtrl', ['$scope', '$http', 'guideService', '$q'
           $scope.toggleEditingGuide(false);
 
         }, function(response) {
-          console.log("error updating guide", response);
+          console.log('error updating guide', response);
         });
     };
 
@@ -228,7 +228,7 @@ openFarmApp.controller('showGuideCtrl', ['$scope', '$http', 'guideService', '$q'
 
     function favoriteGuide (guideId) {
       if (!$scope.currentUser){
-        alertsService.pushToAlerts(["You need to log in to mark your favorite"], 401);
+        alertsService.pushToAlerts(['You need to log in to mark your favorite'], 401);
       }
       else{
         $scope.updatingFavoritedGuides = true;

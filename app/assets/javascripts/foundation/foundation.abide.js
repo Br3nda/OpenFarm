@@ -167,15 +167,15 @@
             value = el.value.trim(),
             direct_parent = this.S(el).parent(),
             validator = el.getAttribute(this.add_namespace('data-abide-validator')),
-            is_radio = el.type === "radio",
-            is_checkbox = el.type === "checkbox",
+            is_radio = el.type === 'radio',
+            is_checkbox = el.type === 'checkbox',
             label = this.S('label[for="' + el.getAttribute('id') + '"]'),
             valid_length = (required) ? (el.value.length > 0) : true;
 
         var parent, valid;
 
         // support old way to do equalTo validations
-        if(el.getAttribute(this.add_namespace('data-equalto'))) { validator = "equalTo"; }
+        if(el.getAttribute(this.add_namespace('data-equalto'))) { validator = 'equalTo'; }
 
         if (!direct_parent.is('label')) {
           parent = direct_parent;
