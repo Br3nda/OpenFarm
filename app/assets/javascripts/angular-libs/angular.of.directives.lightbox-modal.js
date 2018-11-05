@@ -1,5 +1,5 @@
 openFarmApp.directive('ofLightboxModal', ['$http', '$modal', 'stageService',
-  function ofLightboxModal ($http, $modal, stageService) {
+  function ofLightboxModal($http, $modal, stageService) {
     return {
       restrict: 'A',
       scope: {

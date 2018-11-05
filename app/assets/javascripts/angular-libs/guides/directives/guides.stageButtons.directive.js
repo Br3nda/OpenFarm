@@ -1,5 +1,5 @@
 openFarmApp.directive('stageButtons', ['$rootScope', '$location',
-  function stageButtons($rootScope, $location){
+  function stageButtons($rootScope, $location) {
     return {
       restrict: 'A',
       scope: {
@@ -12,11 +12,11 @@ openFarmApp.directive('stageButtons', ['$rootScope', '$location',
           hint: '='
       },
       controller: ['$scope', '$element', '$attrs',
-       function ($scope, $element, $attrs){
+       function ($scope, $element, $attrs) {
         // Takes in attributes and set them to the appropriate
         // variable on the local scope.
-        $scope.$watch('processing', function(){
-          if ($scope.processing === true){
+        $scope.$watch('processing', function () {
+          if ($scope.processing === true) {
             $scope.disabledText = 'This may take some time';
           }
         });
@@ -27,36 +27,36 @@ openFarmApp.directive('stageButtons', ['$rootScope', '$location',
         $scope.cancelUrl = $attrs.cancelUrl || '/';
         $scope.backText = $attrs.backText || undefined;
 
-        $scope.switchToStep = function(step){
+        $scope.switchToStep = function (step) {
           $rootScope.step = step;
           $location.hash($rootScope.step);
           scrollToTop();
         };
 
-        $scope.goBack = function() {
+        $scope.goBack = function () {
           $rootScope.previousStep = $rootScope.step;
           $rootScope.step -= 1;
           $location.hash($rootScope.step);
           scrollToTop();
         };
 
-        var scrollToTop = function(){
+        var scrollToTop = function () {
           window.scrollTo($('.guides').scrollTop(), 0);
         };
 
-        $scope.previousStep = function(){
+        $scope.previousStep = function () {
           $rootScope.previousStep = $rootScope.step;
           $rootScope.step -= 1;
           $location.hash($rootScope.step);
           scrollToTop();
         };
 
-        $scope.tunnelToNextStage = function(stage) {
+        $scope.tunnelToNextStage = function (stage) {
           $scope.nextStage(stage);
           scrollToTop();
         };
 
-        $scope.nextStep = function(){
+        $scope.nextStep = function () {
           $rootScope.previousStep = $rootScope.step;
           $rootScope.step += 1;
           $location.hash($rootScope.step);

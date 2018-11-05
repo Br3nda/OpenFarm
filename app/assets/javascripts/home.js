@@ -3,19 +3,19 @@
 // <!--[endif]-->
 
 // Cool title effect for "community favorites"
-$(window).load(function() {
+$(window).load(function () {
   // get the  height of the hero
   var pageHeight = $($('.hero')[0]).height();
   // get the height including margins of the featured crops title
   var titleHeight = $($('.explore-community-favorites')[0]).outerHeight(true);
 
   // On resize, recalculate the above values
-  $(window).resize(function() {
+  $(window).resize(function () {
     pageHeight = $($('.hero')[0]).height();
     titleHeight = $($('.explore-community-favorites')[0]).outerHeight(true);
   });
 
-  $(window).scroll(function() {
+  $(window).scroll(function () {
     updateTitleBackground($(window).scrollTop(), pageHeight, titleHeight);
   });
 });

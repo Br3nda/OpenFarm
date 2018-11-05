@@ -2,25 +2,25 @@
   'use strict';
 
   Foundation.libs.dropdown = {
-    name : 'dropdown',
+    name: 'dropdown',
 
-    version : '5.3.0',
+    version: '5.3.0',
 
-    settings : {
+    settings: {
       active_class: 'open',
       align: 'bottom',
       is_hover: false,
-      opened: function(){},
-      closed: function(){}
+      opened: function () {},
+      closed: function () {}
     },
 
-    init : function (scope, method, options) {
+    init: function (scope, method, options) {
       Foundation.inherit(this, 'throttle');
 
       this.bindings(method, options);
     },
 
-    events : function (scope) {
+    events: function (scope) {
       var self = this,
           S = self.S;
 
@@ -49,11 +49,11 @@
           }
 
           var settings = target.data(self.attr_name(true) + '-init') || self.settings;
-          
-          if(S(e.target).data(self.data_attr()) && settings.is_hover) {
+
+          if (S(e.target).data(self.data_attr()) && settings.is_hover) {
             self.closeall.call(self);
           }
-          
+
           if (settings.is_hover) self.open.apply(self, [dropdown, target]);
         })
         .on('mouseleave.fndtn.dropdown', '[' + this.attr_name() + '], [' + this.attr_name() + '-content]', function (e) {
@@ -75,8 +75,8 @@
           if (S(e.target).data(self.data_attr()) || S(e.target).parent().data(self.data_attr())) {
             return;
           }
-          if (!(S(e.target).data('revealId')) && 
-            (parent.length > 0 && (S(e.target).is('[' + self.attr_name() + '-content]') || 
+          if (!(S(e.target).data('revealId')) &&
+            (parent.length > 0 && (S(e.target).is('[' + self.attr_name() + '-content]') ||
               $.contains(parent.first()[0], e.target)))) {
             e.stopPropagation();
             return;
@@ -105,7 +105,7 @@
       dropdown.each(function () {
         if (self.S(this).hasClass(self.settings.active_class)) {
           self.S(this)
-            .css(Foundation.rtl ? 'right':'left', '-99999px')
+            .css(Foundation.rtl ? 'right' : 'left', '-99999px')
             .removeClass(self.settings.active_class)
             .prev('[' + self.attr_name() + ']')
             .removeClass(self.settings.active_class)
@@ -116,9 +116,9 @@
       });
     },
 
-    closeall: function() {
+    closeall: function () {
       var self = this;
-      $.each(self.S('[' + this.attr_name() + '-content]'), function() {
+      $.each(self.S('[' + this.attr_name() + '-content]'), function () {
         self.close.call(self, self.S(this));
       });
     },
@@ -139,7 +139,7 @@
       return this.name;
     },
 
-    toggle : function (target) {
+    toggle: function (target) {
       var dropdown = this.S('#' + target.data(this.data_attr()));
       if (dropdown.length === 0) {
         // No dropdown found, not continuing
@@ -157,7 +157,7 @@
       }
     },
 
-    resize : function () {
+    resize: function () {
       var dropdown = this.S('[' + this.attr_name() + '-content].open'),
           target = this.S("[" + this.attr_name() + "='" + dropdown.attr('id') + "']");
 
@@ -166,22 +166,22 @@
       }
     },
 
-    css : function (dropdown, target) {
+    css: function (dropdown, target) {
       var left_offset = Math.max((target.width() - dropdown.width()) / 2, 8);
-      
+
       this.clear_idx();
 
       if (this.small()) {
         var p = this.dirs.bottom.call(dropdown, target);
 
         dropdown.attr('style', '').removeClass('drop-left drop-right drop-top').css({
-          position : 'absolute',
+          position: 'absolute',
           width: '95%',
           'max-width': 'none',
           top: p.top
         });
 
-        dropdown.css(Foundation.rtl ? 'right':'left', left_offset);
+        dropdown.css(Foundation.rtl ? 'right' : 'left', left_offset);
       } else {
         var settings = target.data(this.attr_name(true) + '-init') || this.settings;
 
@@ -191,8 +191,8 @@
       return dropdown;
     },
 
-    style : function (dropdown, target, settings) {
-      var css = $.extend({position: 'absolute'}, 
+    style: function (dropdown, target, settings) {
+      var css = $.extend({ position: 'absolute' },
         this.dirs[settings.align].call(dropdown, target, settings));
 
       dropdown.attr('style', '').css(css);
@@ -200,9 +200,9 @@
 
     // return CSS property object
     // `this` is the dropdown
-    dirs : {
+    dirs: {
       // Calculate target offset
-      _base : function (t) {
+      _base: function (t) {
         var o_p = this.offsetParent(),
             o = o_p.offset(),
             p = t.offset();
@@ -224,11 +224,11 @@
         }
 
         if (Foundation.rtl) {
-          return {left: p.left - this.outerWidth() + t.outerWidth(), 
-            top: p.top - this.outerHeight()};
+          return { left: p.left - this.outerWidth() + t.outerWidth(),
+            top: p.top - this.outerHeight() };
         }
 
-        return {left: p.left, top: p.top - this.outerHeight()};
+        return { left: p.left, top: p.top - this.outerHeight() };
       },
       bottom: function (t, s) {
         var self = Foundation.libs.dropdown,
@@ -240,29 +240,29 @@
         }
 
         if (self.rtl) {
-          return {left: p.left - this.outerWidth() + t.outerWidth(), top: p.top + t.outerHeight()};
+          return { left: p.left - this.outerWidth() + t.outerWidth(), top: p.top + t.outerHeight() };
         }
 
-        return {left: p.left, top: p.top + t.outerHeight()};
+        return { left: p.left, top: p.top + t.outerHeight() };
       },
       left: function (t, s) {
         var p = Foundation.libs.dropdown.dirs._base.call(this, t);
 
         this.addClass('drop-left');
 
-        return {left: p.left - this.outerWidth(), top: p.top};
+        return { left: p.left - this.outerWidth(), top: p.top };
       },
       right: function (t, s) {
         var p = Foundation.libs.dropdown.dirs._base.call(this, t);
 
         this.addClass('drop-right');
 
-        return {left: p.left + t.outerWidth(), top: p.top};
+        return { left: p.left + t.outerWidth(), top: p.top };
       }
     },
 
     // Insert rule to style psuedo elements
-    adjust_pip : function (pip_offset_base, p) {
+    adjust_pip: function (pip_offset_base, p) {
       var sheet = Foundation.stylesheet;
 
       if (this.small()) {
@@ -272,9 +272,9 @@
       this.rule_idx = sheet.cssRules.length;
 
       var sel_before = '.f-dropdown.open:before',
-          sel_after  = '.f-dropdown.open:after',
+          sel_after = '.f-dropdown.open:after',
           css_before = 'left: ' + pip_offset_base + 'px;',
-          css_after  = 'left: ' + (pip_offset_base - 1) + 'px;';
+          css_after = 'left: ' + (pip_offset_base - 1) + 'px;';
 
       if (sheet.insertRule) {
         sheet.insertRule([sel_before, '{', css_before, '}'].join(' '), this.rule_idx);
@@ -286,7 +286,7 @@
     },
 
     // Remove old dropdown rule index
-    clear_idx : function () {
+    clear_idx: function () {
       var sheet = Foundation.stylesheet;
 
       if (this.rule_idx) {
@@ -296,7 +296,7 @@
       }
     },
 
-    small : function () {
+    small: function () {
       return matchMedia(Foundation.media_queries.small).matches &&
         !matchMedia(Foundation.media_queries.medium).matches;
     },
@@ -308,6 +308,6 @@
       this.S('[data-dropdown-content]').off('.fndtn.dropdown');
     },
 
-    reflow : function () {}
+    reflow: function () {}
   };
 }(jQuery, window, window.document));

@@ -1,4 +1,4 @@
-(function(angular) {
+(function (angular) {
   'use strict';
 
   angular
@@ -35,7 +35,7 @@
     vm.uploading = false;
 
     // upload on file select or drop
-    function upload (file) {
+    function upload(file) {
       vm.uploading = true;
       var destinationUri;
       var cropReference = '';
@@ -82,7 +82,7 @@
         });
     }
     // for multiple files:
-    function uploadFiles (files) {
+    function uploadFiles(files) {
       var numOfFiles = files.length;
       if (files && files.length) {
         for (var i = 0; i < files.length; i++) {
@@ -95,7 +95,7 @@
       pic.deleted = true;
     }
 
-    function uploadToLocalSystem (file, item, itemType, destinationUri) {
+    function uploadToLocalSystem(file, item, itemType, destinationUri) {
       return Upload.upload({
         url: '/api/local/upload_file',
         method: 'POST',
@@ -105,7 +105,7 @@
       });
     }
 
-    function uploadUsingS3 (file, fileKey, token_details, s3Uri) {
+    function uploadUsingS3(file, fileKey, token_details, s3Uri) {
       return Upload.upload({
         url: s3Uri,
         method: 'POST',

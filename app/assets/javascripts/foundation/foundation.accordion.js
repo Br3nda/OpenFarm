@@ -2,22 +2,22 @@
   'use strict';
 
   Foundation.libs.accordion = {
-    name : 'accordion',
+    name: 'accordion',
 
-    version : '5.3.0',
+    version: '5.3.0',
 
-    settings : {
+    settings: {
       active_class: 'active',
       multi_expand: false,
       toggleable: true,
-      callback : function () {}
+      callback: function () {}
     },
 
-    init : function (scope, method, options) {
+    init: function (scope, method, options) {
       this.bindings(method, options);
     },
 
-    events : function () {
+    events: function () {
       var self = this;
       var S = this.S;
       S(this.scope)
@@ -58,8 +58,8 @@
       });
     },
 
-    off : function () {},
+    off: function () {},
 
-    reflow : function () {}
+    reflow: function () {}
   };
 }(jQuery, window, window.document));

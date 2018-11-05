@@ -2,13 +2,13 @@
   'use strict';
 
   Foundation.libs.tab = {
-    name : 'tab',
+    name: 'tab',
 
-    version : '5.3.0',
+    version: '5.3.0',
 
-    settings : {
+    settings: {
       active_class: 'active',
-      callback : function () {},
+      callback: function () {},
       deep_linking: false,
       scroll_to_content: true,
       is_hover: false
@@ -16,7 +16,7 @@
 
     default_tab_hashes: [],
 
-    init : function (scope, method, options) {
+    init: function (scope, method, options) {
       var self = this,
           S = this.S;
 
@@ -31,7 +31,7 @@
       });
     },
 
-    events : function () {
+    events: function () {
       var self = this,
           S = this.S;
 
@@ -39,7 +39,7 @@
         .off('.tab')
         // Click event: tab title
         .on('click.fndtn.tab', '[' + this.attr_name() + '] > * > a', function (e) {
-          var settings = S(this).closest('[' + self.attr_name() +']').data(self.attr_name(true) + '-init');
+          var settings = S(this).closest('[' + self.attr_name() + ']').data(self.attr_name(true) + '-init');
           if (!settings.is_hover || Modernizr.touch) {
             e.preventDefault();
             e.stopPropagation();
@@ -48,7 +48,7 @@
         })
         // Hover event: tab title
         .on('mouseenter.fndtn.tab', '[' + this.attr_name() + '] > * > a', function (e) {
-          var settings = S(this).closest('[' + self.attr_name() +']').data(self.attr_name(true) + '-init');
+          var settings = S(this).closest('[' + self.attr_name() + ']').data(self.attr_name(true) + '-init');
           if (settings.is_hover) self.toggle_active_tab(S(this).parent());
         });
 
@@ -59,7 +59,7 @@
       });
     },
 
-    handle_location_hash_change : function () {
+    handle_location_hash_change: function () {
       var self = this,
           S = this.S;
 
@@ -160,8 +160,8 @@
       return str;
     },
 
-    off : function () {},
+    off: function () {},
 
-    reflow : function () {}
+    reflow: function () {}
   };
 }(jQuery, window, window.document));

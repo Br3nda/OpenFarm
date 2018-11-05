@@ -6,11 +6,11 @@ openFarmApp.controller('profileCtrl', ['$scope', '$rootScope', '$http',
 
     $scope.query = '';
 
-    $scope.setProfileUser = function(success, object){
-      if (success){
+    $scope.setProfileUser = function (success, object) {
+      if (success) {
         $rootScope.profileUser = $scope.profileUser = object;
         $rootScope.ofPageLoading = false;
-        if((!object.user_setting ||
+        if ((!object.user_setting ||
             !object.user_setting.favorite_crop) &&
             $scope.profileUser.id === $scope.currentUser.id) {
             $scope.cropNotSet = true;
@@ -22,17 +22,17 @@ openFarmApp.controller('profileCtrl', ['$scope', '$rootScope', '$http',
       }
     };
 
-    $scope.editProfile = function(){
+    $scope.editProfile = function () {
       $scope.editing = true;
     };
 
     // setFavoriteCrop was originally = function(item, model, label);
-    $scope.setFavoriteCrop = function(item){
+    $scope.setFavoriteCrop = function (item) {
       if ($scope.currentUser.id == $scope.profileUser.id) {
         var favCrop = item;
 
-        var callback = function(success, user) {
-          if(user) {
+        var callback = function (success, user) {
+          if (user) {
             $scope.profileUser = user;
             $scope.editing = false;
             $scope.cropNotSet = false;
@@ -47,7 +47,7 @@ openFarmApp.controller('profileCtrl', ['$scope', '$rootScope', '$http',
 
 
     //
-    userService.getUser($scope.userId, function(success, user) {
+    userService.getUser($scope.userId, function (success, user) {
       $rootScope.currentUser = $scope.currentUser = user;
 
       if ($scope.profileId === $scope.userId) {

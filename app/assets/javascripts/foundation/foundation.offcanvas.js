@@ -2,20 +2,20 @@
   'use strict';
 
   Foundation.libs.offcanvas = {
-    name : 'offcanvas',
+    name: 'offcanvas',
 
-    version : '5.3.0',
+    version: '5.3.0',
 
-    settings : {
+    settings: {
       open_method: 'move',
       close_on_click: true
     },
 
-    init : function (scope, method, options) {
+    init: function (scope, method, options) {
       this.bindings(method, options);
     },
 
-    events : function () {
+    events: function () {
       var self = this,
           S = self.S,
           move_class = '',
@@ -56,7 +56,7 @@
 
     },
 
-    toggle: function(class_name, $off_canvas) {
+    toggle: function (class_name, $off_canvas) {
       $off_canvas = $off_canvas || this.get_wrapper();
       if ($off_canvas.is('.' + class_name)) {
         this.hide(class_name, $off_canvas);
@@ -65,36 +65,36 @@
       }
     },
 
-    show: function(class_name, $off_canvas) {
+    show: function (class_name, $off_canvas) {
       $off_canvas = $off_canvas || this.get_wrapper();
       $off_canvas.trigger('open').trigger('open.fndtn.offcanvas');
       $off_canvas.addClass(class_name);
     },
 
-    hide: function(class_name, $off_canvas) {
+    hide: function (class_name, $off_canvas) {
       $off_canvas = $off_canvas || this.get_wrapper();
       $off_canvas.trigger('close').trigger('close.fndtn.offcanvas');
       $off_canvas.removeClass(class_name);
     },
 
-    click_toggle_class: function(e, class_name) {
+    click_toggle_class: function (e, class_name) {
       e.preventDefault();
       var $off_canvas = this.get_wrapper(e);
       this.toggle(class_name, $off_canvas);
     },
 
-    click_remove_class: function(e, class_name) {
+    click_remove_class: function (e, class_name) {
       e.preventDefault();
       var $off_canvas = this.get_wrapper(e);
       this.hide(class_name, $off_canvas);
     },
 
-    get_settings: function(e) {
-      var offcanvas  = this.S(e.target).closest('[' + this.attr_name() + ']');
+    get_settings: function (e) {
+      var offcanvas = this.S(e.target).closest('[' + this.attr_name() + ']');
       return offcanvas.data(this.attr_name(true) + '-init') || this.settings;
     },
 
-    get_wrapper: function(e) {
+    get_wrapper: function (e) {
       var $off_canvas = this.S(e ? e.target : this.scope).closest('.off-canvas-wrap');
 
       if ($off_canvas.length === 0) {
@@ -103,6 +103,6 @@
       return $off_canvas;
     },
 
-    reflow : function () {}
+    reflow: function () {}
   };
 }(jQuery, window, window.document));

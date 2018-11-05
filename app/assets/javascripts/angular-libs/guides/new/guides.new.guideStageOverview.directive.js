@@ -9,8 +9,8 @@ openFarmApp.directive('guideStageOverview', [function guideStageOverview() {
       controller: ['$scope',
         function ($scope) {
 
-          $scope.placeStageUpload = function(stage, image){
-            if (!stage.pictures){
+          $scope.placeStageUpload = function (stage, image) {
+            if (!stage.pictures) {
               stage.pictures = [];
             }
             stage.pictures.push({
@@ -19,7 +19,7 @@ openFarmApp.directive('guideStageOverview', [function guideStageOverview() {
             });
           };
 
-          $scope.$watch('viewingStageOverview', function() {
+          $scope.$watch('viewingStageOverview', function () {
 
           });
         }

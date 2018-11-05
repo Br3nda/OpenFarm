@@ -1,5 +1,5 @@
 openFarmApp.directive('addToGardens', ['$rootScope', 'gardenService',
-  function($rootScope, gardenService) {
+  function ($rootScope, gardenService) {
     return {
       restrict: 'A',
       scope: {
@@ -7,16 +7,16 @@ openFarmApp.directive('addToGardens', ['$rootScope', 'gardenService',
         objectType: '=',
         user: '=user',
       },
-      link: function($scope, element, attr){
+      link: function ($scope, element, attr) {
 
-        $scope.$watch('user', function() {
+        $scope.$watch('user', function () {
           if ($scope.user && $scope.gardens === undefined) {
             $scope.gardens = {};
             gardenService.getGardensForUser($scope.user,
-              function(success, response, code) {
-                if(success) {
+              function (success, response, code) {
+                if (success) {
                   $scope.gardens = response;
-                  $scope.gardens.forEach(function(garden) {
+                  $scope.gardens.forEach(function (garden) {
                     garden.added = !!findCropInGarden(garden);
                   });
                 }
@@ -24,7 +24,7 @@ openFarmApp.directive('addToGardens', ['$rootScope', 'gardenService',
           }
         });
 
-        function findCropInGarden (garden) {
+        function findCropInGarden(garden) {
           var gardenCrop = garden.garden_crops.filter(function (gC) {
             return gC[$scope.objectType] &&
                    gC[$scope.objectType].id === $scope.cropObject.id;
@@ -32,11 +32,11 @@ openFarmApp.directive('addToGardens', ['$rootScope', 'gardenService',
           return gardenCrop && gardenCrop.length > 0 ? gardenCrop[0] : null;
         }
 
-        $scope.toggleGarden = function(garden){
+        $scope.toggleGarden = function (garden) {
           garden.adding = true;
-          if (!garden.added){
-            var callback = function(success){
-              if (success){
+          if (!garden.added) {
+            var callback = function (success) {
+              if (success) {
                 garden.adding = false;
                 garden.added = true;
               }
@@ -49,7 +49,7 @@ openFarmApp.directive('addToGardens', ['$rootScope', 'gardenService',
             gardenService.deleteGardenCrop(
               garden,
               findCropInGarden(garden),
-              function(){
+              function () {
                 garden.adding = false;
                 garden.added = false;
               });

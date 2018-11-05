@@ -2,28 +2,28 @@
   'use strict';
 
   Foundation.libs.interchange = {
-    name : 'interchange',
+    name: 'interchange',
 
-    version : '5.3.0',
+    version: '5.3.0',
 
-    cache : {},
+    cache: {},
 
-    images_loaded : false,
-    nodes_loaded : false,
+    images_loaded: false,
+    nodes_loaded: false,
 
-    settings : {
-      load_attr : 'interchange',
+    settings: {
+      load_attr: 'interchange',
 
-      named_queries : {
-        'default' : 'only screen',
-        small : Foundation.media_queries.small,
-        medium : Foundation.media_queries.medium,
-        large : Foundation.media_queries.large,
-        xlarge : Foundation.media_queries.xlarge,
+      named_queries: {
+        'default': 'only screen',
+        small: Foundation.media_queries.small,
+        medium: Foundation.media_queries.medium,
+        large: Foundation.media_queries.large,
+        xlarge: Foundation.media_queries.xlarge,
         xxlarge: Foundation.media_queries.xxlarge,
-        landscape : 'only screen and (orientation: landscape)',
-        portrait : 'only screen and (orientation: portrait)',
-        retina : 'only screen and (-webkit-min-device-pixel-ratio: 2),' +
+        landscape: 'only screen and (orientation: landscape)',
+        portrait: 'only screen and (orientation: portrait)',
+        retina: 'only screen and (-webkit-min-device-pixel-ratio: 2),' +
           'only screen and (min--moz-device-pixel-ratio: 2),' +
           'only screen and (-o-min-device-pixel-ratio: 2/1),' +
           'only screen and (min-device-pixel-ratio: 2),' +
@@ -31,7 +31,7 @@
           'only screen and (min-resolution: 2dppx)'
       },
 
-      directives : {
+      directives: {
         replace: function (el, path, trigger) {
           // The trigger argument, if called within the directive, fires
           // an event named after the directive on the element, passing
@@ -59,7 +59,7 @@
           if (last_path == path) return;
 
           if (/\.(gif|jpg|jpeg|tiff|png)([?#].*)?/i.test(path)) {
-            $(el).css('background-image', 'url('+path+')');
+            $(el).css('background-image', 'url(' + path + ')');
             el.data('interchange-last-path', path);
             return trigger(path);
           }
@@ -74,7 +74,7 @@
       }
     },
 
-    init : function (scope, method, options) {
+    init: function (scope, method, options) {
       Foundation.inherit(this, 'throttle random_str');
 
       this.data_attr = this.set_data_attr();
@@ -84,15 +84,15 @@
       this.load('nodes');
     },
 
-    get_media_hash : function() {
-        var mediaHash='';
-        for (var queryName in this.settings.named_queries ) {
+    get_media_hash: function () {
+        var mediaHash = '';
+        for (var queryName in this.settings.named_queries) {
             mediaHash += matchMedia(this.settings.named_queries[queryName]).matches.toString();
         }
         return mediaHash;
     },
 
-    events : function () {
+    events: function () {
       var self = this, prevMediaHash;
 
       $(window)
@@ -108,10 +108,10 @@
       return this;
     },
 
-    resize : function () {
+    resize: function () {
       var cache = this.cache;
 
-      if(!this.images_loaded || !this.nodes_loaded) {
+      if (!this.images_loaded || !this.nodes_loaded) {
         setTimeout($.proxy(this.resize, this), 50);
         return;
       }
@@ -123,9 +123,9 @@
           if (passed) {
             this.settings.directives[passed
               .scenario[1]].call(this, passed.el, passed.scenario[0], function () {
-                if (arguments[0] instanceof Array) { 
+                if (arguments[0] instanceof Array) {
                   var args = arguments[0];
-                } else { 
+                } else {
                   var args = Array.prototype.slice.call(arguments, 0);
                 }
 
@@ -137,7 +137,7 @@
 
     },
 
-    results : function (uuid, scenarios) {
+    results: function (uuid, scenarios) {
       var count = scenarios.length;
 
       if (count > 0) {
@@ -151,7 +151,7 @@
             mq = matchMedia(rule);
           }
           if (mq.matches) {
-            return {el: el, scenario: scenarios[count]};
+            return { el: el, scenario: scenarios[count] };
           }
         }
       }
@@ -159,7 +159,7 @@
       return false;
     },
 
-    load : function (type, force_update) {
+    load: function (type, force_update) {
       if (typeof this['cached_' + type] === 'undefined' || force_update) {
         this['update_' + type]();
       }
@@ -167,7 +167,7 @@
       return this['cached_' + type];
     },
 
-    update_images : function () {
+    update_images: function () {
       var images = this.S('img[' + this.data_attr + ']'),
           count = images.length,
           i = count,
@@ -197,7 +197,7 @@
       return this;
     },
 
-    update_nodes : function () {
+    update_nodes: function () {
       var nodes = this.S('[' + this.data_attr + ']').not('img'),
           count = nodes.length,
           i = count,
@@ -216,7 +216,7 @@
           this.cached_nodes.push(nodes[i]);
         }
 
-        if(loaded_count === count) {
+        if (loaded_count === count) {
           this.nodes_loaded = true;
           this.enhance('nodes');
         }
@@ -225,7 +225,7 @@
       return this;
     },
 
-    enhance : function (type) {
+    enhance: function (type) {
       var i = this['cached_' + type].length;
 
       while (i--) {
@@ -235,7 +235,7 @@
       return $(window).trigger('resize').trigger('resize.fndtn.interchange');
     },
 
-    convert_directive : function (directive) {
+    convert_directive: function (directive) {
 
       var trimmed = this.trim(directive);
 
@@ -246,28 +246,28 @@
       return 'replace';
     },
 
-    parse_scenario : function (scenario) {
+    parse_scenario: function (scenario) {
       // This logic had to be made more complex since some users were using commas in the url path
       // So we cannot simply just split on a comma
       var directive_match = scenario[0].match(/(.+),\s*(\w+)\s*$/),
-      media_query         = scenario[1];
+      media_query = scenario[1];
 
       if (directive_match) {
-        var path  = directive_match[1],
+        var path = directive_match[1],
         directive = directive_match[2];
       }
       else {
         var cached_split = scenario[0].split(/,\s*$/),
-        path             = cached_split[0],
-        directive        = '';               
+        path = cached_split[0],
+        directive = '';
       }
 
       return [this.trim(path), this.convert_directive(directive), this.trim(media_query)];
     },
 
-    object : function(el) {
+    object: function (el) {
       var raw_arr = this.parse_data_attr(el),
-          scenarios = [], 
+          scenarios = [],
           i = raw_arr.length;
 
       if (i > 0) {
@@ -284,7 +284,7 @@
       return this.store(el, scenarios);
     },
 
-    store : function (el, scenarios) {
+    store: function (el, scenarios) {
       var uuid = this.random_str(),
           current_uuid = el.data(this.add_namespace('uuid', true));
 
@@ -295,7 +295,7 @@
       return this.cache[uuid] = scenarios;
     },
 
-    trim : function(str) {
+    trim: function (str) {
 
       if (typeof str === 'string') {
         return $.trim(str);
@@ -320,9 +320,9 @@
       return 'data-' + this.settings.load_attr;
     },
 
-    parse_data_attr : function (el) {
+    parse_data_attr: function (el) {
       var raw = el.attr(this.attr_name()).split(/\[(.*?)\]/),
-          i = raw.length, 
+          i = raw.length,
           output = [];
 
       while (i--) {
@@ -334,7 +334,7 @@
       return output;
     },
 
-    reflow : function () {
+    reflow: function () {
       this.load('images', true);
       this.load('nodes', true);
     }

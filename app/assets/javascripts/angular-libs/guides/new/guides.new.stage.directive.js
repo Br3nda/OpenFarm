@@ -13,7 +13,7 @@ openFarmApp.directive('guidesStage', ['$http', '$location', '$rootScope',
 
           $scope.viewingStageOverview = true;
 
-          var transferStageValuesIfNoneExist = function(stage, nextStage) {
+          var transferStageValuesIfNoneExist = function (stage, nextStage) {
 
             if (!$scope.guideExists) {
               nextStage.environment = angular.copy(stage.environment);
@@ -22,16 +22,16 @@ openFarmApp.directive('guidesStage', ['$http', '$location', '$rootScope',
             }
           };
 
-          $scope.nextStage = function(stage){
+          $scope.nextStage = function (stage) {
             var nextStage = $scope.stages[stage.nextSelectedIndex];
             transferStageValuesIfNoneExist(stage, nextStage);
             $scope.editSelectedStage(nextStage);
           };
 
-          $scope.editSelectedStage = function(chosenStage){
-            $scope.stages.forEach(function(stage){
+          $scope.editSelectedStage = function (chosenStage) {
+            $scope.stages.forEach(function (stage) {
               stage.editing = false;
-              if (chosenStage.name === stage.name){
+              if (chosenStage.name === stage.name) {
                 stage.editing = true;
                 $scope.currentStage = chosenStage;
               }

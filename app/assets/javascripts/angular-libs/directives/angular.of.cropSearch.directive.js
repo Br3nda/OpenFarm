@@ -24,7 +24,7 @@ openFarmApp.directive('cropSearch', ['$http', 'cropService',
           $scope.required = $scope.required !== undefined ? $scope.required : true;
 
           $scope.firstCrop = undefined;
-          //Typeahead search for crops
+          // Typeahead search for crops
           $scope.getCrops = function (val) {
             // be nice and only hit the server if
             // length >= 3
@@ -32,7 +32,7 @@ openFarmApp.directive('cropSearch', ['$http', 'cropService',
               params: {
                 filter: val
               }
-            }).then(function(res) {
+            }).then(function (res) {
               var crops = [];
               crops = res.data.data;
               if (crops.length === 0 && $scope.allowNew) {
@@ -41,7 +41,7 @@ openFarmApp.directive('cropSearch', ['$http', 'cropService',
                   is_new: true
                 } });
               }
-              crops = crops.map(function(crop) {
+              crops = crops.map(function (crop) {
                 return cropService.utilities.buildCrop(crop, res.data.included);
               });
               $scope.firstCrop = crops[0];
@@ -49,7 +49,7 @@ openFarmApp.directive('cropSearch', ['$http', 'cropService',
             });
           };
 
-          $scope.submitCrop = function($item, $model, $label, options) {
+          $scope.submitCrop = function ($item, $model, $label, options) {
 
             if ($scope.firstCrop !== undefined) {
               $scope.cropOnSelect($scope.firstCrop);

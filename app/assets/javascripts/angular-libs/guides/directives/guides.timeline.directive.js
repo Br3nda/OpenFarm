@@ -1,9 +1,9 @@
 openFarmApp.directive('timeline', ['guideService',
-  function timeline(guideService){
+  function timeline(guideService) {
     return {
       restrict: 'A',
       scope: true,
-      controller: ['$scope', function($scope){
+      controller: ['$scope', function ($scope) {
         guideService.drawTimeline();
       }],
       templateUrl: '/assets/templates/_timeline.html'
@@ -11,7 +11,7 @@ openFarmApp.directive('timeline', ['guideService',
   }]);
 
 openFarmApp.directive('createTimeline', ['guideService',
-  function createTimeline(guideService){
+  function createTimeline(guideService) {
     return {
       restrict: 'A',
       scope: {
@@ -19,11 +19,11 @@ openFarmApp.directive('createTimeline', ['guideService',
       },
       require: 'timeline',
       controller: ['$scope',
-        function($scope){
+        function ($scope) {
           $scope.creating = true;
 
           guideService.drawTimeline($scope.timespan,
-                                    function(days, dayWidth, scale){
+                                    function (days, dayWidth, scale) {
                                       $scope.days = days;
                                       $scope.dayWidth = dayWidth;
                                       $scope.calendarScale = scale;

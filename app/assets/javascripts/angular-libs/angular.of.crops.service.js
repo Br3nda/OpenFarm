@@ -9,7 +9,7 @@ openFarmApp.factory('cropService', ['$http', '$q', '$log', 'alertsService',
     //   ...
     // }
 
-    var buildCrop = function(data, included) {
+    var buildCrop = function (data, included) {
       var pictures;
       var companions;
       var crop = data.attributes;
@@ -18,14 +18,14 @@ openFarmApp.factory('cropService', ['$http', '$q', '$log', 'alertsService',
       crop.links = data.links;
 
       if (included) {
-        pictures = included.filter(function(obj) {
+        pictures = included.filter(function (obj) {
           return obj.type === 'crops-pictures' &&
                  obj.attributes.photographic_id === crop.id;
-        }).map(function(pic) {
+        }).map(function (pic) {
           return pic.attributes;
         });
 
-        companions = included.filter(function(obj) {
+        companions = included.filter(function (obj) {
           return obj.type === 'crops';
         });
       }
@@ -37,7 +37,7 @@ openFarmApp.factory('cropService', ['$http', '$q', '$log', 'alertsService',
 
     // Builds Params according to JSON-API from the
     // front-end Crop model
-    var buildParams = function(cropObject) {
+    var buildParams = function (cropObject) {
       var data = {
         type: 'crops',
         id: cropObject.id,
@@ -45,22 +45,22 @@ openFarmApp.factory('cropService', ['$http', '$q', '$log', 'alertsService',
         images: cropObject.images
       };
       cropObject.images = null;
-      return {'data': data};
+      return { 'data': data };
     };
 
     // get the guide specified.
-    var getCrop = function(cropId, callback){
+    var getCrop = function (cropId, callback) {
       $http({
         url: '/api/v1/crops/' + cropId,
         method: 'GET'
       }).success(function (response) {
-        return callback (true, buildCrop(response.data, response.included));
+        return callback(true, buildCrop(response.data, response.included));
       }).error(function (response, code) {
         alertsService.pushToAlerts(response, code);
       });
     };
 
-    var getCropWithPromise = function(cropId) {
+    var getCropWithPromise = function (cropId) {
       return $q(function (resolve, reject) {
         if (cropId !== undefined && cropId !== '') {
           $http({
@@ -78,29 +78,29 @@ openFarmApp.factory('cropService', ['$http', '$q', '$log', 'alertsService',
       });
     };
 
-    var createCropWithPromise = function(cropObject) {
+    var createCropWithPromise = function (cropObject) {
       var url = '/api/v1/crops/';
       return $q(function (resolve, reject) {
         $http.post(url, buildParams(cropObject))
-          .success(function(response) {
+          .success(function (response) {
             resolve(buildCrop(response.data, response.included));
           })
-          .error(function(response) {
+          .error(function (response) {
             alertsService.pushToAlerts(response.errors);
             reject();
           });
       });
     };
 
-    var updateCrop = function(cropId, cropObject, callback){
+    var updateCrop = function (cropId, cropObject, callback) {
       var url = '/api/v1/crops/' + cropId + '/';
       $http.put(url, buildParams(cropObject))
         .success(function (response) {
-          return callback (true, buildCrop(response.data, response.included));
+          return callback(true, buildCrop(response.data, response.included));
         })
         .error(function (response) {
           alertsService.pushToAlerts(response.errors);
-          return callback (false, response.errors);
+          return callback(false, response.errors);
         });
     };
     return {

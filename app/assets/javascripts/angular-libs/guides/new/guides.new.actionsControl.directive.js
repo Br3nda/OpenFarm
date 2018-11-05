@@ -11,8 +11,8 @@ openFarmApp.directive('actionsControl', ['$http', '$modal', 'defaultService',
         function ($scope) {
           $scope.stage.stage_action_options = [];
 
-          $scope.activateAction = function(action) {
-            $scope.stage.stage_action_options.forEach(function(action) {
+          $scope.activateAction = function (action) {
+            $scope.stage.stage_action_options.forEach(function (action) {
               action.selected = false;
             });
             $scope.stage.activeAction = action;
@@ -20,7 +20,7 @@ openFarmApp.directive('actionsControl', ['$http', '$modal', 'defaultService',
             $scope.viewingStageOverview = false;
           };
 
-          $scope.openAddActionModal = function(stage){
+          $scope.openAddActionModal = function (stage) {
 
             defaultService.getStageActionOptions()
               .then(function (actionOptions) {
@@ -33,9 +33,9 @@ openFarmApp.directive('actionsControl', ['$http', '$modal', 'defaultService',
                       $scope.actionOptions = actionOptions;
                       $scope.existingActions = stage.stage_action_options || [];
 
-                      $scope.actionOptions.forEach(function(action){
-                        $scope.existingActions.forEach(function(existingAction){
-                          if (existingAction.name === action.name){
+                      $scope.actionOptions.forEach(function (action) {
+                        $scope.existingActions.forEach(function (existingAction) {
+                          if (existingAction.name === action.name) {
                             action.overview = existingAction.overview;
                             action.selected = true;
                             action.pictures = [];
@@ -45,7 +45,7 @@ openFarmApp.directive('actionsControl', ['$http', '$modal', 'defaultService',
 
                       $scope.ok = function () {
                         var selectedActions = $scope.actionOptions
-                                                .filter(function(action){
+                                                .filter(function (action) {
                                                   return action.selected;
                                                 });
                         $modalInstance.close(selectedActions);
@@ -57,10 +57,10 @@ openFarmApp.directive('actionsControl', ['$http', '$modal', 'defaultService',
                     }],
                   keyboard: false,
                   resolve: {
-                    stage: function(){
+                    stage: function () {
                       return stage;
                     },
-                    actionOptions: function(){
+                    actionOptions: function () {
                       return actionOptions;
                     }
                   }

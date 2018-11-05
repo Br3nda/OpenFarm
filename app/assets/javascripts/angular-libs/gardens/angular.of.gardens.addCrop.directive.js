@@ -21,7 +21,7 @@ openFarmApp.directive('addCrop', ['$http',
           $scope.crops = undefined;
           $scope.garden = undefined;
 
-          //Typeahead search for crops
+          // Typeahead search for crops
           $scope.getCrops = function (val) {
             // be nice and only hit the server if
             // length >= 3
@@ -29,7 +29,7 @@ openFarmApp.directive('addCrop', ['$http',
               params: {
                 filter: val
               }
-            }).then(function(res) {
+            }).then(function (res) {
               var crops = [];
               crops = res.data.data;
               if (crops.length === 0 && $scope.allowNew) {
@@ -38,7 +38,7 @@ openFarmApp.directive('addCrop', ['$http',
                   is_new: true
                 } });
               }
-              crops = crops.map(function(crop) {
+              crops = crops.map(function (crop) {
                 return cropService.utilities.buildCrop(crop, res.data.included);
               });
               $scope.firstCrop = crops[0];
@@ -48,32 +48,32 @@ openFarmApp.directive('addCrop', ['$http',
           };
 
           function acallback(success, response) {
-            $scope.user.gardens.forEach(function(garden){
-              if(garden === $scope.gardenQuery) {
+            $scope.user.gardens.forEach(function (garden) {
+              if (garden === $scope.gardenQuery) {
                 garden.garden_crops.push({
-                  'crop':response.crop,
+                  'crop': response.crop,
                   'guide': response.guide,
-                  'sowed':response.sowed,
-                  'stage':response.stage,
-                  'quantity':response.quantity
+                  'sowed': response.sowed,
+                  'stage': response.stage,
+                  'quantity': response.quantity
                 });
               }
             });
           }
 
-          //Typeahead search for crops
-          //cropSearch.getCrops("tomato");
+          // Typeahead search for crops
+          // cropSearch.getCrops("tomato");
           $scope.addCropToGarden = function () {
             $scope.crops1 = $scope.getCrops($scope.cropQuery);
             var cropi;
-            if($scope.crops1) {
+            if ($scope.crops1) {
             for (cropi in $scope.crops) {
-              if($scope.crops[cropi].name == $scope.cropQuery.name) {
+              if ($scope.crops[cropi].name == $scope.cropQuery.name) {
                 gardenService.addGardenCropToGarden($scope.gardenQuery,
                                                     $scope.objectType,
                                                     $scope.cropQuery, acallback);
                 }
-                if($scope.crops[cropi].name == $scope.cropQuery) {
+                if ($scope.crops[cropi].name == $scope.cropQuery) {
                   $scope.finalCrop = cropService.utilities.buildParams($scope.crops[cropi]);
                   gardenService.addGardenCropToGarden($scope.gardenQuery,
                                                     $scope.objectType,

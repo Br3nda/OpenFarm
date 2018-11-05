@@ -24,7 +24,7 @@ openFarmApp.factory('userService', ['$http', '$q', 'gardenService',
     //   gardens: []
     // }
 
-    function checkIfIsObj (includedObj) {
+    function checkIfIsObj(includedObj) {
       if (includedObj.id === this.objId) {
         // if (includedObj.type === 'user-setting' || includedObj.type === 'user_setting') {
         // }
@@ -36,7 +36,7 @@ openFarmApp.factory('userService', ['$http', '$q', 'gardenService',
       }
     }
 
-    function checkEachRelationshipAndPush (obj) {
+    function checkEachRelationshipAndPush(obj) {
       var passedThis = {
         arr: this.arr,
         objId: obj.id
@@ -45,7 +45,7 @@ openFarmApp.factory('userService', ['$http', '$q', 'gardenService',
       this.included.forEach(checkIfIsObj, passedThis);
     }
 
-    function buildUser (data, included) {
+    function buildUser(data, included) {
       var user_setting,
           picture,
           gardens;
@@ -53,7 +53,7 @@ openFarmApp.factory('userService', ['$http', '$q', 'gardenService',
       user.id = data.id;
       user.relationships = data.relationships;
       user.links = data.links;
-      if(included) {
+      if (included) {
         // Can this be abstracted into a factory that other
         // services can use? TODO
         for (var key in data.relationships) {
@@ -86,12 +86,12 @@ openFarmApp.factory('userService', ['$http', '$q', 'gardenService',
       return user;
     }
 
-    function buildUserSetting (data) {
+    function buildUserSetting(data) {
       var userSetting = data.attributes;
       return userSetting;
     }
 
-    function getUser (userId, callback){
+    function getUser(userId, callback) {
       var url = '/api/v1/users/' + userId;
       $http.get(url)
         .success(function (response) {
@@ -102,7 +102,7 @@ openFarmApp.factory('userService', ['$http', '$q', 'gardenService',
         });
     }
 
-    function getUserWithPromise (userId) {
+    function getUserWithPromise(userId) {
       return $q(function (resolve, reject) {
         if (userId) {
           var url = '/api/v1/users/' + userId;
@@ -119,7 +119,7 @@ openFarmApp.factory('userService', ['$http', '$q', 'gardenService',
       });
     }
 
-    function setFavoriteCrop (userId, cropId, callback){
+    function setFavoriteCrop(userId, cropId, callback) {
       // wrapper function around put user
       var params = {
         'attributes': {},
@@ -128,8 +128,8 @@ openFarmApp.factory('userService', ['$http', '$q', 'gardenService',
         }
       };
 
-      $http.put('/api/v1/users/' + userId + '/', { 'data': params } )
-        .success(function(response) {
+      $http.put('/api/v1/users/' + userId + '/', { 'data': params })
+        .success(function (response) {
           return callback(true, buildUser(response.data, response.included));
         }).error(function (response, code) {
           alertsService.pushToAlerts(response, code);
@@ -137,10 +137,10 @@ openFarmApp.factory('userService', ['$http', '$q', 'gardenService',
         });
     }
 
-    function updateUser (userId, params, callback) {
+    function updateUser(userId, params, callback) {
       var data = { 'data': params };
       $http.put('/api/v1/users/' + userId + '/', data)
-        .success(function(response) {
+        .success(function (response) {
           return callback(true, buildUser(response.data, response.included));
         }).error(function (response, code) {
           alertsService.pushToAlerts(response.errors, code);
@@ -148,11 +148,11 @@ openFarmApp.factory('userService', ['$http', '$q', 'gardenService',
         });
     }
 
-    function updateUserWithPromise (userId, params, callback) {
+    function updateUserWithPromise(userId, params, callback) {
       var data = { 'data': params };
       return $q(function (resolve, reject) {
         $http.put('/api/v1/users/' + userId + '/', data)
-          .success(function(response) {
+          .success(function (response) {
             resolve(buildUser(response.data, response.included));
           }).error(function (response, code) {
             alertsService.pushToAlerts(response.errors, code);

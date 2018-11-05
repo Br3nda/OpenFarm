@@ -2,13 +2,13 @@
   'use strict';
 
   Foundation.libs.reveal = {
-    name : 'reveal',
+    name: 'reveal',
 
-    version : '5.3.0',
+    version: '5.3.0',
 
-    locked : false,
+    locked: false,
 
-    settings : {
+    settings: {
       animation: 'fadeAndPop',
       animation_speed: 250,
       close_on_background_click: true,
@@ -16,18 +16,18 @@
       dismiss_modal_class: 'close-reveal-modal',
       bg_class: 'reveal-modal-bg',
       root_element: 'body',
-      open: function(){},
-      opened: function(){},
-      close: function(){},
-      closed: function(){},
-      bg : $('.reveal-modal-bg'),
-      css : {
-        open : {
+      open: function () {},
+      opened: function () {},
+      close: function () {},
+      closed: function () {},
+      bg: $('.reveal-modal-bg'),
+      css: {
+        open: {
           'opacity': 0,
           'visibility': 'visible',
-          'display' : 'block'
+          'display': 'block'
         },
-        close : {
+        close: {
           'opacity': 1,
           'visibility': 'hidden',
           'display': 'none'
@@ -35,12 +35,12 @@
       }
     },
 
-    init : function (scope, method, options) {
+    init: function (scope, method, options) {
       $.extend(true, this.settings, method, options);
       this.bindings(method, options);
     },
 
-    events : function (scope) {
+    events: function (scope) {
       var self = this,
           S = self.S;
 
@@ -60,7 +60,7 @@
             } else {
               var url = ajax === true ? element.attr('href') : ajax;
 
-              self.open.call(self, element, {url: url});
+              self.open.call(self, element, { url: url });
             }
           }
         });
@@ -87,7 +87,7 @@
           }
         });
 
-      if(S('[' + self.attr_name() + ']', this.scope).length > 0) {
+      if (S('[' + self.attr_name() + ']', this.scope).length > 0) {
         S(this.scope)
           // .off('.reveal')
           .on('open.fndtn.reveal', this.settings.open)
@@ -111,16 +111,16 @@
     },
 
     // PATCH #3: turning on key up capture only when a reveal window is open
-    key_up_on : function (scope) {
+    key_up_on: function (scope) {
       var self = this;
 
       // PATCH #1: fixing multiple keyup event trigger from single key press
-      self.S('body').off('keyup.fndtn.reveal').on('keyup.fndtn.reveal', function ( event ) {
+      self.S('body').off('keyup.fndtn.reveal').on('keyup.fndtn.reveal', function (event) {
         var open_modal = self.S('[' + self.attr_name() + '].open'),
             settings = open_modal.data(self.attr_name(true) + '-init');
         // PATCH #2: making sure that the close event can be called only while unlocked,
         //           so that multiple keyup.fndtn.reveal events don't prevent clean closing of the reveal window.
-        if ( settings && event.which === 27  && settings.close_on_esc && !self.locked) { // 27 is the keycode for the Escape key
+        if (settings && event.which === 27 && settings.close_on_esc && !self.locked) { // 27 is the keycode for the Escape key
           self.close.call(self, open_modal);
         }
       });
@@ -129,12 +129,12 @@
     },
 
     // PATCH #3: turning on key up capture only when a reveal window is open
-    key_up_off : function (scope) {
+    key_up_off: function (scope) {
       this.S('body').off('keyup.fndtn.reveal');
       return true;
     },
 
-    open : function (target, ajax_settings) {
+    open: function (target, ajax_settings) {
       var self = this,
           modal;
 
@@ -162,7 +162,7 @@
             .data('offset', this.cache_offset(modal));
         }
 
-        this.key_up_on(modal);    // PATCH #3: turning on key up capture only when a reveal window is open
+        this.key_up_on(modal); // PATCH #3: turning on key up capture only when a reveal window is open
         modal.trigger('open').trigger('open.fndtn.reveal');
 
         if (open_modal.length < 1) {
@@ -186,7 +186,7 @@
 
           $.extend(ajax_settings, {
             success: function (data, textStatus, jqXHR) {
-              if ( $.isFunction(old_success) ) {
+              if ($.isFunction(old_success)) {
                 old_success(data, textStatus, jqXHR);
               }
 
@@ -206,21 +206,21 @@
       }
     },
 
-    close : function (modal) {
+    close: function (modal) {
       var modal = modal && modal.length ? modal : this.S(this.scope),
           open_modals = this.S('[' + this.attr_name() + '].open'),
           settings = modal.data(this.attr_name(true) + '-init') || this.settings;
 
       if (open_modals.length > 0) {
         this.locked = true;
-        this.key_up_off(modal);   // PATCH #3: turning on key up capture only when a reveal window is open
+        this.key_up_off(modal); // PATCH #3: turning on key up capture only when a reveal window is open
         modal.trigger('close').trigger('close.fndtn.reveal');
         this.toggle_bg(modal, false);
         this.hide(open_modals, settings.css.close, settings);
       }
     },
 
-    close_targets : function () {
+    close_targets: function () {
       var base = '.' + this.settings.dismiss_modal_class;
 
       if (this.settings.close_on_background_click) {
@@ -230,15 +230,15 @@
       return base;
     },
 
-    toggle_bg : function (modal, state) {
+    toggle_bg: function (modal, state) {
       if (this.S('.' + this.settings.bg_class).length === 0) {
-        this.settings.bg = $('<div />', {'class': this.settings.bg_class})
+        this.settings.bg = $('<div />', { 'class': this.settings.bg_class })
           .appendTo('body').hide();
       }
 
       var visible = this.settings.bg.filter(':visible').length > 0;
-      if ( state != visible ) {
-        if ( state == undefined ? visible : !state ) {
+      if (state != visible) {
+        if (state == undefined ? visible : !state) {
           this.hide(this.settings.bg);
         } else {
           this.show(this.settings.bg);
@@ -246,7 +246,7 @@
       }
     },
 
-    show : function (el, css) {
+    show: function (el, css) {
       // is modal
       if (css) {
         var settings = el.data(this.attr_name(true) + '-init') || this.settings,
@@ -255,7 +255,7 @@
         if (el.parent(root_element).length === 0) {
           var placeholder = el.wrap('<div style="display: none;" />').parent();
 
-          el.on('closed.fndtn.reveal.wrapped', function() {
+          el.on('closed.fndtn.reveal.wrapped', function () {
             el.detach().appendTo(placeholder);
             el.unwrap().unbind('closed.fndtn.reveal.wrapped');
           });
@@ -287,7 +287,7 @@
 
         if (animData.fade) {
           css.top = $(window).scrollTop() + el.data('css-top') + 'px';
-          var end_css = {opacity: 1};
+          var end_css = { opacity: 1 };
 
           return setTimeout(function () {
             return el
@@ -300,7 +300,7 @@
           }.bind(this), settings.animation_speed / 2);
         }
 
-        return el.css(css).show().css({opacity: 1}).addClass('open').trigger('opened').trigger('opened.fndtn.reveal');
+        return el.css(css).show().css({ opacity: 1 }).addClass('open').trigger('opened').trigger('opened.fndtn.reveal');
       }
 
       var settings = this.settings;
@@ -315,7 +315,7 @@
       return el.show();
     },
 
-    hide : function (el, css) {
+    hide: function (el, css) {
       // is modal
       if (css) {
         var settings = el.data(this.attr_name(true) + '-init');
@@ -327,7 +327,7 @@
         }
         if (animData.pop) {
           var end_css = {
-            top: - $(window).scrollTop() - el.data('offset') + 'px',
+            top: -$(window).scrollTop() - el.data('offset') + 'px',
             opacity: 0
           };
 
@@ -342,7 +342,7 @@
         }
 
         if (animData.fade) {
-          var end_css = {opacity: 0};
+          var end_css = { opacity: 0 };
 
           return setTimeout(function () {
             return el
@@ -367,7 +367,7 @@
       return el.hide();
     },
 
-    close_video : function (e) {
+    close_video: function (e) {
       var video = $('.flex-video', e.target),
           iframe = $('iframe', video);
 
@@ -378,7 +378,7 @@
       }
     },
 
-    open_video : function (e) {
+    open_video: function (e) {
       var video = $('.flex-video', e.target),
           iframe = video.find('iframe');
 
@@ -403,7 +403,7 @@
       return str;
     },
 
-    cache_offset : function (modal) {
+    cache_offset: function (modal) {
       var offset = modal.show().height() + parseInt(modal.css('top'), 10);
 
       modal.hide();
@@ -411,11 +411,11 @@
       return offset;
     },
 
-    off : function () {
+    off: function () {
       $(this.scope).off('.fndtn.reveal');
     },
 
-    reflow : function () {}
+    reflow: function () {}
   };
 
   /*

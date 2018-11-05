@@ -9,8 +9,8 @@ openFarmApp.directive('actionDetails', ['$http', '$modal', 'defaultService',
       controller: ['$scope',
         function ($scope) {
 
-          $scope.placeStageActionUpload = function(action, image){
-            if (!action.pictures){
+          $scope.placeStageActionUpload = function (action, image) {
+            if (!action.pictures) {
               action.pictures = [];
             }
             action.pictures.push({

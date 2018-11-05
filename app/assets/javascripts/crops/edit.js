@@ -39,7 +39,7 @@ openFarmApp.controller('cropCtrl', ['$scope', '$http', 'cropService',
       }
     }
 
-    function addSvg ($svg) {
+    function addSvg($svg) {
       $scope.crop.svg_icon = $svg;
     }
 
@@ -48,17 +48,17 @@ openFarmApp.controller('cropCtrl', ['$scope', '$http', 'cropService',
       $scope.crop.companions.push(crop);
     }
 
-    function removeCompanionCrop (idx) {
+    function removeCompanionCrop(idx) {
       $scope.crop.companions.splice(idx, 1);
     }
 
-    function loadTags (query) {
+    function loadTags(query) {
       return $http.get('/api/v1/tags/' + query).then(function (tag_data) {
         return tag_data.data;
       });
     }
 
-    function submitForm () {
+    function submitForm() {
       $scope.crop.sending = true;
 
       var commonNames = $scope.crop.common_names;

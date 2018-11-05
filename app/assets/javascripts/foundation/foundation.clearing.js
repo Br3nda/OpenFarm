@@ -2,13 +2,13 @@
   'use strict';
 
   Foundation.libs.clearing = {
-    name : 'clearing',
+    name: 'clearing',
 
     version: '5.3.0',
 
-    settings : {
-      templates : {
-        viewing : '<a href="#" class="clearing-close">&times;</a>' +
+    settings: {
+      templates: {
+        viewing: '<a href="#" class="clearing-close">&times;</a>' +
           '<div class="visible-img" style="display: none"><div class="clearing-touch-label"></div><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" alt="" />' +
           '<p class="clearing-caption"></p><a href="#" class="clearing-main-prev"><span></span></a>' +
           '<a href="#" class="clearing-main-next"><span></span></a></div>'
@@ -16,19 +16,19 @@
 
       // comma delimited list of selectors that, on click, will close clearing,
       // add 'div.clearing-blackout, div.visible-img' to close on background click
-      close_selectors : '.clearing-close, div.clearing-blackout', 
+      close_selectors: '.clearing-close, div.clearing-blackout',
 
       // Default to the entire li element.
-      open_selectors : '',
+      open_selectors: '',
 
-      touch_label : '',
+      touch_label: '',
 
       // event initializers and locks
-      init : false,
-      locked : false
+      init: false,
+      locked: false
     },
 
-    init : function (scope, method, options) {
+    init: function (scope, method, options) {
       var self = this;
       Foundation.inherit(this, 'throttle image_loaded');
 
@@ -43,7 +43,7 @@
       }
     },
 
-    events : function (scope) {
+    events: function (scope) {
       var self = this,
           S = self.S,
           $scroll_container = $('.scroll-container');
@@ -99,12 +99,12 @@
       this.swipe_events(scope);
     },
 
-    swipe_events : function (scope) {
+    swipe_events: function (scope) {
       var self = this,
       S = self.S;
 
       S(this.scope)
-        .on('touchstart.fndtn.clearing', '.visible-img', function(e) {
+        .on('touchstart.fndtn.clearing', '.visible-img', function (e) {
           if (!e.touches) { e = e.originalEvent; }
           var data = {
                 start_page_x: e.touches[0].pageX,
@@ -117,10 +117,10 @@
           S(this).data('swipe-transition', data);
           e.stopPropagation();
         })
-        .on('touchmove.fndtn.clearing', '.visible-img', function(e) {
+        .on('touchmove.fndtn.clearing', '.visible-img', function (e) {
           if (!e.touches) { e = e.originalEvent; }
           // Ignore pinch/zoom events
-          if(e.touches.length > 1 || e.scale && e.scale !== 1) return;
+          if (e.touches.length > 1 || e.scale && e.scale !== 1) return;
 
           var data = S(this).data('swipe-transition');
 
@@ -135,7 +135,7 @@
           }
 
           if (typeof data.is_scrolling === 'undefined') {
-            data.is_scrolling = !!( data.is_scrolling || Math.abs(data.delta_x) < Math.abs(e.touches[0].pageY - data.start_page_y) );
+            data.is_scrolling = !!(data.is_scrolling || Math.abs(data.delta_x) < Math.abs(e.touches[0].pageY - data.start_page_y));
           }
 
           if (!data.is_scrolling && !data.active) {
@@ -145,19 +145,19 @@
             self.nav(e, direction);
           }
         })
-        .on('touchend.fndtn.clearing', '.visible-img', function(e) {
+        .on('touchend.fndtn.clearing', '.visible-img', function (e) {
           S(this).data('swipe-transition', {});
           e.stopPropagation();
         });
     },
 
-    assemble : function ($li) {
+    assemble: function ($li) {
       var $el = $li.parent();
 
       if ($el.parent().hasClass('carousel')) {
         return;
       }
-      
+
       $el.after('<div id="foundationClearingHolder"></div>');
 
       var grid = $el.detach(),
@@ -168,7 +168,7 @@
       } else {
         grid_outerHTML = grid[0].outerHTML;
       }
-      
+
       var holder = this.S('#foundationClearingHolder'),
           settings = $el.data(this.attr_name(true) + '-init'),
           data = {
@@ -186,7 +186,7 @@
       holder.after(wrapper).remove();
     },
 
-    open : function ($image, current, target) {
+    open: function ($image, current, target) {
       var self = this,
           body = $(document.body),
           root = target.closest('.clearing-assembled'),
@@ -212,7 +212,7 @@
         }.bind(this), 100);
       }
 
-      function cb (image) {
+      function cb(image) {
         var $image = $(image);
         $image.css('visibility', 'visible');
         // toggle the gallery
@@ -241,7 +241,7 @@
       }
     },
 
-    close : function (e, el) {
+    close: function (e, el) {
       e.preventDefault();
 
       var root = (function (target) {
@@ -264,17 +264,17 @@
           .removeClass('clearing-blackout');
         container.removeClass('clearing-container');
         visible_image.hide();
-        visible_image.trigger('closed.fndtn.clearing');        
+        visible_image.trigger('closed.fndtn.clearing');
       }
 
       return false;
     },
 
-    is_open : function (current) {
+    is_open: function (current) {
       return current.parent().prop('style').length > 0;
     },
 
-    keydown : function (e) {
+    keydown: function (e) {
       var clearing = $('.clearing-blackout ul[' + this.attr_name() + ']'),
           NEXT_KEY = this.rtl ? 37 : 39,
           PREV_KEY = this.rtl ? 39 : 37,
@@ -285,14 +285,14 @@
       if (e.which === ESC_KEY) this.S('a.clearing-close').trigger('click').trigger('click.fndtn.clearing');
     },
 
-    nav : function (e, direction) {
+    nav: function (e, direction) {
       var clearing = $('ul[' + this.attr_name() + ']', '.clearing-blackout');
 
       e.preventDefault();
       this.go(clearing, direction);
     },
 
-    resize : function () {
+    resize: function () {
       var image = $('img', '.clearing-blackout .visible-img'),
           label = $('.clearing-touch-label', '.clearing-blackout');
 
@@ -303,7 +303,7 @@
     },
 
     // visual adjustments
-    fix_height : function (target) {
+    fix_height: function (target) {
       var lis = target.parent().children(),
           self = this;
 
@@ -321,7 +321,7 @@
       return this;
     },
 
-    update_paddles : function (target) {
+    update_paddles: function (target) {
       target = target.closest('li');
       var visible_image = target
         .closest('.carousel')
@@ -340,31 +340,31 @@
       }
     },
 
-    center_and_label : function (target, label) {
+    center_and_label: function (target, label) {
       if (!this.rtl) {
         target.css({
-          marginLeft : -(target.outerWidth() / 2),
-          marginTop : -(target.outerHeight() / 2)
+          marginLeft: -(target.outerWidth() / 2),
+          marginTop: -(target.outerHeight() / 2)
         });
 
         if (label.length > 0) {
           label.css({
-            marginLeft : -(label.outerWidth() / 2),
-            marginTop : -(target.outerHeight() / 2)-label.outerHeight()-10
+            marginLeft: -(label.outerWidth() / 2),
+            marginTop: -(target.outerHeight() / 2) - label.outerHeight() - 10
           });
         }
       } else {
         target.css({
-          marginRight : -(target.outerWidth() / 2),
-          marginTop : -(target.outerHeight() / 2),
+          marginRight: -(target.outerWidth() / 2),
+          marginTop: -(target.outerHeight() / 2),
           left: 'auto',
           right: '50%'
         });
 
         if (label.length > 0) {
           label.css({
-            marginRight : -(label.outerWidth() / 2),
-            marginTop : -(target.outerHeight() / 2)-label.outerHeight()-10,
+            marginRight: -(label.outerWidth() / 2),
+            marginTop: -(target.outerHeight() / 2) - label.outerHeight() - 10,
             left: 'auto',
             right: '50%'
           });
@@ -375,7 +375,7 @@
 
     // image loading and preloading
 
-    load : function ($image) {
+    load: function ($image) {
       var href;
 
       if ($image[0].nodeName === "A") {
@@ -390,13 +390,13 @@
       return $image.attr('src');
     },
 
-    preload : function ($image) {
+    preload: function ($image) {
       this
         .img($image.closest('li').next())
         .img($image.closest('li').prev());
     },
 
-    img : function (img) {
+    img: function (img) {
       if (img.length) {
         var new_img = new Image(),
             new_a = this.S('a', img);
@@ -412,7 +412,7 @@
 
     // image caption
 
-    caption : function (container, $image) {
+    caption: function (container, $image) {
       var caption = $image.attr('data-caption');
 
       if (caption) {
@@ -425,11 +425,11 @@
           .hide();
       }
       return this;
-    }, 
+    },
 
     // directional methods
 
-    go : function ($ul, direction) {
+    go: function ($ul, direction) {
       var current = this.S('.visible', $ul),
           target = current[direction]();
 
@@ -440,7 +440,7 @@
       }
     },
 
-    shift : function (current, target, callback) {
+    shift: function (current, target, callback) {
       var clearing = target.parent(),
           old_index = this.settings.prev_index || target.index(),
           direction = this.direction(clearing, current, target),
@@ -454,7 +454,7 @@
       // we use jQuery animate instead of CSS transitions because we
       // need a callback to unlock the next animation
       // needs support for RTL **
-      if (target.index() !== old_index && !/skip/.test(direction)){
+      if (target.index() !== old_index && !/skip/.test(direction)) {
         if (/left/.test(direction)) {
           this.lock();
           dir_obj[dir] = left + width;
@@ -482,7 +482,7 @@
       callback();
     },
 
-    direction : function ($el, current, target) {
+    direction: function ($el, current, target) {
       var lis = this.S('li', $el),
           li_width = lis.outerWidth() + (lis.outerWidth() / 4),
           up_count = Math.floor(this.S('.clearing-container').outerWidth() / li_width) - 1,
@@ -508,7 +508,7 @@
       return response;
     },
 
-    adjacent : function (current_index, target_index) {
+    adjacent: function (current_index, target_index) {
       for (var i = target_index + 1; i >= target_index - 1; i--) {
         if (i === current_index) return true;
       }
@@ -517,24 +517,24 @@
 
     // lock management
 
-    lock : function () {
+    lock: function () {
       this.settings.locked = true;
     },
 
-    unlock : function () {
+    unlock: function () {
       this.settings.locked = false;
     },
 
-    locked : function () {
+    locked: function () {
       return this.settings.locked;
     },
 
-    off : function () {
+    off: function () {
       this.S(this.scope).off('.fndtn.clearing');
       this.S(window).off('.fndtn.clearing');
     },
 
-    reflow : function () {
+    reflow: function () {
       this.init();
     }
   };

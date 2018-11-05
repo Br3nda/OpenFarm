@@ -14,22 +14,22 @@ openFarmApp.directive('ofShowGuideStages', ['$http', '$modal', 'stageService',
       controller: ['$scope',
         function ($scope) {
 
-          $scope.$watch('detailOptions', function(val) {
+          $scope.$watch('detailOptions', function (val) {
             if (val !== undefined) {
               $scope.environment = angular.copy($scope.detailOptions.multiSelectEnvironment);
               $scope.soil = angular.copy($scope.detailOptions.multiSelectSoil);
               $scope.light = angular.copy($scope.detailOptions.multiSelectLight);
-              $scope.environment.forEach(function(env) {
+              $scope.environment.forEach(function (env) {
                 if ($scope.stage.environment !== null && $scope.stage.environment.indexOf(env.label) > -1) {
                   env.selected = true;
                 }
               });
-              $scope.soil.forEach(function(env) {
+              $scope.soil.forEach(function (env) {
                 if ($scope.stage.soil !== null && $scope.stage.soil.indexOf(env.label) > -1) {
                   env.selected = true;
                 }
               });
-              $scope.light.forEach(function(env) {
+              $scope.light.forEach(function (env) {
                 if ($scope.stage.light !== null && $scope.stage.light.indexOf(env.label) > -1) {
                   env.selected = true;
                 }
@@ -48,15 +48,15 @@ openFarmApp.directive('ofShowGuideStages', ['$http', '$modal', 'stageService',
               });
           }
 
-          $scope.toggleEditingStage = function() {
+          $scope.toggleEditingStage = function () {
             $scope.editingStage = !$scope.editingStage;
           };
 
-          $scope.deleteStage = function(stage) {
+          $scope.deleteStage = function (stage) {
             var con = confirm('Are you sure you want to delete this stage?');
             if (con) {
               stageService.deleteStageWithPromise(stage.id)
-                .then(function() {
+                .then(function () {
                   $scope.triggerGuideUpdate();
                 });
             }
@@ -74,31 +74,31 @@ openFarmApp.directive('ofShowGuideStages', ['$http', '$modal', 'stageService',
             }
           };
 
-          $scope.saveStageChanges = function(stage) {
+          $scope.saveStageChanges = function (stage) {
             var actions = stage.stage_actions || [];
             var data = {
               'attributes': {
                 name: stage.name,
                 overview: stage.overview,
-                environment: $scope.environment.filter(function(env) {
+                environment: $scope.environment.filter(function (env) {
                                 return env.selected;
-                              }).map(function(env) {
+                              }).map(function (env) {
                                 return env.label;
                               }),
-                light: $scope.light.filter(function(light) {
+                light: $scope.light.filter(function (light) {
                           return light.selected;
-                        }).map(function(light) {
+                        }).map(function (light) {
                           return light.label;
                         }),
-                soil: $scope.soil.filter(function(soil) {
+                soil: $scope.soil.filter(function (soil) {
                         return soil.selected;
-                      }).map(function(soil) {
+                      }).map(function (soil) {
                         return soil.label;
                       }),
                 stage_length: stage.stage_length,
                 order: stage.order,
               },
-              actions: actions.map(function(sa, index) {
+              actions: actions.map(function (sa, index) {
                         var actionData = {
                           name: sa.name,
                           images: sa.pictures,
@@ -114,16 +114,16 @@ openFarmApp.directive('ofShowGuideStages', ['$http', '$modal', 'stageService',
             };
 
 
-            stageService.updateStageWithPromise(stage.id, {'data': data})
-              .then(function(response) {
+            stageService.updateStageWithPromise(stage.id, { 'data': data })
+              .then(function (response) {
                 $scope.toggleEditingStage();
                 // window.location.reload()
-              }, function(error) {
+              }, function (error) {
                 console.log('error updating stage', error);
               });
           };
 
-          $scope.openAddActionModal = function(stage){
+          $scope.openAddActionModal = function (stage) {
 
             defaultService.getStageActionOptions()
               .then(function (actionOptions) {
@@ -136,9 +136,9 @@ openFarmApp.directive('ofShowGuideStages', ['$http', '$modal', 'stageService',
                       $scope.actionOptions = actionOptions;
                       $scope.existingActions = stage.stage_action_options || [];
 
-                      $scope.actionOptions.forEach(function(action){
-                        $scope.existingActions.forEach(function(existingAction){
-                          if (existingAction.name === action.name){
+                      $scope.actionOptions.forEach(function (action) {
+                        $scope.existingActions.forEach(function (existingAction) {
+                          if (existingAction.name === action.name) {
                             action.overview = existingAction.overview;
                             action.selected = true;
                             action.pictures = [];
@@ -148,7 +148,7 @@ openFarmApp.directive('ofShowGuideStages', ['$http', '$modal', 'stageService',
 
                       $scope.ok = function () {
                         var selectedActions = $scope.actionOptions
-                                                .filter(function(action){
+                                                .filter(function (action) {
                                                   return action.selected;
                                                 });
                         $modalInstance.close(selectedActions);
@@ -160,10 +160,10 @@ openFarmApp.directive('ofShowGuideStages', ['$http', '$modal', 'stageService',
                     }],
                   keyboard: false,
                   resolve: {
-                    stage: function(){
+                    stage: function () {
                       return stage;
                     },
-                    actionOptions: function(){
+                    actionOptions: function () {
                       return actionOptions;
                     }
                   }

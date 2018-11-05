@@ -1,13 +1,13 @@
-/*global angular*/
-/*eslint no-loop-func:0, func-names:0*/
+/* global angular */
+/* eslint no-loop-func:0, func-names:0 */
 
 (function withAngular(angular) {
   'use strict';
 
   var directiveName = 'socialshare'
     , serviceName = 'Socialshare'
-    , socialshareProviderNames = ['facebook', 'facebook-messenger','sms', 'twitter', 'linkedin', 'google', 'pinterest', 'tumblr', 'reddit', 'stumbleupon', 'buffer', 'digg', 'delicious', 'vk', 'pocket', 'wordpress', 'flipboard', 'xing', 'hackernews', 'evernote', 'whatsapp', 'telegram', 'viber', 'skype', 'email', 'ok']
-    , socialshareConfigurationProvider = /*@ngInject*/ function socialshareConfigurationProvider() {
+    , socialshareProviderNames = ['facebook', 'facebook-messenger', 'sms', 'twitter', 'linkedin', 'google', 'pinterest', 'tumblr', 'reddit', 'stumbleupon', 'buffer', 'digg', 'delicious', 'vk', 'pocket', 'wordpress', 'flipboard', 'xing', 'hackernews', 'evernote', 'whatsapp', 'telegram', 'viber', 'skype', 'email', 'ok']
+    , socialshareConfigurationProvider = /* @ngInject */ function socialshareConfigurationProvider() {
 
       var socialshareConfigurationDefault = [{
         'provider': 'email',
@@ -23,11 +23,11 @@
       {
         'provider': 'facebook',
         'conf': {
-          'url':'',
-          'title':'',
-          'href':'',
-          'quote':'',
-          'hashtags':'',
+          'url': '',
+          'title': '',
+          'href': '',
+          'quote': '',
+          'hashtags': '',
           'text': '',
           'media': '',
           'type': '',
@@ -231,7 +231,7 @@
           'url': '',
           'text': '',
           'media': '',
-          'follow' : '',
+          'follow': '',
           'trigger': 'click',
           'popupHeight': 600,
           'popupWidth': 500
@@ -300,8 +300,8 @@
             , aConfigurationKey
             , configElement
             , internIndex = 0
-          //this is necessary becuase provider run before any service
-          //so i have to take the log from another injector
+          // this is necessary becuase provider run before any service
+          // so i have to take the log from another injector
           , $log = angular.injector(['ng']).get('$log');
 
           if (configuration && configuration.length > 0) {
@@ -340,7 +340,7 @@
               }
             }
         }
-        , '$get': /*@ngInject*/ function instantiateProvider() {
+        , '$get': /* @ngInject */ function instantiateProvider() {
 
             return socialshareConfigurationDefault;
         }
@@ -492,7 +492,7 @@
           + ',top=' + ($window.innerHeight - attrs.socialsharePopupHeight) / 2 + ',left=' + ($window.innerWidth - attrs.socialsharePopupWidth) / 2);
 
       } else {
-        //otherwise default to using sharer.php
+        // otherwise default to using sharer.php
         $window.open(
           'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(attrs.socialshareUrl || $window.location.href)
           , 'Facebook', 'toolbar=0,status=0,resizable=yes,width=' + attrs.socialsharePopupWidth + ',height=' + attrs.socialsharePopupHeight
@@ -526,12 +526,12 @@
 
         urlString += '&bcc=' + encodeURIComponent(attrs.socialshareBcc);
       }
-      if($window.self !== $window.top) {
+      if ($window.self !== $window.top) {
         $window.open(urlString, '_blank');
       } else {
         $window.open(urlString, '_self');
       }
-      
+
     }
     , facebookMessengerShare = function facebookMessengerShare($window, attrs, element) {
 
@@ -555,7 +555,7 @@
         urlString += '&hashtags=' + encodeURIComponent(attrs.socialshareHashtags);
       }
 
-      //default to the current page if a URL isn't specified
+      // default to the current page if a URL isn't specified
       urlString += '&url=' + encodeURIComponent(attrs.socialshareUrl || $window.location.href);
 
       $window.open(
@@ -712,7 +712,7 @@
         urlString += '&picture=' + encodeURIComponent(attrs.socialshareMedia);
       }
 
-      //default to the current page if a URL isn't specified
+      // default to the current page if a URL isn't specified
       urlString += '&url=' + encodeURIComponent(attrs.socialshareUrl || $window.location.href);
 
       $window.open(
@@ -726,7 +726,7 @@
       if (attrs.socialshareText) {
         urlString += 't=' + encodeURIComponent(attrs.socialshareText) + '&';
       }
-      //default to the current page if a URL isn't specified
+      // default to the current page if a URL isn't specified
       urlString += 'u=' + encodeURIComponent(attrs.socialshareUrl || $window.location.href);
 
       $window.open(
@@ -741,7 +741,7 @@
         urlString += 'title=' + encodeURIComponent(attrs.socialshareText) + '&';
       }
 
-      //default to the current page if a URL isn't specified
+      // default to the current page if a URL isn't specified
       urlString += 'url=' + encodeURIComponent(attrs.socialshareUrl || $window.location.href);
 
       $window.open(
@@ -756,7 +756,7 @@
         urlString += 'text=' + encodeURIComponent(attrs.socialshareText) + '&';
       }
 
-      //default to the current page if a URL isn't specified
+      // default to the current page if a URL isn't specified
       urlString += 'url=' + encodeURIComponent(attrs.socialshareUrl || $window.location.href);
 
       $window.open(
@@ -774,7 +774,7 @@
         urlString += 'i=' + encodeURIComponent(attrs.socialshareMedia) + '&';
       }
 
-      //default to the current page if a URL isn't specified
+      // default to the current page if a URL isn't specified
       urlString += 'u=' + encodeURIComponent(attrs.socialshareUrl || $window.location.href);
 
       $window.open(
@@ -816,11 +816,11 @@
     }
     , manageSmsShare = function smsShare($window, attrs, element) {
 
-      if(attrs.socialshareText.indexOf('%') >= 0) {
+      if (attrs.socialshareText.indexOf('%') >= 0) {
         $log.warn('sending sms text with "%" sign is not supported');
       }
 
-      var body = encodeURIComponent(attrs.socialshareText.replace('%','')) + encodeURIComponent(attrs.socialshareUrl)
+      var body = encodeURIComponent(attrs.socialshareText.replace('%', '')) + encodeURIComponent(attrs.socialshareUrl)
         , toPhoneNumber = attrs.socialshareTo || ''
         , urlString = 'sms:' + toPhoneNumber + '?&body=' + body;
 
@@ -859,13 +859,13 @@
         , 'Skype', 'toolbar=0,status=0,resizable=yes,width=' + attrs.socialsharePopupWidth + ',height=' + attrs.socialsharePopupHeight
         + ',top=' + ($window.innerHeight - attrs.socialsharePopupHeight) / 2 + ',left=' + ($window.innerWidth - attrs.socialsharePopupWidth) / 2);
     }
-    , socialshareService = /*@ngInject*/  ['$window', '$log', function socialshareService($window, $log) {
+    , socialshareService = /* @ngInject */ ['$window', '$log', function socialshareService($window, $log) {
 
       this.emailShare = manageEmailShare;
       this.facebookShare = manageFacebookShare;
       this.twitterShare = manageTwitterShare;
-      //**** Fb Messenger can't open without an element clicked (href)
-      //this.facebookMessengerShare = facebookMessengerShare;
+      //* *** Fb Messenger can't open without an element clicked (href)
+      // this.facebookMessengerShare = facebookMessengerShare;
       this.stumbleuponShare = manageStumbleuponShare;
       this.pinterestShare = managePinterestShare;
       this.googleShare = manageGooglePlusShare;
@@ -884,10 +884,10 @@
       this.redditShare = manageRedditShare;
       this.evernoteShare = manageEvernoteShare;
       this.tumblrShare = manageTumblrShare;
-      //**** viber can't share without an element clicked (href)
-      //this.viberShare = manageViberShare;
-      //**** whatsapp can't share without an element clicked (href)
-      //this.whatsappShare = manageWhatsappShare;
+      //* *** viber can't share without an element clicked (href)
+      // this.viberShare = manageViberShare;
+      //* *** whatsapp can't share without an element clicked (href)
+      // this.whatsappShare = manageWhatsappShare;
       this.skypeShare = skypeShare;
       this.smsShare = manageSmsShare;
 
@@ -992,7 +992,7 @@
         }
       };
     }]
-    , socialshareDirective = /*@ngInject*/ ['$window', 'socialshareConf', 'Socialshare', '$log', function socialshareDirective($window, socialshareConf, $log) {
+    , socialshareDirective = /* @ngInject */ ['$window', 'socialshareConf', 'Socialshare', '$log', function socialshareDirective($window, socialshareConf, $log) {
 
       var linkingFunction = function linkingFunction($scope, element, attrs) {
 
@@ -1001,15 +1001,15 @@
         var configurationElement
         , index = 0
         , onEventTriggered = function onEventTriggered() {
-          /*eslint-disable no-use-before-define*/
+          /* eslint-disable no-use-before-define */
           if (attrs.socialshareProvider in sharingFunctions) {
             sharingFunctions[attrs.socialshareProvider]($window, attrs, element);
           } else {
             return true;
           }
         };
-        /*eslint-enable no-use-before-define*/
-        //looking into configuration if there is a config for the current provider
+        /* eslint-enable no-use-before-define */
+        // looking into configuration if there is a config for the current provider
         for (; index < socialshareConf.length; index += 1) {
           if (socialshareConf[index].provider === attrs.socialshareProvider) {
             configurationElement = socialshareConf[index];
@@ -1021,22 +1021,22 @@
           $log.warn('Invalid Provider Name : ' + attrs.socialshareProvider);
         }
 
-        //if some attribute is not define provide a default one
+        // if some attribute is not define provide a default one
         attrs.socialshareQuote = attrs.socialshareQuote || configurationElement.conf.quote;
         attrs.socialshareTitle = attrs.socialshareTitle || configurationElement.conf.title;
         attrs.socialshareUrl = attrs.socialshareUrl || configurationElement.conf.url || configurationElement.conf.href;
         attrs.socialshareText = attrs.socialshareText || configurationElement.conf.text;
         attrs.socialshareMedia = attrs.socialshareMedia || configurationElement.conf.media;
-        attrs.socialshareType =  attrs.socialshareType || configurationElement.conf.type;
+        attrs.socialshareType = attrs.socialshareType || configurationElement.conf.type;
         attrs.socialshareVia = attrs.socialshareVia || configurationElement.conf.via;
-        attrs.socialshareTo =  attrs.socialshareTo || configurationElement.conf.to;
-        attrs.socialshareFrom =  attrs.socialshareFrom || configurationElement.conf.from;
+        attrs.socialshareTo = attrs.socialshareTo || configurationElement.conf.to;
+        attrs.socialshareFrom = attrs.socialshareFrom || configurationElement.conf.from;
         attrs.socialshareRef = attrs.socialshareRef || configurationElement.conf.ref;
         attrs.socialshareDislay = attrs.socialshareDislay || configurationElement.conf.display;
         attrs.socialshareSource = attrs.socialshareSource || configurationElement.conf.source;
         attrs.socialshareCaption = attrs.socialshareCaption || configurationElement.conf.caption;
         attrs.socialshareRedirectUri = attrs.socialshareRedirectUri || configurationElement.conf.redirectUri;
-        attrs.socialshareTrigger =  attrs.socialshareTrigger || configurationElement.conf.trigger;
+        attrs.socialshareTrigger = attrs.socialshareTrigger || configurationElement.conf.trigger;
         attrs.socialsharePopupHeight = attrs.socialsharePopupHeight || configurationElement.conf.popupHeight;
         attrs.socialsharePopupWidth = attrs.socialsharePopupWidth || configurationElement.conf.popupWidth;
         attrs.socialshareSubreddit = attrs.socialshareSubreddit || configurationElement.conf.subreddit;

@@ -18,7 +18,7 @@ openFarmApp.controller('showGuideCtrl', ['$scope', '$http', 'guideService', '$q'
     $scope.favoriteGuide = favoriteGuide;
     $scope.placeGuideUpload = placeGuideUpload;
 
-    $scope.toggleEditingGuide = function(optionalSetToValue) {
+    $scope.toggleEditingGuide = function (optionalSetToValue) {
       if (optionalSetToValue === undefined) {
         $scope.editing = !$scope.editing;
       } else {
@@ -27,8 +27,8 @@ openFarmApp.controller('showGuideCtrl', ['$scope', '$http', 'guideService', '$q'
       $scope.saved = false;
     };
 
-    $scope.setGuideUser = function(success, object){
-      if (success){
+    $scope.setGuideUser = function (success, object) {
+      if (success) {
         $scope.guide.user = object;
       }
     };
@@ -38,17 +38,17 @@ openFarmApp.controller('showGuideCtrl', ['$scope', '$http', 'guideService', '$q'
       $scope.saveGuideChanges();
     };
 
-    $scope.saveGuideChanges = function() {
-      var params = {'data':  {
+    $scope.saveGuideChanges = function () {
+      var params = { 'data': {
         'attributes': {
           'overview': $scope.guide.overview,
           'name': $scope.guide.name,
           'location': $scope.guide.location,
           'draft': $scope.guide.draft,
           'featured_image': 0,
-          'practices': $scope.practices.filter(function(practice) {
+          'practices': $scope.practices.filter(function (practice) {
                          return practice.selected === true;
-                       }).map(function(practice) {
+                       }).map(function (practice) {
                          return practice.slug;
                        })
           },
@@ -57,39 +57,39 @@ openFarmApp.controller('showGuideCtrl', ['$scope', '$http', 'guideService', '$q'
       };
 
       guideService.updateGuideWithPromise($scope.guide.id, params)
-        .then(function(response) {
+        .then(function (response) {
 
           $scope.setGuide(response);
 
           $scope.toggleEditingGuide(false);
 
-        }, function(response) {
+        }, function (response) {
           console.log("error updating guide", response);
         });
     };
 
-    $scope.guideUpdate = function() {
+    $scope.guideUpdate = function () {
       guideService.getGuideWithPromise($scope.guideId)
         .then($scope.setGuide);
     };
 
-    $scope.setCurrentUser = function(success, object){
-      if (success){
+    $scope.setCurrentUser = function (success, object) {
+      if (success) {
         $scope.currentUser = object;
 
-        $scope.currentUser.gardens.forEach(function(g){
-          g.garden_crops.forEach(function(gc){
-            if (gc.guide && gc.guide._id === $scope.guide._id){
+        $scope.currentUser.gardens.forEach(function (g) {
+          g.garden_crops.forEach(function (gc) {
+            if (gc.guide && gc.guide._id === $scope.guide._id) {
               g.added = true;
               $scope.gardenCrop = gc;
             }
           });
         });
 
-        if ($scope.guide.basic_needs){
-          $scope.guide.basic_needs.forEach(function(b){
-            if (b.percent < 0.5){
-              switch (b.name){
+        if ($scope.guide.basic_needs) {
+          $scope.guide.basic_needs.forEach(function (b) {
+            if (b.percent < 0.5) {
+              switch (b.name) {
                 case 'Sun / Shade':
                   b.tooltip = 'Low compatibility with "' + b.garden +
                   '" because it gets ' + b.user;
@@ -109,8 +109,8 @@ openFarmApp.controller('showGuideCtrl', ['$scope', '$http', 'guideService', '$q'
               }
             }
 
-            if (b.percent >= 0.5 && b.percent < 0.75){
-              switch (b.name){
+            if (b.percent >= 0.5 && b.percent < 0.75) {
+              switch (b.name) {
                 case 'Sun / Shade':
                   b.tooltip = 'Medium compatibility with "' + b.garden +
                   '" because it gets ' + b.user;
@@ -131,8 +131,8 @@ openFarmApp.controller('showGuideCtrl', ['$scope', '$http', 'guideService', '$q'
               }
             }
 
-            if (b.percent >= 0.75){
-              switch (b.name){
+            if (b.percent >= 0.75) {
+              switch (b.name) {
                 case 'Sun / Shade':
                   b.tooltip = 'High compatibility with "' + b.garden +
                   '" because it gets ' + b.user;
@@ -163,22 +163,22 @@ openFarmApp.controller('showGuideCtrl', ['$scope', '$http', 'guideService', '$q'
       }
     };
 
-    $scope.setGuide = function(object){
+    $scope.setGuide = function (object) {
       $scope.guide = object;
 
-      if ($scope.userId){
+      if ($scope.userId) {
         userService.getUser($scope.userId,
                             $scope.setCurrentUser);
       }
 
-      if($scope.guide.user !== undefined) {
+      if ($scope.guide.user !== undefined) {
         userService.getUser($scope.guide.user.id,
                             $scope.setGuideUser);
       }
 
       setPractices($scope.guide.practices);
 
-      $scope.$watch('guide.stages', function() {
+      $scope.$watch('guide.stages', function () {
         if ($scope.guide.stages !== undefined) {
           // This is a hack because stages get built from the
           // API. This is kind of flawed still at the moment,
@@ -209,14 +209,14 @@ openFarmApp.controller('showGuideCtrl', ['$scope', '$http', 'guideService', '$q'
       }
     };
 
-    function setPractices (guidePractices) {
+    function setPractices(guidePractices) {
       $q.all([
         defaultService.processedDetailOptions(),
         cropService.getCropWithPromise($scope.guide.relationships.crop.data.id)
-      ]).then(function(data) {
+      ]).then(function (data) {
         $scope.options = data[0];
         $scope.practices = data[0].multiSelectPractices;
-        $scope.practices.forEach(function(practice) {
+        $scope.practices.forEach(function (practice) {
           if ($scope.guide.practices !== null && guidePractices.indexOf(practice.slug.toLowerCase()) > -1) {
             practice.selected = true;
           }
@@ -226,11 +226,11 @@ openFarmApp.controller('showGuideCtrl', ['$scope', '$http', 'guideService', '$q'
       });
     }
 
-    function favoriteGuide (guideId) {
-      if (!$scope.currentUser){
+    function favoriteGuide(guideId) {
+      if (!$scope.currentUser) {
         alertsService.pushToAlerts(["You need to log in to mark your favorite"], 401);
       }
-      else{
+      else {
         $scope.updatingFavoritedGuides = true;
         var favorited_guide_ids = $scope.currentUser.favorited_guides.map(function (g) { return g.id; }) || [];
         var index = favorited_guide_ids.indexOf(guideId);
@@ -260,8 +260,8 @@ openFarmApp.controller('showGuideCtrl', ['$scope', '$http', 'guideService', '$q'
       }
     }
 
-    function placeGuideUpload (image){
-      $scope.guide.featured_image = {'image_url': image};
+    function placeGuideUpload(image) {
+      $scope.guide.featured_image = { 'image_url': image };
     }
 
     guideService.getGuideWithPromise($scope.guideId)

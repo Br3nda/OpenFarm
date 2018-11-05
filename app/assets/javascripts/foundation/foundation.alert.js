@@ -2,19 +2,19 @@
   'use strict';
 
   Foundation.libs.alert = {
-    name : 'alert',
+    name: 'alert',
 
-    version : '5.3.0',
+    version: '5.3.0',
 
-    settings : {
-      callback: function (){}
+    settings: {
+      callback: function () {}
     },
 
-    init : function (scope, method, options) {
+    init: function (scope, method, options) {
       this.bindings(method, options);
     },
 
-    events : function () {
+    events: function () {
       var self = this,
           S = this.S;
 
@@ -25,7 +25,7 @@
         e.preventDefault();
         if (Modernizr.csstransitions) {
           alertBox.addClass("alert-close");
-          alertBox.on('transitionend webkitTransitionEnd oTransitionEnd', function(e) {
+          alertBox.on('transitionend webkitTransitionEnd oTransitionEnd', function (e) {
             S(this).trigger('close').trigger('close.fndtn.alert').remove();
             settings.callback();
           });
@@ -38,6 +38,6 @@
       });
     },
 
-    reflow : function () {}
+    reflow: function () {}
   };
 }(jQuery, window, window.document));

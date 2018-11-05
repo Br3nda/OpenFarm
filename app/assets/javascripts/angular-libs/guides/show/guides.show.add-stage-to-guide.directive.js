@@ -1,5 +1,5 @@
 openFarmApp.directive('ofShowAddStageToGuide', ['$q', 'defaultService', 'stageService',
-  function ofShowAddStageToGuide ($q, defaultService, stageService) {
+  function ofShowAddStageToGuide($q, defaultService, stageService) {
     return {
       restrict: 'A',
       scope: {
@@ -48,14 +48,14 @@ openFarmApp.directive('ofShowAddStageToGuide', ['$q', 'defaultService', 'stageSe
             var promises = [];
             $scope.stageOptions.forEach(function (stage) {
               if (stage.selected) {
-                var params = {'data': {
+                var params = { 'data': {
                   'attributes': {
                     'name': stage.name,
                     'order': stage.order
                   },
                   'guide_id': $scope.guideId
 
-                }};
+                } };
                 counter += counter + 1;
                 promises.push(stageService.createStageWithPromise(params));
               }
