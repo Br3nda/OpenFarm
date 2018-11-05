@@ -26,7 +26,7 @@ FactoryGirl.define do
 end
 
 FactoryGirl.define do
-  #Other factory definitions
+  # Other factory definitions
 
   factory :confirmed_user, :parent => :user do
     after(:create) { |user| user.confirm }
