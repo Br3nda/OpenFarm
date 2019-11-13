@@ -15,10 +15,7 @@ describe Api::V1::GardenCropsController, type: :controller do
       guide = FactoryBot.create(:guide)
       garden = FactoryBot.create(:garden, user: @user)
       sowed = Faker::Date.between(from: 2.days.ago, to: Date.today).to_s
-      data = { attributes: { quantity: rand(100),
-                             stage: Faker::Lorem.word,
-                             sowed: sowed,
-                             guide: guide.id.to_s } }
+      data = { attributes: { quantity: rand(100), stage: Faker::Lorem.word, sowed: sowed, guide: guide.id.to_s } }
 
       old_length = garden.garden_crops.length
       Legacy._post self, :create, data: data, garden_id: garden.id.to_s, format: :json
@@ -31,10 +28,7 @@ describe Api::V1::GardenCropsController, type: :controller do
       guide = FactoryBot.create(:guide)
       garden = FactoryBot.create(:garden, user: @user)
       sowed = Faker::Date.between(from: 2.days.ago, to: Date.today).to_s
-      data = { attributes: { quantity: rand(100),
-                             stage: Faker::Lorem.word,
-                             sowed: sowed,
-                             guide: guide.id.to_s } }
+      data = { attributes: { quantity: rand(100), stage: Faker::Lorem.word, sowed: sowed, guide: guide.id.to_s } }
 
       Legacy._post self, :create, data: data, garden_id: garden.id.to_s, format: :json
       @user.reload
@@ -45,10 +39,7 @@ describe Api::V1::GardenCropsController, type: :controller do
       guide = FactoryBot.create(:guide)
       garden = FactoryBot.create(:garden)
       sowed = Faker::Date.between(from: 2.days.ago, to: Date.today)
-      data = { attributes: { quantity: rand(100),
-                             stage: Faker::Lorem.word,
-                             sowed: sowed,
-                             guide: guide.id.to_s } }
+      data = { attributes: { quantity: rand(100), stage: Faker::Lorem.word, sowed: sowed, guide: guide.id.to_s } }
       Legacy._post self, :create, data: data, garden_id: garden.id.to_s, format: :json
       expect(response.status).to eq(422)
     end
@@ -63,20 +54,14 @@ describe Api::V1::GardenCropsController, type: :controller do
     it 'should delete garden crops' do
       garden = FactoryBot.create(:garden, user: @user)
       garden_crop = FactoryBot.create(:garden_crop, garden: garden)
-      Legacy._delete self, :destroy,
-                     garden_id: garden_crop.garden.id,
-                     id: garden_crop.id,
-                     format: :json
+      Legacy._delete self, :destroy, garden_id: garden_crop.garden.id, id: garden_crop.id, format: :json
       expect(garden.reload.garden_crops.length).to eq(0)
       expect(response.status).to eq(204)
     end
 
     it 'should not delete garden crops of other users gardens' do
       garden_crop = FactoryBot.create(:garden_crop)
-      Legacy._delete self, :destroy,
-                     garden_id: garden_crop.garden.id.to_s,
-                     id: garden_crop.id,
-                     format: :json
+      Legacy._delete self, :destroy, garden_id: garden_crop.garden.id.to_s, id: garden_crop.id, format: :json
       expect(response.status).to eq(401)
     end
 
@@ -136,9 +121,7 @@ describe Api::V1::GardenCropsController, type: :controller do
 
     it 'should show a garden_crop with a crop' do
       crop = FactoryBot.create :crop
-      garden_crop = FactoryBot.create(:garden_crop,
-                                      garden: @garden,
-                                      crop: crop)
+      garden_crop = FactoryBot.create(:garden_crop, garden: @garden, crop: crop)
       # @garden.crop = FactoryBot.create :crop
       garden_crop.save
       Legacy._get self, :show, garden_id: @garden.id, id: garden_crop.id
@@ -147,9 +130,7 @@ describe Api::V1::GardenCropsController, type: :controller do
 
     it 'should show a garden_crop with a guide' do
       guide = FactoryBot.create :guide
-      garden_crop = FactoryBot.create(:garden_crop,
-                                      garden: @garden,
-                                      guide: guide)
+      garden_crop = FactoryBot.create(:garden_crop, garden: @garden, guide: guide)
       # @garden.crop = FactoryBot.create :crop
       garden_crop.save
       Legacy._get self, :show, garden_id: @garden.id, id: garden_crop.id
@@ -189,7 +170,8 @@ describe Api::V1::GardenCropsController, type: :controller do
       sign_in user
       garden = FactoryBot.create(:garden, user: user)
       garden_crop = FactoryBot.create(:garden_crop, garden: garden)
-      Legacy._put self, :update,
+      Legacy._put self,
+                  :update,
                   garden_id: garden_crop.garden.id,
                   id: garden_crop.id,
                   data: { attributes: { stage: 'updated' } },
@@ -199,7 +181,8 @@ describe Api::V1::GardenCropsController, type: :controller do
     end
     it 'should not update garden crops belonging to other users' do
       garden_crop = FactoryBot.create(:garden_crop)
-      Legacy._put self, :update,
+      Legacy._put self,
+                  :update,
                   garden_id: garden_crop.garden.id,
                   id: garden_crop.id,
                   data: { attributes: { stage: 'updated' } },

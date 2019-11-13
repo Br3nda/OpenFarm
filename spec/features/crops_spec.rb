@@ -37,6 +37,6 @@ describe 'Crop pages', :js do
 
   it 'requires user log in to create a guide' do
     visit '/crops/new'
-    expect(page).to have_content('You\'re not authorized to go to there.')
+    expect(page).to have_content("You're not authorized to go to there.")
   end
 end
