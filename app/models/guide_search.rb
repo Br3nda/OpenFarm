@@ -18,7 +18,7 @@ class GuideSearch
     self
   end
 
-  def ignore_drafts()
+  def ignore_drafts
     filter[:draft] = false
 
     self
