@@ -9,12 +9,16 @@ describe GardenCrops::CreateGardenCrop do
   let(:user) { FactoryBot.create(:user) }
 
   let(:params) do
-    { user: user,
+    {
+      user: user,
       garden_id: FactoryBot.create(:garden, user: user).id.to_s,
-      attributes: { stage: Faker::Lorem.word,
-                    sowed: Faker::Date.between(from: 2.days.ago, to: Date.today),
-                    quantity: rand(100),
-                    guide: FactoryBot.create(:guide).id.to_s } }
+      attributes: {
+        stage: Faker::Lorem.word,
+        sowed: Faker::Date.between(from: 2.days.ago, to: Date.today),
+        quantity: rand(100),
+        guide: FactoryBot.create(:guide).id.to_s
+      }
+    }
   end
 
   it 'requires fields' do
@@ -48,7 +52,7 @@ describe GardenCrops::CreateGardenCrop do
     params[:garden_id] = FactoryBot.create(:garden).id.to_s
     results = cgc.run(params)
     message = results.errors.message_list.first
-    expect(message).to include('for gardens you don\'t own.')
+    expect(message).to include("for gardens you don't own.")
   end
 
   it 'catches that there is no crop or guide attached' do

@@ -9,17 +9,14 @@ describe Api::V1::StagesController, type: :controller do
   let(:guide) { FactoryBot.create(:guide, user: user) }
   let(:stage) { FactoryBot.create(:stage, guide: user) }
 
-  before do
-    @guide = FactoryBot.create(:guide, name: 'lee\'s mung bean')
-  end
+  before { @guide = FactoryBot.create(:guide, name: "lee's mung bean") }
 
   it 'creates stages' do
     guide = FactoryBot.create(:guide, user: user)
     old_length = Stage.all.length
-    data = { attributes: { name: Faker::Lorem.word,
-                           order: 0,
-                           soil: Faker::Lorem.words(number: 2) },
-             guide_id: guide.id.to_s }
+    data = {
+      attributes: { name: Faker::Lorem.word, order: 0, soil: Faker::Lorem.words(number: 2) }, guide_id: guide.id.to_s
+    }
     Legacy._post self, 'create', data: data, format: :json
     expect(response.status).to eq(201)
     new_length = Stage.all.length
@@ -31,19 +28,13 @@ describe Api::V1::StagesController, type: :controller do
   it 'should return an error when wrong info is passed to create' do
     # FIXME: what is this spec testing? Maybe we should do some assertions on
     # the response message.
-    data = {
-      instructions: Faker::Lorem.paragraph,
-      guide_id: guide.id.to_s
-    }
+    data = { instructions: Faker::Lorem.paragraph, guide_id: guide.id.to_s }
     Legacy._post self, 'create', data: data, format: :json
     expect(response.status).to eq(422)
   end
 
   it 'should return an error when a guide does not exist' do
-    data = { attributes: { instructions: Faker::Lorem.sentences(number: 2),
-                           name: 'hello',
-                           order: 0 },
-             guide_id: 1 }
+    data = { attributes: { instructions: Faker::Lorem.sentences(number: 2), name: 'hello', order: 0 }, guide_id: 1 }
     Legacy._post self, 'create', data: data, format: :json
     error = json['errors'][0]
     expect(error['title']).to eq('Could not find a guide with id 1.')
@@ -68,14 +59,12 @@ describe Api::V1::StagesController, type: :controller do
   end
 
   it 'cant create a stage on someone elses guide' do
-    data = { attributes: { instructions: Faker::Lorem.sentences(number: 2),
-                           name: 'hello',
-                           order: 0 },
-             guide_id: FactoryBot.create(:guide).id.to_s }
+    data = {
+      attributes: { instructions: Faker::Lorem.sentences(number: 2), name: 'hello', order: 0 },
+      guide_id: FactoryBot.create(:guide).id.to_s
+    }
     Legacy._post self, 'create', data: data, format: :json
-    expect(json['errors'][0]['title']).to include(
-      'You can only create stages for guides that belong to you.'
-    )
+    expect(json['errors'][0]['title']).to include('You can only create stages for guides that belong to you.')
     expect(response.status).to eq(401)
   end
 
@@ -99,9 +88,7 @@ describe Api::V1::StagesController, type: :controller do
 
   it 'only destroys stages owned by the user' do
     Legacy._delete self, :destroy, id: FactoryBot.create(:stage)
-    expect(json['errors'][0]['title']).to include(
-      'can only destroy stages that belong to your guides.'
-    )
+    expect(json['errors'][0]['title']).to include('can only destroy stages that belong to your guides.')
     expect(response.status).to eq(401)
   end
 
@@ -128,12 +115,11 @@ describe Api::V1::StagesController, type: :controller do
   end
 
   it 'should add actions in a stage creation event successfully' do
-    data = { attributes: { instructions: Faker::Lorem.paragraph,
-                           name: 'hello',
-                           order: 0 },
-             actions: [{ name: Faker::Lorem.word,
-                         overview: Faker::Lorem.paragraph }],
-             guide_id: guide.id.to_s }
+    data = {
+      attributes: { instructions: Faker::Lorem.paragraph, name: 'hello', order: 0 },
+      actions: [{ name: Faker::Lorem.word, overview: Faker::Lorem.paragraph }],
+      guide_id: guide.id.to_s
+    }
     Legacy._post self, 'create', data: data, format: :json
     expect(response.status).to eq(201)
   end
@@ -141,22 +127,22 @@ describe Api::V1::StagesController, type: :controller do
   it 'should remove actions from stages'
 
   it 'should reject stage actions without a name' do
-    data = { attributes: { instructions: Faker::Lorem.paragraph,
-                           name: 'hello',
-                           order: 0 },
-             actions: [{ name: '' }],
-             guide_id: guide.id.to_s }
+    data = {
+      attributes: { instructions: Faker::Lorem.paragraph, name: 'hello', order: 0 },
+      actions: [{ name: '' }],
+      guide_id: guide.id.to_s
+    }
     Legacy._post self, 'create', data: data, format: :json
     expect(response.status).to eq(422)
     expect(response.body).to include('not a valid action name')
   end
 
   it 'should accept stage actions without an overview' do
-    data = { attributes: { instructions: Faker::Lorem.paragraph,
-                           name: 'hello',
-                           order: 0 },
-             actions: [{ name: 'hello' }],
-             guide_id: guide.id.to_s }
+    data = {
+      attributes: { instructions: Faker::Lorem.paragraph, name: 'hello', order: 0 },
+      actions: [{ name: 'hello' }],
+      guide_id: guide.id.to_s
+    }
     Legacy._post self, 'create', data: data, format: :json
     expect(response.status).to eq(201)
   end
