@@ -4,12 +4,7 @@ require 'openfarm_errors'
 describe Stages::CreateStage do
   let(:mutation) { Stages::CreateStage }
   let(:guide) { FactoryBot.create(:guide) }
-  let(:params) do
-    { user: guide.user,
-      attributes: { name: Faker::Name.last_name,
-                    order: 0 },
-      guide_id: "#{guide._id}" }
-  end
+  let(:params) { { user: guide.user, attributes: { name: Faker::Name.last_name, order: 0 }, guide_id: "#{guide._id}" } }
 
   it 'minimally requires a user and a guide to be true' do
     expect(mutation.run(params).success?).to be_truthy
@@ -23,9 +18,7 @@ describe Stages::CreateStage do
 
   it 'creates a stage image via URL' do
     VCR.use_cassette('mutations/stages/create_stage') do
-      image_hash = {
-        image_url: 'http://i.imgur.com/2haLt4J.jpg'
-      }
+      image_hash = { image_url: 'http://i.imgur.com/2haLt4J.jpg' }
       image_params = params.merge(images: [image_hash])
       results = mutation.run(image_params)
       pics = results.result.pictures
@@ -34,9 +27,7 @@ describe Stages::CreateStage do
   end
 
   it 'disallows phony URLs' do
-    image_hash = {
-      image_url: 'iWroteThisWrong.net/2haLt4J.jpg'
-    }
+    image_hash = { image_url: 'iWroteThisWrong.net/2haLt4J.jpg' }
     image_params = params.merge(images: [image_hash])
     results = mutation.run(image_params)
     expect(results.success?).to be_falsey
@@ -45,8 +36,7 @@ describe Stages::CreateStage do
 
   it 'uploads multiple images' do
     VCR.use_cassette('mutations/stages/create_stage') do
-      image_hash = [{ image_url: 'http://i.imgur.com/2haLt4J.jpg' },
-                    { image_url: 'http://i.imgur.com/kpHLl.jpg' }]
+      image_hash = [{ image_url: 'http://i.imgur.com/2haLt4J.jpg' }, { image_url: 'http://i.imgur.com/kpHLl.jpg' }]
       image_params = params.merge(images: image_hash)
       results = mutation.run(image_params)
       pics = results.result.pictures
@@ -61,8 +51,7 @@ describe Stages::CreateStage do
   end
 
   it 'allows a well formed stage actions array' do
-    actions = [{ name: Faker::Lorem.word,
-                 overview: Faker::Lorem.paragraph }]
+    actions = [{ name: Faker::Lorem.word, overview: Faker::Lorem.paragraph }]
     actions_params = params.merge(actions: actions)
     results = mutation.run(actions_params)
     expect(results.success?).to be_truthy
@@ -70,12 +59,10 @@ describe Stages::CreateStage do
   end
 
   it 'allows a well formed stage actions array with order' do
-    actions = [{ name: Faker::Lorem.word,
-                 overview: Faker::Lorem.paragraph,
-                 order: 1 },
-               { name: Faker::Lorem.word,
-                 overview: Faker::Lorem.paragraph,
-                 order: 2 }]
+    actions = [
+      { name: Faker::Lorem.word, overview: Faker::Lorem.paragraph, order: 1 },
+      { name: Faker::Lorem.word, overview: Faker::Lorem.paragraph, order: 2 }
+    ]
     actions_params = params.merge(actions: actions)
     results = mutation.run(actions_params)
     expect(results.result.stage_actions[0][:order]).to eq(1)
@@ -85,15 +72,15 @@ describe Stages::CreateStage do
 
   it 'allows images in stage actions' do
     VCR.use_cassette('mutations/stages/create_stage') do
-      actions = [{ name: Faker::Lorem.word,
-                   overview: Faker::Lorem.paragraph,
-                   order: 1,
-                   images: [{ image_url: 'http://i.imgur.com/2haLt4J.jpg' },
-                            { image_url: 'http://i.imgur.com/kpHLl.jpg' }]
-                    },
-                 { name: Faker::Lorem.word,
-                   overview: Faker::Lorem.paragraph,
-                   order: 2 }]
+      actions = [
+        {
+          name: Faker::Lorem.word,
+          overview: Faker::Lorem.paragraph,
+          order: 1,
+          images: [{ image_url: 'http://i.imgur.com/2haLt4J.jpg' }, { image_url: 'http://i.imgur.com/kpHLl.jpg' }]
+        },
+        { name: Faker::Lorem.word, overview: Faker::Lorem.paragraph, order: 2 }
+      ]
       actions_params = params.merge(actions: actions)
       results = mutation.run(actions_params)
       expect(results.success?).to be_truthy

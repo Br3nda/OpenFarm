@@ -1,11 +1,15 @@
 require 'factory_bot_rails'
 if Rails.env != 'production' # <= Prevent catastrophe
   Mongoid.purge!
-  admin = FactoryBot.create(:user, admin: true,
-                             email: 'admin@admin.com',
-                             password: 'admin123',
-                             password_confirmation: 'admin123',
-                             confirmed_at: Date.today)
+  admin =
+    FactoryBot.create(
+      :user,
+      admin: true,
+      email: 'admin@admin.com',
+      password: 'admin123',
+      password_confirmation: 'admin123',
+      confirmed_at: Date.today
+    )
 
   FactoryBot.create(:garden, user: admin)
 
@@ -27,21 +31,17 @@ if Rails.env != 'production' # <= Prevent catastrophe
   mulch = FactoryBot.create(:stage_action_option, name: 'Apply Mulch')
   prepare = FactoryBot.create(:stage_action_option, name: 'Prepare Soil')
   amend = FactoryBot.create(:stage_action_option, name: 'Amend Soil')
-  fertilize = FactoryBot.create(:stage_action_option,
-                                 name: 'Apply Fertilizer')
-  pesticide = FactoryBot.create(:stage_action_option,
-                                 name: 'Apply Pesticide')
+  fertilize = FactoryBot.create(:stage_action_option, name: 'Apply Fertilizer')
+  pesticide = FactoryBot.create(:stage_action_option, name: 'Apply Pesticide')
   weeds = FactoryBot.create(:stage_action_option, name: 'Remove Weeds')
   sow = FactoryBot.create(:stage_action_option, name: 'Sow')
   prune = FactoryBot.create(:stage_action_option, name: 'Prune')
   thin = FactoryBot.create(:stage_action_option, name: 'Thin')
   harvest = FactoryBot.create(:stage_action_option, name: 'Harvest')
-  biocontrol = FactoryBot.create(:stage_action_option,
-                                  name: 'Add Biocontrol')
+  biocontrol = FactoryBot.create(:stage_action_option, name: 'Add Biocontrol')
   cover = FactoryBot.create(:stage_action_option, name: 'Cover')
   graft = FactoryBot.create(:stage_action_option, name: 'Graft')
-  support = FactoryBot.create(:stage_action_option,
-                               name: 'Add Support Structure')
+  support = FactoryBot.create(:stage_action_option, name: 'Add Support Structure')
   tap = FactoryBot.create(:stage_action_option, name: 'Tap')
   pollinate = FactoryBot.create(:stage_action_option, name: 'Pollinate')
   scar = FactoryBot.create(:stage_action_option, name: 'Scar')
@@ -49,9 +49,7 @@ if Rails.env != 'production' # <= Prevent catastrophe
   train = FactoryBot.create(:stage_action_option, name: 'Train')
 
   # Seed the details for each guide.
-  FactoryBot.create(:detail_option,
-                     name: 'Greenhouse',
-                     category: 'environment')
+  FactoryBot.create(:detail_option, name: 'Greenhouse', category: 'environment')
   FactoryBot.create(:detail_option, name: 'Potted', category: 'environment')
   FactoryBot.create(:detail_option, name: 'Inside', category: 'environment')
   FactoryBot.create(:detail_option, name: 'Inside', category: 'environment')
@@ -68,12 +66,8 @@ if Rails.env != 'production' # <= Prevent catastrophe
   FactoryBot.create(:detail_option, name: 'Organic', category: 'practices')
   FactoryBot.create(:detail_option, name: 'Hydroponic', category: 'practices')
   FactoryBot.create(:detail_option, name: 'Intensive', category: 'practices')
-  FactoryBot.create(:detail_option,
-                     name: 'Conventional',
-                     category: 'practices')
-  FactoryBot.create(:detail_option,
-                     name: 'Permaculture',
-                     category: 'practices')
+  FactoryBot.create(:detail_option, name: 'Conventional', category: 'practices')
+  FactoryBot.create(:detail_option, name: 'Permaculture', category: 'practices')
 
   prep = FactoryBot.create(:stage_option, name: 'Preparation', order: 0)
   prep.stage_action_options = [water, fertilize, amend, prepare]
@@ -88,12 +82,10 @@ if Rails.env != 'production' # <= Prevent catastrophe
   seed.stage_action_options = [weeds, fertilize, water, thin]
 
   juve = FactoryBot.create(:stage_option, name: 'Juvenile', order: 4)
-  juve.stage_action_options = [weeds, fertilize, water, thin, biocontrol,
-                               pesticide, support, train]
+  juve.stage_action_options = [weeds, fertilize, water, thin, biocontrol, pesticide, support, train]
 
   adult = FactoryBot.create(:stage_option, name: 'Adult', order: 5)
-  adult.stage_action_options = [weeds, fertilize, graft, water, biocontrol,
-                                pesticide, support]
+  adult.stage_action_options = [weeds, fertilize, graft, water, biocontrol, pesticide, support]
 
   flower = FactoryBot.create(:stage_option, name: 'Flowering', order: 6)
   flower.stage_action_options = [weeds, fertilize, graft, pollinate, prune]
@@ -104,5 +96,5 @@ if Rails.env != 'production' # <= Prevent catastrophe
   dormant = FactoryBot.create(:stage_option, name: 'Dormant', order: 8)
   dormant.stage_action_options = [prune, cover, tap]
 
-  Guide.all.each{ |gde| gde.update_attributes(user: admin) }
+  Guide.all.each { |gde| gde.update_attributes(user: admin) }
 end

@@ -15,24 +15,23 @@ OpenFarm::Application.configure do
   config.assets.version = '1.0'
   config.force_ssl = true
   config.log_level = :info
-  config.action_mailer.smtp_settings = { address: 'smtp.mandrillapp.com',
-                                         port: 587,
-                                         user_name: ENV['MANDRILL_USERNAME'],
-                                         password: ENV['MANDRILL_APIKEY'] }
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.mandrillapp.com', port: 587, user_name: ENV['MANDRILL_USERNAME'], password: ENV['MANDRILL_APIKEY']
+  }
 
   config.middleware.use ExceptionNotification::Rack,
                         email: {
                           email_prefix: '[OpenFarm Errors] ',
-                          sender_address: %("notifier" <notifier@openfarm.cc>),
+                          sender_address: '"notifier" <notifier@openfarm.cc>',
                           exception_recipients: ENV['ALERTS'].to_s.split('|')
                         },
-                        ignore_exceptions: [
-                          'AbstractController::ActionNotFound',
-                          'ActionController::InvalidAuthenticityToken',
-                          'ActionController::RoutingError',
-                          'ActionController::UnknownFormat',
-                          'ActionView::MissingTemplate',
-                          'Mongoid::Errors::DocumentNotFound'
+                        ignore_exceptions: %w[
+                          AbstractController::ActionNotFound
+                          ActionController::InvalidAuthenticityToken
+                          ActionController::RoutingError
+                          ActionController::UnknownFormat
+                          ActionView::MissingTemplate
+                          Mongoid::Errors::DocumentNotFound
                         ]
   config.action_mailer.default_url_options = { host: 'openfarm.cc' }
   config.action_mailer.delivery_method = :smtp
@@ -41,14 +40,18 @@ OpenFarm::Application.configure do
   config.i18n.fallbacks = true
   config.active_support.deprecation = :notify
   config.log_formatter = ::Logger::Formatter.new
-  options = { storage: :s3,
-              s3_protocol: :https,
-              path: '/:rails_env/media/:class/:attachment/:id.:extension',
-              s3_credentials: { bucket: ENV['S3_BUCKET_NAME'],
-                                s3_protocol: :https,
-                                s3_region: ENV['AWS_REGION'],
-                                access_key_id: ENV['SERVER_S3_ACCESS_KEY'],
-                                secret_access_key: ENV['SERVER_S3_SECRET_KEY'] } }
+  options = {
+    storage: :s3,
+    s3_protocol: :https,
+    path: '/:rails_env/media/:class/:attachment/:id.:extension',
+    s3_credentials: {
+      bucket: ENV['S3_BUCKET_NAME'],
+      s3_protocol: :https,
+      s3_region: ENV['AWS_REGION'],
+      access_key_id: ENV['SERVER_S3_ACCESS_KEY'],
+      secret_access_key: ENV['SERVER_S3_SECRET_KEY']
+    }
+  }
 
   Paperclip::Attachment.default_options.merge!(options)
 end
